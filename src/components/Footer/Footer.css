@@ -1,0 +1,48 @@
+@import "../../vendor/fonts/fonts.css";
+
+.footer {
+    background-color: #000;
+    display: grid;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    grid-template-areas:
+        "title title"
+        "year navigation";
+    grid-template-columns: repeat(2, 1fr);
+    line-height: 1;
+    padding: 80px 70px 20px;
+    row-gap: 20px;
+}
+
+.footer__title {
+    border-bottom: 1px solid #424242;
+    color: #8B8B8B;
+    grid-area: title;
+    margin: 0;
+    text-align: center;
+    padding: 0 0 20px;
+}
+
+.footer__year {
+    color: #fff;
+    grid-area: year;
+    margin: 0;
+}
+
+.footer__navigation {
+    justify-self: right;
+    display: flex;
+    grid-area: navigation;
+}
+
+.footer__link {
+    color: #fff;
+    display: block;
+    margin-right: 20px;
+    text-decoration: none;
+}
+
+.footer__link:last-child {
+    margin-right: 0;
+}
