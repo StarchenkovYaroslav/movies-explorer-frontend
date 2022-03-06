@@ -1,4 +1,8 @@
+import "./App.css";
+
 import { Routes, Route } from "react-router-dom";
+
+import { paths } from "../../utils/config";
 
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -19,12 +23,12 @@ function App() {
       <div className="content">
         <Routes>
 
-          <Route path="/" element={<Main/>} />
-          <Route path="movies" element={<Movies/>} />
-          <Route path="saved-movies" element={<SavedMovies/>} />
-          <Route path="profile" element={<Profile/>} />
-          <Route path="signin" element={<Login/>} />
-          <Route path="signup" element={<Register/>} />
+          <Route path={paths.main} element={<Main/>} />
+          <Route path={paths.movies} element={<Movies/>} />
+          <Route path={paths.savedMovies} element={<SavedMovies/>} />
+          <Route path={paths.profile} element={<Profile/>} />
+          <Route path={paths.signIn} element={<Login/>} />
+          <Route path={paths.signUp} element={<Register/>} />
 
         </Routes>
       </div>

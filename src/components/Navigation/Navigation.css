@@ -1,0 +1,31 @@
+@import "../../vendor/fonts/fonts.css";
+
+.navigation {
+    align-items: center;
+    display: flex;
+}
+
+.navigation__link {
+    display: block;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    margin-right: 30px;
+    text-decoration: none;
+}
+
+.navigation__link:last-child {
+    margin-right: 0;
+}
+
+.navigation__link_path_signup {
+    color: #fff;
+}
+
+.navigation__link_path_signin {
+    background-color: #3ddc84;
+    border-radius: 3px;
+    color: #000;
+    padding: 10px 20px;
+}
