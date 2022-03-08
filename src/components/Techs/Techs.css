@@ -1,0 +1,73 @@
+@import "../../vendor/fonts/fonts.css";
+
+.techniques {
+    background-color: #272727;
+    padding: 100px 70px;
+}
+
+.techniques__title {
+    margin: 0 0 90px;
+}
+
+.techniques__description {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 100px;
+}
+
+.techniques__description-title {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.16;
+    margin: 0 0 26px;
+    max-width: 600px;
+    text-align: center;
+}
+
+.techniques__description-text {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.43;
+    margin: 0;
+    max-width: 460px;
+    text-align: center;
+}
+
+.techniques__list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.techniques__list-item {
+    margin: 0 10px 0 0;
+}
+
+.techniques__list-item:last-child {
+    margin-right: 0;
+}
+
+.techniques__link {
+    background-color: #303030;
+    border-radius: 10px;
+    color: #fff;
+    display: block;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    min-width: 90px;
+    padding: 21px 0;
+    text-align: center;
+    text-decoration: none;
+}
