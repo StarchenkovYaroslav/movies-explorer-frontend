@@ -1,5 +1,9 @@
+import Promo from "../Promo/Promo";
+
 function Main() {
-  return null;
+  return (
+    <Promo />
+  );
 }
 
 export default Main;
