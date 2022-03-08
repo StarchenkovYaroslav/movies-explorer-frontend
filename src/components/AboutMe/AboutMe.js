@@ -27,7 +27,7 @@ function AboutMe() {
         </ul>
         <img className="student__photo" src={studentPhoto} alt="Фото студента" />
       </div>
-        <Portfolio />
+      <Portfolio />
     </section>
   );
 }
