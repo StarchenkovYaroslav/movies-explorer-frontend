@@ -27,6 +27,7 @@
 
 .project-navigation__link {
     color: #fff;
+    display: block;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-size: 13px;
     font-weight: 500;
