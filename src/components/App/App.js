@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="page">
 
-      <Header/>
+      <Header loggedIn={true} />
 
       <div className="content">
         <Routes>

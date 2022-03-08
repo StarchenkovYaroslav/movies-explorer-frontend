@@ -8,13 +8,15 @@ import headerLogo from "../../images/header__logo.svg";
 
 import Navigation from "../Navigation/Navigation";
 
-function Header() {
+function Header({ loggedIn }) {
+  const headerClassName = loggedIn ? 'header  header_logged-in' : 'header';
+
   return (
-    <header className="header">
+    <header className={headerClassName}>
       <Link to={paths.main}>
         <img className="header__logo" src={headerLogo} alt="логотип" />
       </Link>
-      <Navigation />
+      <Navigation loggedIn={loggedIn} />
     </header>
   )
 }

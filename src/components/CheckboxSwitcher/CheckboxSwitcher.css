@@ -1,0 +1,23 @@
+.switcher {
+    align-items: center;
+    background-color: #343434;
+    border-radius: 20px;
+    display: flex;
+    justify-content: start;
+    height: 20px;
+    padding: 0 2px;
+    width: 36px;
+}
+
+.switcher__checked {
+    justify-content: end;
+}
+
+.switcher__indicator {
+    background-color: #2BE080;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: 16px;
+    width: 16px;
+}
