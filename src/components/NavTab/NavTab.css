@@ -1,0 +1,34 @@
+@import "../../vendor/fonts/fonts.css";
+
+.project-navigation {
+    align-items: center;
+    background-color: #272727;
+    display: flex;
+    justify-content: center;
+    padding: 24px 0;
+}
+
+.project-navigation__links-list {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.project-navigation__links-item {
+    margin: 0 40px 0 0;
+}
+
+.project-navigation__links-item:last-child {
+    margin-right: 0;
+}
+
+.project-navigation__link {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+}
