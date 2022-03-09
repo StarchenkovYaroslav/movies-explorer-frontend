@@ -20,7 +20,7 @@ function App() {
 
       <Header loggedIn={true} />
 
-      <div className="content">
+      <main className="content">
         <Routes>
 
           <Route path={paths.main} element={<Main/>} />
@@ -31,7 +31,7 @@ function App() {
           <Route path={paths.signUp} element={<Register/>} />
 
         </Routes>
-      </div>
+      </main>
 
       <Footer/>
 
