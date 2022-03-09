@@ -2,15 +2,12 @@
     align-items: center;
     background-color: #343434;
     border-radius: 20px;
+    box-sizing: border-box;
     display: flex;
     justify-content: start;
     height: 20px;
     padding: 0 2px;
     width: 36px;
-}
-
-.switcher__checked {
-    justify-content: end;
 }
 
 .switcher__indicator {
@@ -25,4 +22,5 @@
 
 .switcher__indicator_checked {
     background-color: #2BE080;
+    transform: translate(16px, 0);
 }
