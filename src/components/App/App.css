@@ -1,4 +1,7 @@
 .page {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
     margin: 0 auto;
     max-width: 1280px;
+    min-height: 100vh;
 }
