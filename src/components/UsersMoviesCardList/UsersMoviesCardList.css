@@ -1,0 +1,7 @@
+.users-movies-card-list {
+    background-color: #202020;
+    display: grid;
+    grid-gap: 25px 24px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    padding: 70px 70px 10px;
+}

@@ -1,0 +1,6 @@
+.more-movies {
+    background-color: #202020;
+    display: flex;
+    justify-content: center;
+    padding: 50px 70px 80px;
+}

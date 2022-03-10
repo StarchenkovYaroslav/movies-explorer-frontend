@@ -1,7 +1,8 @@
 import Search from "../Search/Search";
 import {useState} from "react";
+import UsersMoviesCardList from "../UsersMoviesCardList/UsersMoviesCardList";
 
-function Movies() {
+function UsersMovies() {
   const [isShortMoviesChosen, setIsShortMoviesChosen] = useState(false);
   const [searchedMovie, setSearchedMovie] = useState('');
 
@@ -22,8 +23,10 @@ function Movies() {
         onChooseShortMovies={handleChooseShortMovies}
         onInputSearchedMovie={handleInputSearchedMovie}
       />
+
+      <UsersMoviesCardList />
     </>
   );
 }
 
-export default Movies;
+export default UsersMovies;

@@ -7,8 +7,8 @@ import { paths } from "../../utils/config";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
-import Movies from "../Movies/Movies";
-import SavedMovies from "../SavedMovies/SavedMovies";
+import AllMovies from "../AllMovies/AllMovies";
+import UsersMovies from "../UsersMovies/UsersMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
@@ -24,8 +24,8 @@ function App() {
         <Routes>
 
           <Route path={paths.main} element={<Main/>} />
-          <Route path={paths.movies} element={<Movies/>} />
-          <Route path={paths.savedMovies} element={<SavedMovies/>} />
+          <Route path={paths.movies} element={<AllMovies/>} />
+          <Route path={paths.savedMovies} element={<UsersMovies/>} />
           <Route path={paths.profile} element={<Profile/>} />
           <Route path={paths.signIn} element={<Login/>} />
           <Route path={paths.signUp} element={<Register/>} />

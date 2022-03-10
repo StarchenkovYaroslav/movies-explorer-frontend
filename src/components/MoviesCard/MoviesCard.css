@@ -1,0 +1,49 @@
+@import "../../vendor/fonts/fonts.css";
+
+.movie-card {
+    background-color: #222222;
+    border-radius: 6px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-gap: 18px 14px;
+    grid-template-areas:
+        "name duration"
+        "image image"
+        "button button";
+    grid-template-columns: 230fr 90fr;
+    padding: 18px 0;
+    width: 360px;
+}
+
+.movie-card__name {
+    align-self: end;
+    color: #fff;
+    grid-area: name;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
+    margin: 0;
+    padding: 0 0 0 18px;
+}
+
+.movie-card__duration {
+    align-self: end;
+    color: #8B8B8B;
+    grid-area: duration;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    justify-self: end;
+    line-height: 1;
+    margin: 0;
+    padding: 0 18px 0 0;
+}
+
+.movie-card__image {
+    grid-area: image;
+    height: 200px;
+    object-fit: cover;
+    object-position: center center;
+    width: 100%;
+}

@@ -1,0 +1,12 @@
+.movies-card__delete-button {
+    background: url(../../images/movie-card__delete-button-icon.svg) center center / 10px 10px no-repeat,
+        #313131;
+    cursor: pointer;
+    border: none;
+    border-radius: 30px;
+    justify-self: center;
+    grid-area: button;
+    height: 29px;
+    padding: 0;
+    width: 100px;
+}
