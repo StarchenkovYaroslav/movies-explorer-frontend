@@ -1,0 +1,73 @@
+@import "../../vendor/fonts/fonts.css";
+
+.profile-edit {
+    background-color: #202020;
+    display: flex;
+    justify-content: center;
+    padding: 23px 0 16px;
+}
+
+.profile-edit__form {
+    display: flex;
+    flex-direction: column;
+    max-width: 410px;
+    width: 100%;
+}
+
+.profile-edit__inputs-container {
+    align-self: stretch;
+    margin: 0 0 220px;
+}
+
+.profile-edit__input-container {
+    align-items: end;
+    border: none;
+    border-bottom: 1px solid #424242;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 0 17px;
+    padding: 0 0 16px;
+}
+
+.profile-edit__input-container:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.profile-edit__input-label {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.profile-edit__input {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1;
+    max-width: 70%;
+    text-align: right;
+}
+
+.profile-edit__input:focus {
+    outline: none;
+}
+
+.profile-edit__submit-button {
+    align-self: center;
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+    padding: 0;
+}

@@ -1,6 +1,6 @@
 import "./App.css";
 
-import { Routes, Route } from "react-router-dom";
+import {Routes, Route, useLocation} from "react-router-dom";
 
 import { paths } from "../../utils/config";
 
@@ -14,6 +14,9 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 
 function App() {
+  const location = useLocation();
+
+  const isFooterVisible = location.pathname !== '/' + paths.profile;
 
   return (
     <div className="page">
@@ -33,7 +36,7 @@ function App() {
         </Routes>
       </main>
 
-      <Footer/>
+      {isFooterVisible ? <Footer/> : null}
 
     </div>
   )

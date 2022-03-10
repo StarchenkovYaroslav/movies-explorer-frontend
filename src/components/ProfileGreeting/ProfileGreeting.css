@@ -1,0 +1,16 @@
+@import "../../vendor/fonts/fonts.css";
+
+.profile-greeting {
+    background-color: #202020;
+    padding: 74px 0 100px;
+}
+
+.profile-greeting__title {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1;
+    margin: 0;
+    text-align: center;
+}
