@@ -1,0 +1,50 @@
+@import "../../vendor/fonts/fonts.css";
+
+.not-found-page {
+    background-color: #202020;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+    height: 100vh;
+    padding: 60px 0;
+}
+
+.not-found-page__info {
+    align-self: center;
+    justify-self: center;
+}
+
+.not-found-page__title {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 140px;
+    font-weight: 400;
+    line-height: 1;
+    margin: 0 0 5px;
+    text-align: center;
+}
+
+.not-found-page__subtitle {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1;
+    margin: 0;
+    text-align: center;
+}
+
+.not-found-page__back-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #4285F4;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    justify-self: center;
+    line-height: 1;
+    padding: 0;
+    text-decoration: none;
+}

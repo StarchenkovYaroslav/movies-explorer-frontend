@@ -13,23 +13,27 @@ import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import {useState} from "react";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
   const location = useLocation();
 
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const isHeaderVisible = loggedIn
+  const isHeaderVisible = Object.values(paths).includes(location.pathname.slice(1))
+    && (loggedIn
     || location.pathname === '/' + paths.main
-    || location.pathname === '/' + paths.profile;
-  const isFooterVisible = location.pathname !== '/' + paths.profile
+    || location.pathname === '/' + paths.profile);
+
+  const isFooterVisible = Object.values(paths).includes(location.pathname.slice(1))
+    && location.pathname !== '/' + paths.profile
     && location.pathname !== '/' + paths.signUp
     && location.pathname !== '/' + paths.signIn;
 
   return (
     <div className="page">
 
-      {isHeaderVisible ? <Header loggedIn={true} /> : null}
+      {isHeaderVisible ? <Header loggedIn={false} /> : null}
 
       <main className="content">
         <Routes>
@@ -40,6 +44,8 @@ function App() {
           <Route path={paths.profile} element={<Profile/>} />
           <Route path={paths.signIn} element={<Login/>} />
           <Route path={paths.signUp} element={<Register/>} />
+
+          <Route path="*" element={<NotFoundPage/>} />
 
         </Routes>
       </main>
