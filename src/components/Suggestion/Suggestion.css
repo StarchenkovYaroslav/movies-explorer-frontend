@@ -1,0 +1,24 @@
+.page-with-form__suggestion {
+    justify-self: center;
+    display: flex;
+}
+
+.page-with-form__suggestion-question {
+    color: #8B8B8B;
+    display: block;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    margin: 0 6px 0 0;
+}
+
+.page-with-form__suggestion-link {
+    color: #4285F4;
+    display: block;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    text-decoration: none;
+}

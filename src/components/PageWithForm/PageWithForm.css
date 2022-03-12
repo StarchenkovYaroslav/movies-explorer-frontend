@@ -1,0 +1,19 @@
+.page-with-form {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    padding: 70px 0;
+    min-height: 100vh;
+}
+
+.page-with-form__container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 396px;
+    width: 100%;
+}
+

@@ -10,13 +10,14 @@
 .profile-edit__form {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     max-width: 410px;
     width: 100%;
 }
 
 .profile-edit__inputs-container {
     align-self: stretch;
-    margin: 0 0 220px;
+    margin: 0 0 20px;
 }
 
 .profile-edit__input-container {

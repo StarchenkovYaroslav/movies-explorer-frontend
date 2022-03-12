@@ -12,16 +12,24 @@ import UsersMovies from "../UsersMovies/UsersMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import {useState} from "react";
 
 function App() {
   const location = useLocation();
 
-  const isFooterVisible = location.pathname !== '/' + paths.profile;
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const isHeaderVisible = loggedIn
+    || location.pathname === '/' + paths.main
+    || location.pathname === '/' + paths.profile;
+  const isFooterVisible = location.pathname !== '/' + paths.profile
+    && location.pathname !== '/' + paths.signUp
+    && location.pathname !== '/' + paths.signIn;
 
   return (
     <div className="page">
 
-      <Header loggedIn={true} />
+      {isHeaderVisible ? <Header loggedIn={true} /> : null}
 
       <main className="content">
         <Routes>
