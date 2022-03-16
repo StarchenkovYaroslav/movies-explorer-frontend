@@ -14,3 +14,9 @@
     margin: 0 0 0 12px;
     user-select: none;
 }
+
+@media (max-width: 767px) {
+    .checkbox__name {
+        font-size: 11px;
+    }
+}

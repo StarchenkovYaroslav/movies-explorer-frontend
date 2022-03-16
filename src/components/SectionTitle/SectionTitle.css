@@ -9,3 +9,10 @@
     margin: 0;
     padding: 0 0 23px;
 }
+
+@media (max-width: 767px) {
+    .section-title {
+        font-size: 18px;
+        padding: 0 0 28px;
+    }
+}

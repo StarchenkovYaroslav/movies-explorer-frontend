@@ -16,3 +16,9 @@
     text-align: center;
     width: 100%;
 }
+
+@media (max-width: 424px) {
+    .page-with-form__submit-button {
+        font-size: 12px;
+    }
+}

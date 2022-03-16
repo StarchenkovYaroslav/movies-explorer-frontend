@@ -4,7 +4,7 @@
     background-color: #202020;
     display: flex;
     justify-content: center;
-    padding: 23px 0 16px;
+    padding: 123px 70px 16px;
 }
 
 .profile-edit__form {
@@ -71,4 +71,22 @@
     font-weight: 400;
     line-height: 1;
     padding: 0;
+}
+
+@media (max-width: 1279px) {
+    .profile-edit {
+        padding: 96px 30px 16px;
+    }
+}
+
+@media (max-width: 767px) {
+    .profile-edit {
+        padding: 80px 30px 16px;
+    }
+}
+
+@media (max-width: 424px) {
+    .profile-edit__submit-button {
+        font-size: 12px;
+    }
 }

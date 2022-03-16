@@ -8,12 +8,23 @@
 }
 
 .page-with-form__container {
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: repeat(3, auto);
     height: 100%;
     margin: 0 auto;
     max-width: 396px;
     width: 100%;
+}
+
+@media (max-width: 424px) {
+    .page-with-form {
+        padding: 56px 30px 30px;
+    }
+
+    .page-with-form__container {
+        grid-template-rows: auto 1fr auto;
+    }
 }
 

@@ -27,3 +27,13 @@
     padding: 0;
     width: 34px;
 }
+
+@media (max-width: 767px) {
+    .search-form__icon {
+        display: none;
+    }
+
+    .search-form__input-container {
+        padding: 0 0 9px;
+    }
+}

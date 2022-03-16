@@ -4,3 +4,15 @@
     justify-content: center;
     padding: 50px 70px 80px;
 }
+
+@media (max-width: 1279px) {
+    .more-movies {
+        padding: 50px 30px 80px;
+    }
+}
+
+@media (max-width: 767px) {
+    .more-movies {
+        padding: 50px 40px 80px;
+    }
+}

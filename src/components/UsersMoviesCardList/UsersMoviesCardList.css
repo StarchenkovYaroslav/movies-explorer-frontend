@@ -1,7 +1,19 @@
 .users-movies-card-list {
     background-color: #202020;
     display: grid;
-    grid-gap: 25px 24px;
+    grid-gap: 35px 24px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    padding: 70px 70px 10px;
+    padding: 70px 70px 230px;
+}
+
+@media (max-width: 1279px) {
+    .users-movies-card-list {
+        padding: 70px 30px 170px;
+    }
+}
+
+@media (max-width: 767px) {
+    .users-movies-card-list {
+        padding: 40px 10px 170px;
+    }
 }

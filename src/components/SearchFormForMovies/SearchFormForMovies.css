@@ -3,7 +3,7 @@
 .search-form__input {
     border: none;
     color: #8B8B8B;
-    background-color: #202020;
+    background-color: transparent;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
     font-size: 28px;
     font-weight: 500;
@@ -13,6 +13,13 @@
     width: 80%;
 }
 
-.search-form__input {
+.search-form__input:focus {
     outline: none;
+}
+
+@media (max-width: 767px) {
+    .search-form__input {
+        font-size: 18px;
+        text-align: start;
+    }
 }

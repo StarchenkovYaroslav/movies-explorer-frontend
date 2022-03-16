@@ -1,6 +1,5 @@
 import "./FilterCheckboxForShortMovies.css";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
-import {useState} from "react";
 
 function FilterCheckboxForShortMovies(props) {
   return (

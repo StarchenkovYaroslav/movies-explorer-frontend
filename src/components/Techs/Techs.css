@@ -41,8 +41,10 @@
 }
 
 .techniques__list {
-    display: flex;
+    display: grid;
     justify-content: center;
+    gap: 10px 10px;
+    grid-template-columns: repeat(auto-fit, 90px);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -66,8 +68,76 @@
     font-weight: 400;
     letter-spacing: -0.04em;
     line-height: 1;
-    min-width: 90px;
     padding: 21px 0;
     text-align: center;
     text-decoration: none;
+}
+
+@media (max-width: 1279px) {
+    .techniques {
+        padding: 90px 50px;
+    }
+
+    .techniques__title {
+        margin: 0 0 80px;
+    }
+
+    .techniques__description {
+        margin: 0 0 83px;
+    }
+
+    .techniques__description-title {
+        margin: 0 0 22px;
+    }
+
+    .techniques__description-text {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .techniques__list {
+        grid-template-columns: repeat(auto-fit, 84px);
+    }
+
+    .techniques__link {
+        font-size: 12px;
+        min-width: 84px;
+    }
+}
+
+@media (max-width: 767px) {
+    .techniques {
+        padding: 70px 18px;
+    }
+
+    .techniques__title {
+        margin: 0 0 60px;
+    }
+
+    .techniques__description {
+        margin: 0 0 50px;
+    }
+
+    .techniques__description-title {
+        font-size: 30px;
+        line-height: 1.2;
+        margin: 0 0 24px;
+    }
+
+    .techniques__description-text {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+    .techniques__list {
+        padding: 0 53px;
+    }
+
+    .techniques__list-item {
+        margin: 0;
+    }
+
+    .techniques__link {
+        font-size: 12px;
+    }
 }

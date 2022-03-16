@@ -18,4 +18,23 @@
     margin: 0;
     max-width: 730px;
     text-align: center;
+    width: 100%;
+}
+
+@media (max-width: 1279px) {
+    .promo {
+        padding: 326px 19px 342px;
+    }
+}
+
+@media (max-width: 767px) {
+    .promo {
+        background-size: 248px 248px;
+        padding: 207px 10px 246px;
+    }
+
+    .promo__title {
+        font-size: 31px;
+        line-height: 1.26;
+    }
 }

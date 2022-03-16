@@ -28,7 +28,7 @@
 }
 
 .portfolio__link {
-    background: url(../../images/portfolio__link-icon.svg) center right 5px / 20px 20px no-repeat ;
+    background: url(../../images/portfolio__link-icon.svg) center right 5px / 16px 16px no-repeat ;
     color: #fff;
     display: block;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -37,4 +37,28 @@
     letter-spacing: -0.04em;
     line-height: 1.67;
     text-decoration: none;
+}
+
+@media (max-width: 1279px) {
+    .portfolio__links-item {
+        border-bottom: 1px solid #E6E6E6;
+    }
+
+    .portfolio__link {
+        font-size: 28px;
+    }
+}
+
+@media (max-width: 767px) {
+    .portfolio__title {
+        font-size: 14px;
+        line-height: 1.43;
+        margin: 0 0 40px;
+    }
+
+    .portfolio__link {
+        background-size: 12px 12px;
+        font-size: 18px;
+        line-height: 1.56;
+    }
 }

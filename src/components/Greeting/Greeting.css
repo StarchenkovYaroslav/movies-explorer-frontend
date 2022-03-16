@@ -1,6 +1,7 @@
 @import "../../vendor/fonts/fonts.css";
 
 .page-with-form__greeting {
+    align-self: end;
     display: grid;
     grid-template-columns: 1fr;
     margin: 0 0 40px;
@@ -14,4 +15,12 @@
     font-weight: 500;
     line-height: 1;
     margin: 0;
+}
+
+@media (max-width: 767px) {
+    .page-with-form__greeting {
+        justify-items: center;
+        margin: 0 0 80px;
+        row-gap: 50px;
+    }
 }

@@ -4,7 +4,7 @@
     background-color: #202020;
     display: grid;
     font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
     grid-template-areas:
         "title title"
@@ -45,4 +45,43 @@
 
 .footer__link:last-child {
     margin-right: 0;
+}
+
+@media (max-width: 1279px) {
+    .footer {
+        padding: 80px 30px 20px;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer {
+        font-size: 12px;
+        grid-template-areas:
+        "title"
+        "navigation"
+        "year";
+        grid-template-columns: 1fr;
+        line-height: 1.25;
+        padding: 80px 10px 10px;
+        row-gap: 30px;
+    }
+
+    .footer__year {
+        justify-self: center;
+    }
+
+    .footer__navigation {
+        align-items: center;
+        justify-self: center;
+        flex-direction: column;
+    }
+
+    .footer__link {
+        margin-bottom: 12px;
+        margin-right: 0;
+    }
+
+    .footer__link:last-child {
+        margin-bottom: 0;
+    }
 }

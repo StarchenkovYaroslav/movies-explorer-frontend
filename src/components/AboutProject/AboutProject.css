@@ -86,3 +86,67 @@
 .about-project__stage-title_stage_frontend {
     grid-area: frontend-title;
 }
+
+@media (max-width: 1279px) {
+    .about-project {
+        padding: 90px 50px;
+    }
+
+    .about-project__points-list {
+        grid-gap: 30px;
+        margin: 0 0 93px;
+    }
+
+    .about-project__point-title {
+        margin: 0 0 22px;
+    }
+
+    .about-project__point-description {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .about-project__stage-title {
+        font-weight: 400;
+    }
+}
+
+@media (max-width: 767px) {
+    .about-project {
+        padding: 70px 18px;
+    }
+
+    .about-project__title {
+        margin: 0 0 60px;
+    }
+
+    .about-project__points-list {
+        grid-template-columns: 1fr;
+        grid-gap: 56px;
+        list-style: none;
+        margin: 0 0 60px;
+    }
+
+    .about-project__point-title {
+        font-size: 18px;
+        margin: 0 0 16px;
+    }
+
+    .about-project__point-description {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+    .about-project__time-line {
+        row-gap: 10px;
+    }
+
+    .about-project__stage-time {
+        font-size: 11px;
+        padding: 11px 0;
+    }
+
+    .about-project__stage-title {
+        font-size: 11px;
+    }
+}

@@ -4,12 +4,12 @@ import ProfileGreeting from "../ProfileGreeting/ProfileGreeting";
 import ProfileEdit from "../ProfileEdit/ProfileEdit";
 import ProfileExit from "../ProfileExit/ProfileExit";
 
-function Profile() {
+function Profile(props) {
   return (
     <div className="profile">
       <ProfileGreeting />
       <ProfileEdit />
-      <ProfileExit />
+      <ProfileExit onExit={props.onSignOut}/>
     </div>
   );
 }

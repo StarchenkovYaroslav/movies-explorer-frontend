@@ -1,10 +1,11 @@
 import Form from "../Form/Form";
 import Input from "../Input/Input";
 
-function LoginForm() {
+function LoginForm(props) {
   return (
     <Form
       submitButtonText="Войти"
+      onSubmit={props.onSubmit}
     >
       <Input
         label="E-mail"

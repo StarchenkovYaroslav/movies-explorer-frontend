@@ -12,7 +12,6 @@
         "button button";
     grid-template-columns: 230fr 90fr;
     padding: 18px 0;
-    width: 360px;
 }
 
 .movie-card__name {
@@ -46,4 +45,32 @@
     object-fit: cover;
     object-position: center center;
     width: 100%;
+}
+
+@media (max-width: 1279px) {
+    .movie-card__image {
+        height: 190px;
+    }
+}
+
+@media (max-width: 767px) {
+    .movie-card {
+        padding: 14px 0;
+        row-gap: 14px;
+    }
+
+    .movie-card__image {
+        height: 168px;
+    }
+
+    .movie-card__name {
+        font-size: 12px;
+        padding: 0 0 0 14px;
+    }
+
+    .movie-card__duration {
+        font-size: 10px;
+        font-weight: 400;
+        padding: 0 14px 0 0;
+    }
 }

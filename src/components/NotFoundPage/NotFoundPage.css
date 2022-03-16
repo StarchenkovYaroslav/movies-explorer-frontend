@@ -5,13 +5,13 @@
     box-sizing: border-box;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr auto;
+    grid-template-rows: repeat(2, auto);
     height: 100vh;
     padding: 60px 0;
 }
 
 .not-found-page__info {
-    align-self: center;
+    align-self: end;
     justify-self: center;
 }
 
@@ -47,4 +47,14 @@
     line-height: 1;
     padding: 0;
     text-decoration: none;
+}
+
+@media (max-width: 424px) {
+    .not-found-page {
+        padding: 30px 0;
+    }
+
+    .not-found-page__back-button {
+        align-self: end;
+    }
 }

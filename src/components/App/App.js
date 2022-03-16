@@ -1,6 +1,6 @@
 import "./App.css";
 
-import {Routes, Route, useLocation} from "react-router-dom";
+import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
 
 import { paths } from "../../utils/config";
 
@@ -18,22 +18,39 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 function App() {
   const location = useLocation();
 
+  const navigate = useNavigate();
+
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const isHeaderVisible = Object.values(paths).includes(location.pathname.slice(1))
+  const isHeaderVisible =
+    (Object.values(paths).includes(location.pathname.slice(1)) || location.pathname === paths.main)
     && (loggedIn
-    || location.pathname === '/' + paths.main
-    || location.pathname === '/' + paths.profile);
+    || location.pathname === paths.main);
 
-  const isFooterVisible = Object.values(paths).includes(location.pathname.slice(1))
-    && location.pathname !== '/' + paths.profile
+  const isFooterVisible =
+    (Object.values(paths).includes(location.pathname.slice(1)) || location.pathname === paths.main)
+    && (location.pathname !== '/' + paths.profile
     && location.pathname !== '/' + paths.signUp
-    && location.pathname !== '/' + paths.signIn;
+    && location.pathname !== '/' + paths.signIn);
+
+  function handleSignIn(evt) {
+    evt.preventDefault();
+
+    setLoggedIn(true);
+
+    navigate('/' + paths.movies);
+  }
+
+  function handleSignOut() {
+    setLoggedIn(false);
+
+    navigate('/' + paths.signIn);
+  }
 
   return (
     <div className="page">
 
-      {isHeaderVisible ? <Header loggedIn={false} /> : null}
+      {isHeaderVisible ? <Header loggedIn={loggedIn} /> : null}
 
       <main className="content">
         <Routes>
@@ -41,8 +58,8 @@ function App() {
           <Route path={paths.main} element={<Main/>} />
           <Route path={paths.movies} element={<AllMovies/>} />
           <Route path={paths.savedMovies} element={<UsersMovies/>} />
-          <Route path={paths.profile} element={<Profile/>} />
-          <Route path={paths.signIn} element={<Login/>} />
+          <Route path={paths.profile} element={<Profile onSignOut={handleSignOut}/>} />
+          <Route path={paths.signIn} element={<Login onSignIn={handleSignIn}/>} />
           <Route path={paths.signUp} element={<Register/>} />
 
           <Route path="*" element={<NotFoundPage/>} />

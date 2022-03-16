@@ -1,9 +1,9 @@
 import "./ProfileExit.css";
 
-function ProfileExit() {
+function ProfileExit({ onExit }) {
   return (
     <section className="profile-exit">
-      <button className="profile-exit__button" type="button">Выйти из аккаута</button>
+      <button className="profile-exit__button" type="button" onClick={onExit}>Выйти из аккаута</button>
     </section>
   );
 }
