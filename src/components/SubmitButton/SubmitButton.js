@@ -1,8 +1,10 @@
 import "./SubmitButton.css";
 
-function SubmitButton({ text }) {
+function SubmitButton({ text, isActive }) {
+  const buttonClassName = isActive ? 'page-with-form__submit-button' : 'page-with-form__submit-button page-with-form__submit-button_disabled'
+
   return (
-    <button className="page-with-form__submit-button">{text}</button>
+    <button className={buttonClassName} disabled={!isActive}>{text}</button>
   )
 }
 
