@@ -19,6 +19,11 @@
     line-height: 1;
     margin-right: 30px;
     text-decoration: none;
+    transition: all .2s;
+}
+
+.navigation__link:hover {
+    opacity: .6;
 }
 
 .navigation__link:last-child {

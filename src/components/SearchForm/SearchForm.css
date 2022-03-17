@@ -25,7 +25,12 @@
     cursor: pointer;
     height: 34px;
     padding: 0;
+    transition: all .2s;
     width: 34px;
+}
+
+.search-form__submit-button:hover {
+    opacity: .6;
 }
 
 @media (max-width: 767px) {

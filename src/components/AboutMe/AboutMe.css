@@ -76,6 +76,11 @@
     font-weight: 500;
     line-height: 1;
     text-decoration: none;
+    transition: all .2s;
+}
+
+.student__info-link:hover {
+    opacity: .6;
 }
 
 .student__photo {

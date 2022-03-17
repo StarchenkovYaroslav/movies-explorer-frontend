@@ -41,6 +41,11 @@
     display: block;
     margin-right: 20px;
     text-decoration: none;
+    transition: all .2s;
+}
+
+.footer__link:hover {
+    opacity: .6;
 }
 
 .footer__link:last-child {

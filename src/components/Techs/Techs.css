@@ -71,6 +71,11 @@
     padding: 21px 0;
     text-align: center;
     text-decoration: none;
+    transition: all .2s;
+}
+
+.techniques__link:hover {
+    opacity: .6;
 }
 
 @media (max-width: 1279px) {

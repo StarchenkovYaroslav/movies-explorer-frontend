@@ -47,6 +47,11 @@
     line-height: 1;
     padding: 0;
     text-decoration: none;
+    transition: all .2s;
+}
+
+.not-found-page__back-button:hover {
+    opacity: .6;
 }
 
 @media (max-width: 424px) {

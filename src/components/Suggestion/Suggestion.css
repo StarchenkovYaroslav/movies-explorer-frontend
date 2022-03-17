@@ -22,6 +22,11 @@
     font-weight: 400;
     line-height: 1;
     text-decoration: none;
+    transition: all .2s;
+}
+
+.page-with-form__suggestion-link:hover {
+    opacity: .6;
 }
 
 @media (max-width: 424px) {
