@@ -1,15 +1,14 @@
 .users-movies-card-list {
     background-color: #202020;
-    /*box-sizing: border-box;*/
     display: grid;
-    grid-gap: 35px 24px;
+    grid-gap: 32px 28px;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     padding: 70px 70px 230px;
-    /*height: 100%;*/
 }
 
 @media (max-width: 1279px) {
     .users-movies-card-list {
+        grid-gap: 35px 24px;
         padding: 70px 30px 170px;
     }
 }
