@@ -1,3 +1,5 @@
+import "./AllMovies.css";
+
 import {useState} from "react";
 
 import Search from "../Search/Search";
@@ -17,7 +19,7 @@ function AllMovies() {
   }
 
   return (
-    <>
+    <div className="all-movies">
       <Search
         searchedMovie={searchedMovie}
         isShortMoviesChosen={isShortMoviesChosen}
@@ -29,7 +31,7 @@ function AllMovies() {
       <AllMoviesCardList />
 
       <MoreMovies />
-    </>
+    </div>
   );
 }
 

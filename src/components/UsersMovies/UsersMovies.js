@@ -1,3 +1,5 @@
+import "./UsersMovies.css";
+
 import Search from "../Search/Search";
 import {useState} from "react";
 import UsersMoviesCardList from "../UsersMoviesCardList/UsersMoviesCardList";
@@ -15,7 +17,7 @@ function UsersMovies() {
   }
 
   return (
-    <>
+    <div className="users-movies">
       <Search
         searchedMovie={searchedMovie}
         isShortMoviesChosen={isShortMoviesChosen}
@@ -25,7 +27,7 @@ function UsersMovies() {
       />
 
       <UsersMoviesCardList />
-    </>
+    </div>
   );
 }
 
