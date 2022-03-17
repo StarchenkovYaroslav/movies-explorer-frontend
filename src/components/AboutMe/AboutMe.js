@@ -19,10 +19,10 @@ function AboutMe() {
         </div>
         <ul className="student__info-links-list">
           <li className="student__info-links-item">
-            <a href="http://fasebook.ru/" className="student__info-link">Facebook</a>
+            <a href="http://fasebook.ru/" className="student__info-link" target="_blank">Facebook</a>
           </li>
           <li className="student__info-links-item">
-            <a href="https://github.com/StarchenkovYaroslav" className="student__info-link">Github</a>
+            <a href="https://github.com/StarchenkovYaroslav" className="student__info-link" target="_blank">Github</a>
           </li>
         </ul>
         <img className="student__photo" src={studentPhoto} alt="Фото студента" />

@@ -14,25 +14,25 @@ function Techs() {
       </div>
       <ul className="techniques__list">
         <li className="techniques__list-item">
-          <a href="https://www.w3.org/html/" className="techniques__link">HTML</a>
+          <a href="https://www.w3.org/html/" className="techniques__link" target="_blank">HTML</a>
         </li>
         <li className="techniques__list-item">
-          <a href="" className="techniques__link">CSS</a>
+          <a href="https://www.w3.org/Style/CSS/" className="techniques__link" target="_blank">CSS</a>
         </li>
         <li className="techniques__list-item">
-          <a href="https://www.w3.org/Style/CSS/" className="techniques__link">JS</a>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" className="techniques__link" target="_blank">JS</a>
         </li>
         <li className="techniques__list-item">
-          <a href="https://reactjs.org/" className="techniques__link">React</a>
+          <a href="https://reactjs.org/" className="techniques__link" target="_blank">React</a>
         </li>
         <li className="techniques__list-item">
-          <a href="https://git-scm.com/" className="techniques__link">Git</a>
+          <a href="https://git-scm.com/" className="techniques__link" target="_blank">Git</a>
         </li>
         <li className="techniques__list-item">
-          <a href="https://expressjs.com/" className="techniques__link">Express.js</a>
+          <a href="https://expressjs.com/" className="techniques__link" target="_blank">Express.js</a>
         </li>
         <li className="techniques__list-item">
-          <a href="https://www.mongodb.com/" className="techniques__link">mongoDB</a>
+          <a href="https://www.mongodb.com/" className="techniques__link" target="_blank">mongoDB</a>
         </li>
       </ul>
     </section>
