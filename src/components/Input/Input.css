@@ -36,6 +36,8 @@
 }
 
 .page-with-form__input-field:focus {
+    border-bottom: 1px solid #fff;
+    font-weight: 500;
     outline: none;
 }
 

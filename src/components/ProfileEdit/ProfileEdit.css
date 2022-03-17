@@ -57,6 +57,7 @@
 }
 
 .profile-edit__input:focus {
+    font-weight: 500;
     outline: none;
 }
 
