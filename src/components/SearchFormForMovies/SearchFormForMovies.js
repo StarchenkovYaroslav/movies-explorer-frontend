@@ -4,7 +4,7 @@ import SearchForm from "../SearchForm/SearchForm";
 
 function SearchFormForMovies(props) {
   return (
-    <SearchForm>
+    <SearchForm onSubmit={props.onSubmit} >
       <input
         className="search-form__input"
         type="text"

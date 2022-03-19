@@ -8,7 +8,8 @@ export const paths = {
 }
 
 export const moviesApiSettings = {
-  baseUrl: 'https://api.nomoreparties.co/beatfilm-movies',
+  baseUrl: 'https://api.nomoreparties.co',
+  moviesEndpoint: 'beatfilm-movies',
 }
 
 export const mainApiSettings = {

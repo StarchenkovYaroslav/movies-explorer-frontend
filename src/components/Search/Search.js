@@ -9,6 +9,7 @@ function Search(props) {
         <SearchFormForMovies
           searchedMovie={props.searchedMovie}
           onInputSearchedMovie={props.onInputSearchedMovie}
+          onSubmit={props.onSearch}
         />
       </div>
       <FilterCheckboxForShortMovies

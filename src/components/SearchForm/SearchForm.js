@@ -1,8 +1,8 @@
 import "./SearchForm.css";
 
-function SearchForm({ children }) {
+function SearchForm({ children, onSubmit }) {
   return (
-    <form className="search-form">
+    <form className="search-form" onSubmit={onSubmit}>
       <fieldset className="search-form__input-container">
         <div className="search-form__icon"/>
         {children}
