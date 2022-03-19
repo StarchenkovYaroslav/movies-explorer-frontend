@@ -15,12 +15,42 @@ function AllMovies() {
   const [allMovies, setAllMovies] = useState([]);
   const [showedMovies, setShowedMovies] = useState([]);
 
+  const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
+  const [addedMoviesAmount, setAddedMoviesAmount] = useState(0);
+
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
   const isMoreMoviesVisible = showedMovies.length !== 0 && showedMovies.length !== allMovies.length;
 
+  function checkPageWidth() {
+    const pageWidth = document.documentElement.clientWidth;
+
+    if (pageWidth > 1007) {
+      setInitialMoviesAmount(12);
+      setAddedMoviesAmount(3);
+    } else if(pageWidth > 635) {
+      setInitialMoviesAmount(8);
+      setAddedMoviesAmount(2);
+    } else {
+      setInitialMoviesAmount(5);
+      setAddedMoviesAmount(2);
+    }
+
+    console.log(pageWidth);
+  }
+
   useEffect(() => {
-    setShowedMovies(allMovies.slice(0, 3));
+    checkPageWidth()
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('resize', () => {
+      setTimeout(checkPageWidth, 2000);
+    })
+  }, [])
+
+  useEffect(() => {
+    setShowedMovies(allMovies.slice(0, initialMoviesAmount));
   }, [allMovies])
 
   function handleChooseShortMovies(evt) {
@@ -51,8 +81,8 @@ function AllMovies() {
   }
 
   function handleMoreMovies() {
-    if (Math.abs(showedMovies.length - allMovies.length) >= 3) {
-      for (let i = showedMovies.length; i < showedMovies.length + 3; i++) {
+    if (Math.abs(showedMovies.length - allMovies.length) >= addedMoviesAmount) {
+      for (let i = showedMovies.length; i < showedMovies.length + addedMoviesAmount; i++) {
         setShowedMovies(prevShowedMovies => {
           return [...prevShowedMovies, allMovies[i]];
         })
