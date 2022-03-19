@@ -42,9 +42,15 @@ function AllMovies() {
   }, [])
 
   useEffect(() => {
-    window.addEventListener('resize', () => {
+    function postponeCheckPageWidth() {
       setTimeout(checkPageWidth, 2000);
-    })
+    }
+
+    window.addEventListener('resize', postponeCheckPageWidth);
+
+    return () => {
+      window.removeEventListener('resize', postponeCheckPageWidth);
+    }
   }, [])
 
   useEffect(() => {
