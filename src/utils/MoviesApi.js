@@ -2,7 +2,7 @@ import Api from "./Api";
 import { moviesApiSettings } from "./config";
 
 class MoviesApi extends Api {
-  getAllCards() {
+  getAllMovies() {
     return fetch(this._baseUrl)
       .then(this._checkResponse);
   }
