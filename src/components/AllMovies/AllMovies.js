@@ -17,6 +17,8 @@ function AllMovies() {
 
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
+  const isMoreMoviesVisible = showedMovies.length !== 0 && showedMovies.length !== allMovies.length;
+
   useEffect(() => {
     setShowedMovies(allMovies.slice(0, 3));
   }, [allMovies])
@@ -49,10 +51,18 @@ function AllMovies() {
   }
 
   function handleMoreMovies() {
-    for (let i = showedMovies.length; i < showedMovies.length + 3; i++) {
-      setShowedMovies(prevShowedMovies => {
-        return [...prevShowedMovies, allMovies[i]];
-      })
+    if (Math.abs(showedMovies.length - allMovies.length) >= 3) {
+      for (let i = showedMovies.length; i < showedMovies.length + 3; i++) {
+        setShowedMovies(prevShowedMovies => {
+          return [...prevShowedMovies, allMovies[i]];
+        })
+      }
+    } else {
+      for (let i = showedMovies.length; i < allMovies.length; i++) {
+        setShowedMovies(prevShowedMovies => {
+          return [...prevShowedMovies, allMovies[i]];
+        })
+      }
     }
   }
 
@@ -69,7 +79,7 @@ function AllMovies() {
 
       <AllMoviesCardList movies={showedMovies} />
 
-      {showedMovies.length !== 0 ? <MoreMovies onMoreMovies={handleMoreMovies} /> : null}
+      {isMoreMoviesVisible  ? <MoreMovies onMoreMovies={handleMoreMovies} /> : null}
     </div>
   );
 }
