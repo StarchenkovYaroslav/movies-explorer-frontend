@@ -35,8 +35,6 @@ function AllMovies() {
       setInitialMoviesAmount(5);
       setAddedMoviesAmount(2);
     }
-
-    console.log(pageWidth);
   }
 
   useEffect(() => {
