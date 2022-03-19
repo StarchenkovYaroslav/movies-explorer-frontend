@@ -2,10 +2,10 @@ import "./MoreMovies.css";
 
 import MoreMoviesButton from "../MoreMoviesButton/MoreMoviesButton";
 
-function MoreMovies() {
+function MoreMovies({ onMoreMovies }) {
   return (
     <section className="more-movies">
-      <MoreMoviesButton />
+      <MoreMoviesButton onClick={onMoreMovies} />
     </section>
   )
 }

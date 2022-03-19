@@ -1,8 +1,8 @@
 import "./MoreMoviesButton.css";
 
-function MoreMoviesButton() {
+function MoreMoviesButton({ onClick }) {
   return (
-    <button className="more-movies-button" type="button">Ещё</button>
+    <button className="more-movies-button" type="button" onClick={onClick}>Ещё</button>
   )
 }
 

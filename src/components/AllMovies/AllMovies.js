@@ -1,6 +1,6 @@
 import "./AllMovies.css";
 
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 import moviesApi from "../../utils/MoviesApi";
 
@@ -12,9 +12,14 @@ function AllMovies() {
   const [isShortMoviesChosen, setIsShortMoviesChosen] = useState(false);
   const [searchedMovie, setSearchedMovie] = useState('');
 
-  const [movies, setMovies] = useState([]);
+  const [allMovies, setAllMovies] = useState([]);
+  const [showedMovies, setShowedMovies] = useState([]);
 
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
+
+  useEffect(() => {
+    setShowedMovies(allMovies.slice(0, 3));
+  }, [allMovies])
 
   function handleChooseShortMovies(evt) {
     setIsShortMoviesChosen(evt.target.checked);
@@ -31,7 +36,7 @@ function AllMovies() {
 
     moviesApi.getAllMovies()
       .then(loadedMovies => {
-        setMovies(loadedMovies);
+        setAllMovies(loadedMovies);
 
         localStorage.setItem('allMovies', JSON.stringify(loadedMovies));
       })
@@ -41,6 +46,14 @@ function AllMovies() {
       .finally(() => {
         setAreMoviesLoading(false);
       });
+  }
+
+  function handleMoreMovies() {
+    for (let i = showedMovies.length; i < showedMovies.length + 3; i++) {
+      setShowedMovies(prevShowedMovies => {
+        return [...prevShowedMovies, allMovies[i]];
+      })
+    }
   }
 
   return (
@@ -54,9 +67,9 @@ function AllMovies() {
         onSearch={handleSearchMovie}
       />
 
-      <AllMoviesCardList movies={movies} />
+      <AllMoviesCardList movies={showedMovies} />
 
-      {movies.length !== 0 ? <MoreMovies /> : null}
+      {showedMovies.length !== 0 ? <MoreMovies onMoreMovies={handleMoreMovies} /> : null}
     </div>
   );
 }
