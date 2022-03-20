@@ -12,7 +12,6 @@ import UsersMovies from "../UsersMovies/UsersMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import {useState} from "react";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
@@ -20,29 +19,33 @@ function App() {
 
   const navigate = useNavigate();
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const loggedIn =
+  location.pathname === '/' + paths.movies
+  || location.pathname === '/' + paths.savedMovies
+  || location.pathname === '/' + paths.profile;
 
   const isHeaderVisible =
-    (Object.values(paths).includes(location.pathname.slice(1)) || location.pathname === paths.main)
-    && (loggedIn
-    || location.pathname === paths.main);
+    location.pathname === paths.main
+    || location.pathname === '/' + paths.movies
+    || location.pathname === '/' + paths.savedMovies
+    || location.pathname === '/' + paths.profile;
 
   const isFooterVisible =
-    (Object.values(paths).includes(location.pathname.slice(1)) || location.pathname === paths.main)
-    && (location.pathname !== '/' + paths.profile
-    && location.pathname !== '/' + paths.signUp
-    && location.pathname !== '/' + paths.signIn);
+    location.pathname === paths.main
+    || location.pathname === '/' + paths.movies
+    || location.pathname === '/' + paths.savedMovies;
+
 
   function handleSignIn(evt) {
     evt.preventDefault();
 
-    setLoggedIn(true);
+    //setLoggedIn(true);
 
     navigate('/' + paths.movies);
   }
 
   function handleSignOut() {
-    setLoggedIn(false);
+    //setLoggedIn(false);
 
     navigate('/' + paths.signIn);
   }
