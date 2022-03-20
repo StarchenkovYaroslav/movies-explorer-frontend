@@ -1,6 +1,6 @@
 @import "../../vendor/fonts/fonts.css";
 
-.navigation {
+.navigation__container {
     align-items: center;
     display: flex;
 }
