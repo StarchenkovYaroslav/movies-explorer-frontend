@@ -112,6 +112,7 @@
 
 @media (max-width: 767px) {
     .techniques {
+        background-color: #202020;
         padding: 70px 18px;
     }
 
