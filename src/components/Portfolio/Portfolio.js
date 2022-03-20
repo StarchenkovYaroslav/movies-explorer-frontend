@@ -6,13 +6,13 @@ function Portfolio() {
       <h3 className="portfolio__title">Портфолио</h3>
       <ul className="portfolio__links-list">
         <li className="portfolio__links-item">
-          <a href="https://github.com/StarchenkovYaroslav/how-to-learn" className="portfolio__link">Статичный сайт</a>
+          <a href="https://github.com/StarchenkovYaroslav/how-to-learn" className="portfolio__link" target="_blank">Статичный сайт</a>
         </li>
         <li className="portfolio__links-item">
-          <a href="https://github.com/StarchenkovYaroslav/russian-travel" className="portfolio__link">Адаптивный сайт</a>
+          <a href="https://github.com/StarchenkovYaroslav/russian-travel" className="portfolio__link" target="_blank">Адаптивный сайт</a>
         </li>
         <li className="portfolio__links-item">
-          <a href="https://github.com/StarchenkovYaroslav/react-mesto-api-full" className="portfolio__link">Одностраничное приложение</a>
+          <a href="https://github.com/StarchenkovYaroslav/react-mesto-api-full" className="portfolio__link" target="_blank">Одностраничное приложение</a>
         </li>
       </ul>
     </div>
