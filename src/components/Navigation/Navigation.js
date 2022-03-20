@@ -20,12 +20,12 @@ function Navigation({ loggedIn, isVisible }) {
       </>
     ) : (
       <>
-          <div className="navigation__links-list">
-            <Link to={paths.main} className="navigation__link navigation__link_logged-in navigation__link_path_main">Главная</Link>
-            <Link to={paths.movies} className="navigation__link navigation__link_logged-in navigation__link_path_movies">Фильмы</Link>
-            <Link to={paths.savedMovies} className="navigation__link navigation__link_logged-in navigation__link_path_saved-movies">Сохраненные фильмы</Link>
-          </div>
-          <Link to={paths.profile} className="navigation__link navigation__link_path_profile">Аккаунт</Link>
+        <div className="navigation__links-list">
+          <Link to={paths.main} className="navigation__link navigation__link_logged-in navigation__link_path_main">Главная</Link>
+          <Link to={paths.movies} className="navigation__link navigation__link_logged-in navigation__link_path_movies">Фильмы</Link>
+          <Link to={paths.savedMovies} className="navigation__link navigation__link_logged-in navigation__link_path_saved-movies">Сохраненные фильмы</Link>
+        </div>
+        <Link to={paths.profile} className="navigation__link navigation__link_path_profile">Аккаунт</Link>
       </>
     )
 
