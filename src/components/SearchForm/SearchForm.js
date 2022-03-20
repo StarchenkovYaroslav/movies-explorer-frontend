@@ -2,7 +2,7 @@ import "./SearchForm.css";
 
 function SearchForm({ children, onSubmit }) {
   return (
-    <form className="search-form" onSubmit={onSubmit}>
+    <form className="search-form" noValidate={true} onSubmit={onSubmit}>
       <fieldset className="search-form__input-container">
         <div className="search-form__icon"/>
         {children}

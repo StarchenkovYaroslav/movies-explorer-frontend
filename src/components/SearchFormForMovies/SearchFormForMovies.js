@@ -6,6 +6,7 @@ function SearchFormForMovies(props) {
   return (
     <SearchForm onSubmit={props.onSubmit} >
       <input
+        required={true}
         className="search-form__input"
         type="text"
         name="movie"
