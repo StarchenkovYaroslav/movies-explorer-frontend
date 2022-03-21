@@ -1,12 +1,16 @@
 import "./AllMoviesCardList.css";
 import AllMoviesCard from "../AllMoviesCard/AllMoviesCard";
 import {moviesApiSettings} from "../../utils/config";
+import Preloader from "../Preloader/Preloader";
 
-function AllMoviesCardList({ movies }) {
+function AllMoviesCardList({ movies, areMoviesLoading }) {
+  const isPreloaderVisible = areMoviesLoading;
+  const areCardsVisible = !areMoviesLoading && movies.length !== 0;
+
   return (
     <section className="all-movies-card-list">
 
-      {movies.length !== 0 && movies.map(movie => {
+      {areCardsVisible && movies.map(movie => {
         return (
           <AllMoviesCard
             key={movie.id}
@@ -17,6 +21,8 @@ function AllMoviesCardList({ movies }) {
           />
         )
       })}
+
+      {isPreloaderVisible ? <Preloader /> : null}
 
     </section>
   );

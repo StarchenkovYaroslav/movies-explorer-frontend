@@ -20,7 +20,10 @@ function AllMovies() {
 
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
-  const isMoreMoviesVisible = showedMovies.length !== 0 && showedMovies.length !== allMovies.length;
+  const isMoreMoviesVisible =
+    showedMovies.length !== 0
+    && showedMovies.length !== allMovies.length
+    && !areMoviesLoading;
 
   function checkPageWidth() {
     const pageWidth = document.documentElement.clientWidth;
@@ -111,7 +114,10 @@ function AllMovies() {
         onSearch={handleSearchMovie}
       />
 
-      <AllMoviesCardList movies={showedMovies} />
+      <AllMoviesCardList
+        movies={showedMovies}
+        areMoviesLoading={areMoviesLoading}
+      />
 
       {isMoreMoviesVisible  ? <MoreMovies onMoreMovies={handleMoreMovies} /> : null}
     </div>
