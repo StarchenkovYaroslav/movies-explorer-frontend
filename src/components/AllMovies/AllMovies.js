@@ -1,18 +1,23 @@
 import "./AllMovies.css";
 
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
 
-import moviesApi from "../../utils/MoviesApi";
+import moviesApi from "../../utils/Api/MoviesApi";
+import filterMovies from "../../utils/functions/filter-movies";
+import {messages} from "../../utils/config";
 
 import Search from "../Search/Search";
 import AllMoviesCardList from "../AllMoviesCardList/AllMoviesCardList";
 import MoreMovies from "../MoreMovies/MoreMovies";
 
 function AllMovies() {
-  const [isShortMoviesChosen, setIsShortMoviesChosen] = useState(false);
+  const isInitialMount = useRef(true);
+
+  const [areShortMoviesChosen, setAreShortMoviesChosen] = useState(false);
   const [searchedMovie, setSearchedMovie] = useState('');
 
   const [allMovies, setAllMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
   const [showedMovies, setShowedMovies] = useState([]);
 
   const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
@@ -20,10 +25,23 @@ function AllMovies() {
 
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
+  const [isLoadingMessageVisible, setIsLoadingMessageVisible] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('');
+
   const isMoreMoviesVisible =
     showedMovies.length !== 0
-    && showedMovies.length !== allMovies.length
+    && showedMovies.length !== filteredMovies.length
     && !areMoviesLoading;
+
+  function showLoadingMessage(message) {
+    setIsLoadingMessageVisible(true);
+    setLoadingMessage(message);
+  }
+
+  function hideLoadingMessage() {
+    setIsLoadingMessageVisible(false);
+    setLoadingMessage('');
+  }
 
   function checkPageWidth() {
     const pageWidth = document.documentElement.clientWidth;
@@ -57,11 +75,27 @@ function AllMovies() {
   }, [])
 
   useEffect(() => {
-    setShowedMovies(allMovies.slice(0, initialMoviesAmount));
-  }, [allMovies])
+    setFilteredMovies(filterMovies(allMovies, searchedMovie, areShortMoviesChosen));
+  }, [areShortMoviesChosen]);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      if (filteredMovies.length === 0) {
+        setShowedMovies([]);
+
+        showLoadingMessage(messages.movieNotFound);
+      } else {
+        setShowedMovies(filteredMovies.slice(0, initialMoviesAmount));
+
+        hideLoadingMessage();
+      }
+    }
+  }, [filteredMovies])
 
   function handleChooseShortMovies(evt) {
-    setIsShortMoviesChosen(evt.target.checked);
+    setAreShortMoviesChosen(evt.target.checked);
   }
 
   function handleInputSearchedMovie(evt) {
@@ -71,16 +105,23 @@ function AllMovies() {
   function handleSearchMovie(evt) {
     evt.preventDefault();
 
+    hideLoadingMessage();
+
     setAreMoviesLoading(true);
 
     moviesApi.getAllMovies()
       .then(loadedMovies => {
         setAllMovies(loadedMovies);
 
+        setFilteredMovies(filterMovies(loadedMovies, searchedMovie, areShortMoviesChosen));
+
         localStorage.setItem('allMovies', JSON.stringify(loadedMovies));
       })
-      .catch(status => {
-        console.log(status);
+      .catch(() => {
+        setAllMovies([]);
+        setFilteredMovies([]);
+
+        showLoadingMessage(messages.serverError);
       })
       .finally(() => {
         setAreMoviesLoading(false);
@@ -88,16 +129,16 @@ function AllMovies() {
   }
 
   function handleMoreMovies() {
-    if (Math.abs(showedMovies.length - allMovies.length) >= addedMoviesAmount) {
+    if (Math.abs(showedMovies.length - filteredMovies.length) >= addedMoviesAmount) {
       for (let i = showedMovies.length; i < showedMovies.length + addedMoviesAmount; i++) {
         setShowedMovies(prevShowedMovies => {
-          return [...prevShowedMovies, allMovies[i]];
+          return [...prevShowedMovies, filteredMovies[i]];
         })
       }
     } else {
-      for (let i = showedMovies.length; i < allMovies.length; i++) {
+      for (let i = showedMovies.length; i < filteredMovies.length; i++) {
         setShowedMovies(prevShowedMovies => {
-          return [...prevShowedMovies, allMovies[i]];
+          return [...prevShowedMovies, filteredMovies[i]];
         })
       }
     }
@@ -107,7 +148,7 @@ function AllMovies() {
     <div className="all-movies">
       <Search
         searchedMovie={searchedMovie}
-        isShortMoviesChosen={isShortMoviesChosen}
+        isShortMoviesChosen={areShortMoviesChosen}
 
         onChooseShortMovies={handleChooseShortMovies}
         onInputSearchedMovie={handleInputSearchedMovie}
@@ -117,6 +158,8 @@ function AllMovies() {
       <AllMoviesCardList
         movies={showedMovies}
         areMoviesLoading={areMoviesLoading}
+        isLoadingMessageVisible={isLoadingMessageVisible}
+        loadingMessage={loadingMessage}
       />
 
       {isMoreMoviesVisible  ? <MoreMovies onMoreMovies={handleMoreMovies} /> : null}

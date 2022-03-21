@@ -2,8 +2,9 @@ import "./AllMoviesCardList.css";
 import AllMoviesCard from "../AllMoviesCard/AllMoviesCard";
 import {moviesApiSettings} from "../../utils/config";
 import Preloader from "../Preloader/Preloader";
+import LoadingMessage from "../LoadingMessage/LoadingMessage";
 
-function AllMoviesCardList({ movies, areMoviesLoading }) {
+function AllMoviesCardList({ movies, areMoviesLoading, loadingMessage, isLoadingMessageVisible }) {
   const isPreloaderVisible = areMoviesLoading;
   const areCardsVisible = !areMoviesLoading && movies.length !== 0;
 
@@ -23,6 +24,8 @@ function AllMoviesCardList({ movies, areMoviesLoading }) {
       })}
 
       {isPreloaderVisible ? <Preloader /> : null}
+
+      {isLoadingMessageVisible ? <LoadingMessage message={loadingMessage} /> : null}
 
     </section>
   );

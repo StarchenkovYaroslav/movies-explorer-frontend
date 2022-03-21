@@ -1,5 +1,5 @@
 import Api from "./Api";
-import {mainApiSettings} from "./config";
+import {mainApiSettings} from "../config";
 
 class MainApi extends Api {
   constructor(settings) {

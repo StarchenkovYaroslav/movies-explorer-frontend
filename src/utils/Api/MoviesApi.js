@@ -1,5 +1,5 @@
 import Api from "./Api";
-import { moviesApiSettings } from "./config";
+import { moviesApiSettings } from "../config";
 
 class MoviesApi extends Api {
   constructor(settings) {

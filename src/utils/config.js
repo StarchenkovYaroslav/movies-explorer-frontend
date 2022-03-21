@@ -22,3 +22,8 @@ export const mainApiSettings = {
   signOutEndpoint: 'signout',
   checkAuthEndpoint: 'checkAuth'
 }
+
+export const messages = {
+  serverError: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+  movieNotFound: 'Ничего не найдено'
+}
