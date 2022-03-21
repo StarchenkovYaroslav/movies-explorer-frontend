@@ -1,0 +1,44 @@
+@import "../../vendor/fonts/fonts.css";
+
+.search-form__input-container {
+    border: none;
+    border-bottom: 1px solid  #424242;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 0 0 15px;
+}
+
+.search-form__icon {
+    background: url(../../images/search-form__search-icon.svg) center center / 22px 22px no-repeat;
+    border: 1px solid #424242;
+    border-radius: 50%;
+    height: 34px;
+    width: 34px;
+}
+
+.search-form__submit-button {
+    background: url(../../images/search-form__submit-icon.svg) center center / 15px 15px no-repeat,
+        #4285F4;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 34px;
+    padding: 0;
+    transition: all .2s;
+    width: 34px;
+}
+
+.search-form__submit-button:hover {
+    opacity: .6;
+}
+
+@media (max-width: 767px) {
+    .search-form__icon {
+        display: none;
+    }
+
+    .search-form__input-container {
+        padding: 0 0 9px;
+    }
+}

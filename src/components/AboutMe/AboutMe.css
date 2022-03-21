@@ -1,0 +1,172 @@
+@import "../../vendor/fonts/fonts.css";
+
+.student {
+    background-color: #202020;
+    padding: 110px 70px 125px;
+}
+
+.student__title {
+    margin: 0 0 66px;
+}
+
+.student__info {
+    display: grid;
+    grid-template-areas:
+        "text-info photo"
+        "links photo";
+    grid-template-columns: 600fr 270fr;
+    grid-gap: 99px 270px;
+    margin: 0 0 100px;
+}
+
+.student__name {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.16;
+    margin: 0 0 18px;
+}
+
+.student__status {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.11;
+    margin: 0 0 26px;
+}
+
+.student__description {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.57;
+    margin: 0;
+}
+
+.student__info-text {
+    grid-area: text-info;
+}
+
+.student__info-links-list {
+    align-self: end;
+    display: flex;
+    grid-area: links;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.student__info-links-item {
+    margin: 0 20px 0 0;
+}
+
+.student__info-links-item:last-child {
+    margin-right: 0;
+}
+
+.student__info-link {
+    display: block;
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+    transition: all .2s;
+}
+
+.student__info-link:hover {
+    opacity: .6;
+}
+
+.student__photo {
+    border-radius: 10px;
+    grid-area: photo;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    width: 100%;
+}
+
+@media (max-width: 1279px) {
+    .student {
+        padding: 90px 50px;
+    }
+
+    .student__info {
+        grid-template-columns: 364fr 255fr;
+        grid-gap: 87px 49px;
+        margin: 0 0 90px;
+    }
+
+    .student__name {
+        font-size: 50px;
+        line-height: 1;
+        margin: 0 0 16px;
+    }
+
+    .student__status {
+        font-size: 12px;
+        line-height: 1.5;
+        margin: 0 0 20px;
+    }
+
+    .student__description {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+}
+
+@media (max-width: 767px) {
+    .student {
+        padding: 70px 14px;
+    }
+
+    .student__title {
+        margin: 0 0 60px;
+    }
+
+    .student__info {
+        display: grid;
+        grid-template-areas:
+        "photo"
+        "text-info"
+        "links";
+        grid-template-columns: 1fr;
+        grid-gap: 40px;
+        margin: 0 0 70px;
+    }
+
+    .student__name {
+        font-size: 30px;
+        line-height: 1.2;
+        margin: 0 0 20px;
+    }
+
+    .student__status {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+    .student__description {
+        font-size: 11px;
+        line-height: 1.45;
+        margin: 0;
+    }
+
+    .student__info-links-list {
+        align-self: center;
+    }
+
+    .student__info-links-item {
+        margin: 0 26px 0 0;
+    }
+
+    .student__photo {
+        height: 352px;
+    }
+}

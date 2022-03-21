@@ -1,0 +1,29 @@
+@import "../../vendor/fonts/fonts.css";
+
+.search-form__input {
+    border: none;
+    color: #8B8B8B;
+    background-color: transparent;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    padding: 0;
+    width: 80%;
+}
+
+.search-form__input:focus {
+    color: #fff;
+}
+
+.search-form__input:focus {
+    outline: none;
+}
+
+@media (max-width: 767px) {
+    .search-form__input {
+        font-size: 18px;
+        text-align: start;
+    }
+}

@@ -1,0 +1,29 @@
+@import "../../vendor/fonts/fonts.css";
+
+.movies-card__save-button {
+    background: #313131;
+    border: none;
+    border-radius: 30px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    justify-self: center;
+    grid-area: button;
+    height: 29px;
+    line-height: 1;
+    padding: 0;
+    transition: all .2s;
+    width: 100px;
+}
+
+.movies-card__save-button:hover {
+    opacity: .6;
+}
+
+.movies-card__save-button_saved {
+    background: url(../../images/movie-card__save-button-icon.svg) center center / 10px 7px no-repeat,
+    #EE3465;
+}
+

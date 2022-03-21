@@ -1,0 +1,51 @@
+@import "../../vendor/fonts/fonts.css";
+
+.page-with-form__input {
+    border: none;
+    margin: 0 0 24px;
+    padding: 0;
+}
+
+.page-with-form__input:last-of-type {
+    margin-bottom: 0;
+}
+
+.page-with-form__input-label {
+    color: #8B8B8B;
+    display: block;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1;
+    margin: 0 0 5px;
+}
+
+.page-with-form__input-field {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #424242;
+    color: #fff;
+    display: block;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    padding: 0 0 10px;
+    margin: 0 0 6px;
+    width: 100%;
+}
+
+.page-with-form__input-field:focus {
+    border-bottom: 1px solid #fff;
+    font-weight: 500;
+    outline: none;
+}
+
+.page-with-form__input-validation-message {
+    color: #EE3465;
+    display: block;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 1;
+}

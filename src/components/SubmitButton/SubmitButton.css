@@ -1,0 +1,33 @@
+@import "../../vendor/fonts/fonts.css";
+
+.page-with-form__submit-button {
+    align-self: end;
+    background-color: #4285F4;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    grid-area: submit-button;
+    line-height: 1;
+    padding: 15px 0;
+    text-align: center;
+    transition: all .2s;
+    width: 100%;
+}
+
+.page-with-form__submit-button:hover {
+    opacity: .6;
+}
+
+.page-with-form__submit-button_disabled {
+    background-color: #8B8B8B;
+}
+
+@media (max-width: 424px) {
+    .page-with-form__submit-button {
+        font-size: 12px;
+    }
+}

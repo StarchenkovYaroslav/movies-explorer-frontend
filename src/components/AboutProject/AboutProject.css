@@ -1,0 +1,152 @@
+@import "../../vendor/fonts/fonts.css";
+
+.about-project {
+    background-color: #202020;
+    padding: 110px 70px;
+}
+
+.about-project__title {
+    margin: 0 0 70px;
+}
+
+.about-project__points-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 40px;
+    list-style: none;
+    margin: 0 0 110px;
+    padding: 0;
+}
+
+.about-project__point-title {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.2;
+    margin: 0 0 26px;
+}
+
+.about-project__point-description {
+    color: #fff;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.43;
+    margin: 0;
+}
+
+.about-project__time-line {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas:
+        "backend-time frontend-time"
+        "backend-title frontend-title";
+    row-gap: 14px;
+}
+
+.about-project__stage-time {
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+    margin: 0;
+    padding: 9px 0;
+    text-align: center;
+}
+
+.about-project__stage-time_stage_backend {
+    background-color: #3DDC84;
+    color: #000;
+    grid-area: backend-time;
+}
+
+.about-project__stage-time_stage_frontend {
+    background-color: #303030;
+    color: #fff;
+    grid-area: frontend-time;
+}
+
+.about-project__stage-title {
+    color: #8B8B8B;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+    text-align: center;
+}
+
+.about-project__stage-title_stage_backend {
+    grid-area: backend-title;
+}
+
+.about-project__stage-title_stage_frontend {
+    grid-area: frontend-title;
+}
+
+@media (max-width: 1279px) {
+    .about-project {
+        padding: 90px 50px;
+    }
+
+    .about-project__points-list {
+        grid-gap: 30px;
+        margin: 0 0 93px;
+    }
+
+    .about-project__point-title {
+        margin: 0 0 22px;
+    }
+
+    .about-project__point-description {
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    .about-project__stage-title {
+        font-weight: 400;
+    }
+}
+
+@media (max-width: 767px) {
+    .about-project {
+        padding: 70px 18px;
+    }
+
+    .about-project__title {
+        margin: 0 0 60px;
+    }
+
+    .about-project__points-list {
+        grid-template-columns: 1fr;
+        grid-gap: 56px;
+        list-style: none;
+        margin: 0 0 60px;
+    }
+
+    .about-project__point-title {
+        font-size: 18px;
+        margin: 0 0 16px;
+    }
+
+    .about-project__point-description {
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+    .about-project__time-line {
+        row-gap: 10px;
+    }
+
+    .about-project__stage-time {
+        font-size: 11px;
+        padding: 11px 0;
+    }
+
+    .about-project__stage-title {
+        font-size: 11px;
+    }
+}

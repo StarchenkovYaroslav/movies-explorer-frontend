@@ -1,0 +1,14 @@
+@import "../../vendor/fonts/fonts.css";
+
+.page-with-form__form {
+    display: grid;
+    grid-template-areas:
+        "inputs"
+        "submit-button";
+    grid-template-rows: auto 1fr;
+    margin: 0 0 16px;
+}
+
+.page-with-form__inputs-container {
+    margin: 0 0 24px;
+}

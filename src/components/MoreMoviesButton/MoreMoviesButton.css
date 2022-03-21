@@ -1,0 +1,28 @@
+@import "../../vendor/fonts/fonts.css";
+
+.more-movies-button {
+    background-color: #202020;
+    border: 1px solid #424242;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1;
+    min-width: 320px;
+    padding: 11px 0;
+    text-align: center;
+    transition: all .2s;
+}
+
+.more-movies-button:hover {
+    opacity: .6;
+}
+
+@media (max-width: 767px) {
+    .more-movies-button {
+        min-width: 0;
+        width: 100%;
+    }
+}

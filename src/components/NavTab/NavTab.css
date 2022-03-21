@@ -1,0 +1,61 @@
+@import "../../vendor/fonts/fonts.css";
+
+.project-navigation {
+    align-items: center;
+    background-color: #272727;
+    display: flex;
+    justify-content: center;
+    padding: 24px 70px;
+}
+
+.project-navigation__links-list {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.project-navigation__links-item {
+    margin: 0 40px 0 0;
+}
+
+.project-navigation__links-item:last-child {
+    margin-right: 0;
+}
+
+.project-navigation__link {
+    color: #fff;
+    display: block;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    transition: all .2s;
+}
+
+.project-navigation__link:hover {
+    opacity: 0.6;
+}
+
+@media (max-width: 1279px) {
+    .project-navigation {
+        padding: 24px 50px;
+    }
+}
+
+@media (max-width: 767px) {
+    .project-navigation {
+        padding: 24px 18px;
+    }
+
+    .project-navigation__links-item {
+        margin: 0 24px 0 0;
+    }
+
+    .project-navigation__link {
+        font-size: 11px
+    }
+}
