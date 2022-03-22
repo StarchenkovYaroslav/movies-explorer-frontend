@@ -33,12 +33,8 @@ function AllMovies() {
 
   const {
     inputValues,
-    setInputValues,
     inputsValidity,
-    inputErrorMessages,
-    isFormValid,
     handleInputChange,
-    resetForm
   } = useFormWithValidation(
     {movie: ''},
     {movie: false},
