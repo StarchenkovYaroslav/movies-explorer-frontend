@@ -3,6 +3,8 @@ import "./SearchFormForMovies.css";
 import SearchForm from "../SearchForm/SearchForm";
 
 function SearchFormForMovies(props) {
+  const moviePlaceholder = !props.isFormMessageVisible ? 'Фильм' : props.formMessage;
+
   return (
     <SearchForm onSubmit={props.onSubmit} >
       <input
@@ -10,7 +12,7 @@ function SearchFormForMovies(props) {
         className="search-form__input"
         type="text"
         name="movie"
-        placeholder="Фильм"
+        placeholder={moviePlaceholder}
         value={props.searchedMovie}
         onChange={props.onInputSearchedMovie}
       />

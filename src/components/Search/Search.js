@@ -10,6 +10,8 @@ function Search(props) {
           searchedMovie={props.searchedMovie}
           onInputSearchedMovie={props.onInputSearchedMovie}
           onSubmit={props.onSearch}
+          isFormMessageVisible={props.isFormMessageVisible}
+          formMessage={props.formMessage}
         />
       </div>
       <FilterCheckboxForShortMovies

@@ -5,6 +5,7 @@ import {useEffect, useState, useRef} from "react";
 import moviesApi from "../../utils/Api/MoviesApi";
 import filterMovies from "../../utils/functions/filter-movies";
 import {messages} from "../../utils/config";
+import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 
 import Search from "../Search/Search";
 import AllMoviesCardList from "../AllMoviesCardList/AllMoviesCardList";
@@ -14,7 +15,6 @@ function AllMovies() {
   const isInitialMount = useRef(true);
 
   const [areShortMoviesChosen, setAreShortMoviesChosen] = useState(false);
-  const [searchedMovie, setSearchedMovie] = useState('');
 
   const [allMovies, setAllMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
@@ -27,6 +27,24 @@ function AllMovies() {
 
   const [isLoadingMessageVisible, setIsLoadingMessageVisible] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState('');
+
+  const [formMessage, setFormMessage] = useState('');
+  const [isFormMessageVisible, setIsFormMessageVisible] = useState(false);
+
+  const {
+    inputValues,
+    setInputValues,
+    inputsValidity,
+    inputErrorMessages,
+    isFormValid,
+    handleInputChange,
+    resetForm
+  } = useFormWithValidation(
+    {movie: ''},
+    {movie: false},
+    {movie: ''},
+    false
+  );
 
   const isMoreMoviesVisible =
     showedMovies.length !== 0
@@ -41,6 +59,16 @@ function AllMovies() {
   function hideLoadingMessage() {
     setIsLoadingMessageVisible(false);
     setLoadingMessage('');
+  }
+
+  function showFormMessage(message) {
+    setFormMessage(message);
+    setIsFormMessageVisible(true);
+  }
+
+  function hideFormMessage() {
+    setFormMessage('');
+    setIsFormMessageVisible(false);
   }
 
   function checkPageWidth() {
@@ -75,8 +103,20 @@ function AllMovies() {
   }, [])
 
   useEffect(() => {
-    setFilteredMovies(filterMovies(allMovies, searchedMovie, areShortMoviesChosen));
+    setFilteredMovies(filterMovies(allMovies, inputValues.movie, areShortMoviesChosen));
   }, [areShortMoviesChosen]);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+    } else {
+      if (allMovies.length === 0) {
+        setFilteredMovies([]);
+      } else {
+        setFilteredMovies(filterMovies(allMovies, inputValues.movie, areShortMoviesChosen));
+      }
+    }
+  }, [allMovies]);
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -98,12 +138,18 @@ function AllMovies() {
     setAreShortMoviesChosen(evt.target.checked);
   }
 
-  function handleInputSearchedMovie(evt) {
-    setSearchedMovie(evt.target.value);
-  }
-
   function handleSearchMovie(evt) {
     evt.preventDefault();
+
+    if (!inputsValidity.movie) {
+      setAllMovies([]);
+
+      showFormMessage(messages.searchMovieFormErrorMessage);
+
+      return;
+    } else {
+      hideFormMessage();
+    }
 
     hideLoadingMessage();
 
@@ -113,13 +159,10 @@ function AllMovies() {
       .then(loadedMovies => {
         setAllMovies(loadedMovies);
 
-        setFilteredMovies(filterMovies(loadedMovies, searchedMovie, areShortMoviesChosen));
-
         localStorage.setItem('allMovies', JSON.stringify(loadedMovies));
       })
       .catch(() => {
         setAllMovies([]);
-        setFilteredMovies([]);
 
         showLoadingMessage(messages.serverError);
       })
@@ -147,11 +190,14 @@ function AllMovies() {
   return (
     <div className="all-movies">
       <Search
-        searchedMovie={searchedMovie}
+        searchedMovie={inputValues.movie}
         isShortMoviesChosen={areShortMoviesChosen}
 
+        formMessage={formMessage}
+        isFormMessageVisible={isFormMessageVisible}
+
         onChooseShortMovies={handleChooseShortMovies}
-        onInputSearchedMovie={handleInputSearchedMovie}
+        onInputSearchedMovie={handleInputChange}
         onSearch={handleSearchMovie}
       />
 
