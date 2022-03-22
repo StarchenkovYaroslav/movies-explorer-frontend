@@ -142,8 +142,6 @@ function AllMovies() {
     evt.preventDefault();
 
     if (!inputsValidity.movie) {
-      setAllMovies([]);
-
       showFormMessage(messages.searchMovieFormErrorMessage);
 
       return;
