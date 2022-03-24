@@ -92,6 +92,16 @@ function App() {
       })
   }
 
+  function handleEditProfile(data) {
+    mainApi.editCurrentUser(data)
+      .then(user => {
+        setCurrentUser(user);
+      })
+      .catch((status) => {
+        console.log(status);
+      })
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -104,7 +114,7 @@ function App() {
             <Route path={paths.main} element={<Main/>} />
             <Route path={paths.movies} element={<AllMovies/>} />
             <Route path={paths.savedMovies} element={<UsersMovies/>} />
-            <Route path={paths.profile} element={<Profile onSignOut={handleSignOut}/>} />
+            <Route path={paths.profile} element={<Profile onEditProfile={handleEditProfile} onSignOut={handleSignOut}/>} />
             <Route path={paths.signIn} element={<Login onSignIn={handleSignIn}/>} />
             <Route path={paths.signUp} element={<Register onSignUp={handleSignUp}/>} />
 

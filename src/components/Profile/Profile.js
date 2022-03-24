@@ -8,8 +8,8 @@ function Profile(props) {
   return (
     <div className="profile">
       <ProfileGreeting />
-      <ProfileEdit />
-      <ProfileExit onExit={props.onSignOut}/>
+      <ProfileEdit onEditProfile={props.onEditProfile} />
+      <ProfileExit onExit={props.onSignOut} />
     </div>
   );
 }
