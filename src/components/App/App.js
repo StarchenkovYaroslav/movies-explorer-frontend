@@ -14,6 +14,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import {useState} from "react";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import mainApi from "../../utils/Api/MainApi";
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,24 @@ function App() {
     && (location.pathname !== '/' + paths.profile
     && location.pathname !== '/' + paths.signUp
     && location.pathname !== '/' + paths.signIn);
+
+  function handleSignUp(data) {
+    mainApi.signUp(data)
+      .then(() => {
+        return mainApi.signIn({
+          email: data.email,
+          password: data.password,
+        });
+      })
+      .then(() => {
+        setLoggedIn(true);
+
+        navigate('/' + paths.movies);
+      })
+      .catch(status => {
+        console.log(status)
+      });
+  }
 
   function handleSignIn(evt) {
     evt.preventDefault();
@@ -60,7 +79,7 @@ function App() {
           <Route path={paths.savedMovies} element={<UsersMovies/>} />
           <Route path={paths.profile} element={<Profile onSignOut={handleSignOut}/>} />
           <Route path={paths.signIn} element={<Login onSignIn={handleSignIn}/>} />
-          <Route path={paths.signUp} element={<Register/>} />
+          <Route path={paths.signUp} element={<Register onSignUp={handleSignUp}/>} />
 
           <Route path="*" element={<NotFoundPage/>} />
 

@@ -1,15 +1,14 @@
+import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
+
 import Form from "../Form/Form";
 import Input from "../Input/Input";
-import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 
 function RegisterForm(props) {
   const {
     inputValues,
-    inputsValidity,
     inputErrorMessages,
     isFormValid,
     handleInputChange,
-    resetForm
   } = useFormWithValidation(
     {name: '', email: '', password: ''},
     {name: true, email: true, password: ''},
@@ -17,10 +16,18 @@ function RegisterForm(props) {
     false
   );
 
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    props.onSignUp(inputValues);
+  }
+
   return (
     <Form
       submitButtonText="Зарегистрироваться"
       isValid={isFormValid}
+
+      onSubmit={handleSubmit}
     >
       <Input
         required={true}
