@@ -6,11 +6,9 @@ import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation"
 function LoginForm(props) {
   const {
     inputValues,
-    inputsValidity,
     inputErrorMessages,
     isFormValid,
     handleInputChange,
-    resetForm
   } = useFormWithValidation(
     {email: '', password: ''},
     {email: true, password: true},
@@ -18,10 +16,16 @@ function LoginForm(props) {
     false
   );
 
+  function handleSingIn(evt) {
+    evt.preventDefault();
+
+    props.onSignIn(inputValues);
+  }
+
   return (
     <Form
       submitButtonText="Войти"
-      onSubmit={props.onSubmit}
+      onSubmit={handleSingIn}
       isValid={isFormValid}
     >
       <Input

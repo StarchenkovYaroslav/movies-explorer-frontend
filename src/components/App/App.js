@@ -3,6 +3,7 @@ import "./App.css";
 import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
 
 import { paths } from "../../utils/config";
+import mainApi from "../../utils/Api/MainApi";
 
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -14,7 +15,6 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import {useState} from "react";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import mainApi from "../../utils/Api/MainApi";
 
 function App() {
   const location = useLocation();
@@ -52,12 +52,16 @@ function App() {
       });
   }
 
-  function handleSignIn(evt) {
-    evt.preventDefault();
+  function handleSignIn(data) {
+    mainApi.signIn(data)
+      .then(() => {
+        setLoggedIn(true);
 
-    setLoggedIn(true);
-
-    navigate('/' + paths.movies);
+        navigate('/' + paths.movies);
+      })
+      .catch(status => {
+        console.log(status)
+      });
   }
 
   function handleSignOut() {
