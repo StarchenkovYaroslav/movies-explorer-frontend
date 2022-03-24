@@ -39,13 +39,15 @@ function App() {
     && location.pathname !== '/' + paths.signIn);
 
   useEffect(() => {
-    mainApi.getCurrentUser()
-      .then(user => {
-        setCurrentUser(user);
-      })
-      .catch(status => {
-        console.log(status);
-      })
+    if (loggedIn) {
+      mainApi.getCurrentUser()
+        .then(user => {
+          setCurrentUser(user);
+        })
+        .catch(status => {
+          console.log(status);
+        })
+    }
   }, [loggedIn])
 
   function handleSignUp(data) {
