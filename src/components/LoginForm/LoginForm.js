@@ -1,7 +1,8 @@
+import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
+import emailValidator from "../../utils/input-validators/email-validator";
+
 import Form from "../Form/Form";
 import Input from "../Input/Input";
-
-import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 
 function LoginForm(props) {
   const {
@@ -13,7 +14,13 @@ function LoginForm(props) {
     {email: '', password: ''},
     {email: true, password: true},
     {email: '', password: ''},
-    false
+    false,
+    {
+      email: {
+        validate: emailValidator,
+        message: 'введите коррекстный email'
+      }
+    }
   );
 
   function handleSingIn(evt) {

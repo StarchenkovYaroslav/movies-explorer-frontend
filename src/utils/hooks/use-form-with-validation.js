@@ -1,18 +1,33 @@
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 
 
-export function useFormWithValidation(initialInputValues, initialInputsValidity, initialInputErrorMessages, initialIsFormValid) {
+export function useFormWithValidation(
+  initialInputValues, initialInputsValidity, initialInputErrorMessages, initialIsFormValid, customValidators
+) {
   const [inputValues, setInputValues] = useState(initialInputValues);
   const [inputsValidity, setInputsValidity] = useState(initialInputsValidity)
   const [inputErrorMessages, setInputErrorMessages] = useState(initialInputErrorMessages);
 
   const [isFormValid, setIsFormValid] = useState(initialIsFormValid);
 
+  useEffect(() => {
+    setIsFormValid(Object.values(inputsValidity).every(validity => validity === true));
+  }, [inputsValidity])
+
   const handleInputChange = (evt) => {
-    const name = evt.target.name;
-    const value = evt.target.type === 'checkbox' ? evt.target.checked : evt.target.value;
-    const isValid = evt.target.validity.valid;
-    const validationMessage = evt.target.validationMessage;
+    const inputElement = evt.target;
+    const name = inputElement.name;
+    const value = inputElement.type === 'checkbox' ? inputElement.checked : inputElement.value;
+
+    let isValid = false;
+    let validationMessage = '';
+    if (customValidators && customValidators[name] && value !== '') {
+      isValid = customValidators[name].validate(value);
+      validationMessage = !isValid ? customValidators[name].message : '';
+    } else {
+      isValid = inputElement.validity.valid;
+      validationMessage = inputElement.validationMessage;
+    }
 
     setInputValues((inputValues) => {
       return {
@@ -34,8 +49,6 @@ export function useFormWithValidation(initialInputValues, initialInputsValidity,
         [name]: validationMessage
       }
     });
-
-    setIsFormValid(evt.target.closest('form').checkValidity());
   }
 
   const resetForm = useCallback((newInputValues, newInputsValidity, newErrorMessages, newIsFormValid) => {

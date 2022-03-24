@@ -13,6 +13,7 @@ function Input(props) {
         id={props.id}
         value={props.value}
         onChange={props.onChange}
+        pattern={props.pattern}
       />
       <span className="page-with-form__input-validation-message">{props.validationMessage}</span>
     </fieldset>
