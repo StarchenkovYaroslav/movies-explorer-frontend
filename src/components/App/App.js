@@ -2,6 +2,8 @@ import "./App.css";
 
 import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
 
+import {CurrentUserContext, defaultUser} from "../../contexts/CurrentUserContext";
+
 import { paths } from "../../utils/config";
 import mainApi from "../../utils/Api/MainApi";
 
@@ -13,7 +15,7 @@ import UsersMovies from "../UsersMovies/UsersMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
+
+  const [currentUser, setCurrentUser] = useState(defaultUser);
 
   const isHeaderVisible =
     (Object.values(paths).includes(location.pathname.slice(1)) || location.pathname === paths.main)
@@ -33,6 +37,16 @@ function App() {
     && (location.pathname !== '/' + paths.profile
     && location.pathname !== '/' + paths.signUp
     && location.pathname !== '/' + paths.signIn);
+
+  useEffect(() => {
+    mainApi.getCurrentUser()
+      .then(user => {
+        setCurrentUser(user);
+      })
+      .catch(status => {
+        console.log(status);
+      })
+  }, [loggedIn])
 
   function handleSignUp(data) {
     mainApi.signUp(data)
@@ -77,28 +91,30 @@ function App() {
   }
 
   return (
-    <div className="page">
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
 
-      {isHeaderVisible ? <Header loggedIn={loggedIn} /> : null}
+        {isHeaderVisible ? <Header loggedIn={loggedIn} /> : null}
 
-      <main className="content">
-        <Routes>
+        <main className="content">
+          <Routes>
 
-          <Route path={paths.main} element={<Main/>} />
-          <Route path={paths.movies} element={<AllMovies/>} />
-          <Route path={paths.savedMovies} element={<UsersMovies/>} />
-          <Route path={paths.profile} element={<Profile onSignOut={handleSignOut}/>} />
-          <Route path={paths.signIn} element={<Login onSignIn={handleSignIn}/>} />
-          <Route path={paths.signUp} element={<Register onSignUp={handleSignUp}/>} />
+            <Route path={paths.main} element={<Main/>} />
+            <Route path={paths.movies} element={<AllMovies/>} />
+            <Route path={paths.savedMovies} element={<UsersMovies/>} />
+            <Route path={paths.profile} element={<Profile onSignOut={handleSignOut}/>} />
+            <Route path={paths.signIn} element={<Login onSignIn={handleSignIn}/>} />
+            <Route path={paths.signUp} element={<Register onSignUp={handleSignUp}/>} />
 
-          <Route path="*" element={<NotFoundPage/>} />
+            <Route path="*" element={<NotFoundPage/>} />
 
-        </Routes>
-      </main>
+          </Routes>
+        </main>
 
-      {isFooterVisible ? <Footer/> : null}
+        {isFooterVisible ? <Footer/> : null}
 
-    </div>
+      </div>
+    </CurrentUserContext.Provider>
   )
 }
 
