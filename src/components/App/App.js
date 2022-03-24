@@ -40,8 +40,8 @@ function App() {
 
   useEffect(() => {
     mainApi.checkAuth()
-      .then(() => {
-        setLoggedIn(true);
+      .then((data) => {
+        setLoggedIn(data.isValid);
       })
       .catch(status => {
         console.log(status);
