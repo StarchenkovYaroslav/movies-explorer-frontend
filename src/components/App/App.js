@@ -39,6 +39,16 @@ function App() {
     && location.pathname !== '/' + paths.signIn);
 
   useEffect(() => {
+    mainApi.checkAuth()
+      .then(() => {
+        setLoggedIn(true);
+      })
+      .catch(status => {
+        console.log(status);
+      });
+  }, []);
+
+  useEffect(() => {
     if (loggedIn) {
       mainApi.getCurrentUser()
         .then(user => {
