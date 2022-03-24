@@ -65,9 +65,15 @@ function App() {
   }
 
   function handleSignOut() {
-    setLoggedIn(false);
+    mainApi.signOut()
+      .then(() => {
+        setLoggedIn(false);
 
-    navigate('/' + paths.signIn);
+        navigate('/' + paths.signIn);
+      })
+      .catch((status) => {
+        console.log(status);
+      })
   }
 
   return (
