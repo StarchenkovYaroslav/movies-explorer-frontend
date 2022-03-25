@@ -28,15 +28,12 @@ function App() {
   const [currentUser, setCurrentUser] = useState(defaultUser);
 
   const isHeaderVisible =
-    (Object.values(paths).includes(location.pathname.slice(1)) || location.pathname === paths.main)
-    && (loggedIn
-    || location.pathname === paths.main);
+    Object.values(paths).includes(location.pathname.slice(1))
+    && (loggedIn || location.pathname === '/' + paths.main);
 
   const isFooterVisible =
-    (Object.values(paths).includes(location.pathname.slice(1)) || location.pathname === paths.main)
-    && (location.pathname !== '/' + paths.profile
-    && location.pathname !== '/' + paths.signUp
-    && location.pathname !== '/' + paths.signIn);
+    Object.values(paths).includes(location.pathname.slice(1))
+    && ((loggedIn && location.pathname !== '/' + paths.profile) || location.pathname === '/' + paths.main);
 
   useEffect(() => {
     mainApi.checkAuth()
