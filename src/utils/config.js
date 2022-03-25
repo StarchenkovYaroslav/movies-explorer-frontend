@@ -13,7 +13,8 @@ export const moviesApiSettings = {
 }
 
 export const mainApiSettings = {
-  baseUrl: 'https://api.moviesexplorer.nomoredomains.work',
+  baseUrl: 'http://localhost:3001',
+  //baseUrl: 'https://api.moviesexplorer.nomoredomains.work',
   usersEndpoint: 'users',
   userInfoEndpoint: 'me',
   moviesEndpoint: 'movies',
@@ -28,3 +29,5 @@ export const messages = {
   movieNotFound: 'Ничего не найдено',
   searchMovieFormErrorMessage: 'Нужно ввести ключевое слово',
 }
+
+export const userNameRegExp = /^[A-zА-яё\s\-]{2,30}$/;
