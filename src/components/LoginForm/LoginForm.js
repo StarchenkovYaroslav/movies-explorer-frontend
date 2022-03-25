@@ -18,7 +18,7 @@ function LoginForm(props) {
     {
       email: {
         validate: emailValidator,
-        message: 'введите коррекстный email'
+        message: 'введите корректный email'
       }
     }
   );
@@ -34,6 +34,7 @@ function LoginForm(props) {
       submitButtonText="Войти"
       onSubmit={handleSingIn}
       isValid={isFormValid}
+      message={props.message}
     >
       <Input
         required={true}

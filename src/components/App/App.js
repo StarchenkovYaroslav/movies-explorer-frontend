@@ -4,7 +4,7 @@ import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
 
 import {CurrentUserContext, defaultUser} from "../../contexts/CurrentUserContext";
 
-import { paths } from "../../utils/config";
+import {messages, paths} from "../../utils/config";
 import mainApi from "../../utils/Api/MainApi";
 
 import Footer from "../Footer/Footer";
@@ -20,12 +20,15 @@ import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 function App() {
   const location = useLocation();
-
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [currentUser, setCurrentUser] = useState(defaultUser);
+
+  const [signUpMessage, setSignUpMessage] = useState('');
+  const [signInMessage, setSignInMessage] = useState('');
+  const [editProfileMessage, setEditProfileMessage] = useState('');
 
   const isHeaderVisible =
     Object.values(paths).includes(location.pathname.slice(1))
@@ -70,8 +73,8 @@ function App() {
 
         navigate('/' + paths.movies);
       })
-      .catch(status => {
-        console.log(status)
+      .catch(() => {
+        setSignUpMessage(messages.signUpError);
       });
   }
 
@@ -82,8 +85,8 @@ function App() {
 
         navigate('/' + paths.movies);
       })
-      .catch(status => {
-        console.log(status)
+      .catch(() => {
+        setSignInMessage(messages.signInError);
       });
   }
 
@@ -103,9 +106,11 @@ function App() {
     mainApi.editCurrentUser(data)
       .then(user => {
         setCurrentUser(user);
+
+        setEditProfileMessage(messages.profileEditSuccessMessage);
       })
-      .catch((status) => {
-        console.log(status);
+      .catch(() => {
+        setEditProfileMessage(messages.profileEditErrorMessage);
       })
   }
 
@@ -121,9 +126,9 @@ function App() {
             <Route path={paths.main} element={<Main/>} />
             <Route path={paths.movies} element={<AllMovies/>} />
             <Route path={paths.savedMovies} element={<UsersMovies/>} />
-            <Route path={paths.profile} element={<Profile onEditProfile={handleEditProfile} onSignOut={handleSignOut}/>} />
-            <Route path={paths.signIn} element={<Login onSignIn={handleSignIn}/>} />
-            <Route path={paths.signUp} element={<Register onSignUp={handleSignUp}/>} />
+            <Route path={paths.profile} element={<Profile message={editProfileMessage} onEditProfile={handleEditProfile} onSignOut={handleSignOut}/>} />
+            <Route path={paths.signIn} element={<Login onSignIn={handleSignIn} message={signInMessage}/>} />
+            <Route path={paths.signUp} element={<Register onSignUp={handleSignUp} message={signUpMessage}/>} />
 
             <Route path="*" element={<NotFoundPage/>} />
 

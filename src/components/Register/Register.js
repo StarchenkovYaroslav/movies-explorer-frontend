@@ -12,7 +12,7 @@ function Register(props) {
     <section className="register">
       <PageWithForm>
         <Greeting text="Добро пожаловать!" />
-        <RegisterForm onSignUp={props.onSignUp}/>
+        <RegisterForm onSignUp={props.onSignUp} message={props.message} />
         <Suggestion linkPath={`/${paths.signIn}`} linkText="Войти" questionText="Уже зарегистрированы?" />
       </PageWithForm>
     </section>

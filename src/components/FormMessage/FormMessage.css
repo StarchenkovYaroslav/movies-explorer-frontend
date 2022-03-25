@@ -1,0 +1,13 @@
+@import "../../vendor/fonts/fonts.css";
+
+.page-with-form__form-message {
+    align-self: end;
+    color: crimson;
+    display: block;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    justify-self: center;
+    grid-area: message;
+    margin: 0 0 7px;
+}

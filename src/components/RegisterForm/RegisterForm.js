@@ -38,8 +38,8 @@ function RegisterForm(props) {
     <Form
       submitButtonText="Зарегистрироваться"
       isValid={isFormValid}
-
       onSubmit={handleSubmit}
+      message={props.message}
     >
       <Input
         required={true}
