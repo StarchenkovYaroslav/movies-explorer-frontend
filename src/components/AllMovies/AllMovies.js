@@ -33,6 +33,7 @@ function AllMovies() {
 
   const {
     inputValues,
+    setInputValues,
     inputsValidity,
     handleInputChange,
   } = useFormWithValidation(
@@ -83,6 +84,18 @@ function AllMovies() {
   }
 
   useEffect(() => {
+    if (localStorage.getItem('allMovies') && localStorage.getItem('keyWord') && localStorage.getItem('areShortMoviesChosen')) {
+      setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
+
+      setInputValues(prevInputValues => {
+        return {...prevInputValues, movie: localStorage.getItem('keyWord')};
+      })
+
+      setAreShortMoviesChosen(JSON.parse(localStorage.getItem('areShortMoviesChosen')));
+    }
+  }, []);
+
+  useEffect(() => {
     checkPageWidth()
   }, [])
 
@@ -100,6 +113,8 @@ function AllMovies() {
 
   useEffect(() => {
     setFilteredMovies(filterMovies(allMovies, inputValues.movie, areShortMoviesChosen));
+
+    localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
   }, [areShortMoviesChosen]);
 
   useEffect(() => {
@@ -154,6 +169,8 @@ function AllMovies() {
         setAllMovies(loadedMovies);
 
         localStorage.setItem('allMovies', JSON.stringify(loadedMovies));
+        localStorage.setItem('keyWord', inputValues.movie);
+        localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
       })
       .catch(() => {
         setAllMovies([]);
