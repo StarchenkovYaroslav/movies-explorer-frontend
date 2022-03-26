@@ -34,6 +34,7 @@ function AllMovies() {
     setMovieToFind,
     areShortMoviesChosen,
     setAreShortMoviesChosen,
+    foundMovies,
     setFoundMovies,
     filteredMovies,
   } = useFindAndFilterMovies(allMovies);
@@ -138,6 +139,9 @@ function AllMovies() {
 
         hideLoadingMessage();
       }
+
+      localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
+      localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
     }
   }, [filteredMovies])
 
@@ -166,6 +170,8 @@ function AllMovies() {
           setAllMovies(loadedMovies);
 
           setMovieToFind(inputValues.movie);
+
+          localStorage.setItem('keyWord', inputValues.movie);
         })
         .catch(() => {
           showLoadingMessage(messages.serverError);
@@ -209,9 +215,7 @@ function AllMovies() {
           return prevUsersMovies.filter(movie => movie._id !== movieToDeleteId);
         })
       })
-      .catch(() => {
-        console.log('error');
-      })
+      .catch((err) => console.log(err.message));
   }
 
   function handleMoreMovies() {

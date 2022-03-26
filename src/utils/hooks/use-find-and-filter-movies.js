@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import filterShortMovies from "../functions/filter-short-movies";
 import findMovies from "../functions/find-movies";
 
-export function useFindAndFilterMovies(initialMovies) {
+export function useFindAndFilterMovies(initialMovies, mustShowAll) {
   const isInitialMount = useRef(true);
 
   const [movieToFind, setMovieToFind] = useState('');
@@ -10,6 +10,12 @@ export function useFindAndFilterMovies(initialMovies) {
 
   const [foundMovies, setFoundMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+
+  useEffect(() => {
+    if (mustShowAll) {
+      setFoundMovies(initialMovies);
+    }
+  }, [initialMovies])
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -20,17 +26,12 @@ export function useFindAndFilterMovies(initialMovies) {
       } else {
         setFilteredMovies(foundMovies);
       }
-
-      localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
-      localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
     }
   }, [foundMovies, areShortMoviesChosen]);
 
   useEffect(() => {
     if (initialMovies.length !== 0) {
       setFoundMovies(findMovies(initialMovies, movieToFind));
-
-      localStorage.setItem('keyWord', movieToFind);
     }
   }, [movieToFind]);
 
