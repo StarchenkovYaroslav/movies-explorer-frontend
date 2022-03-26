@@ -1,8 +1,10 @@
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import filterShortMovies from "../functions/filter-short-movies";
 import findMovies from "../functions/find-movies";
 
 export function useFindAndFilterMovies(initialMovies) {
+  const isInitialMount = useRef(true);
+
   const [movieToFind, setMovieToFind] = useState('');
   const [areShortMoviesChosen, setAreShortMoviesChosen] = useState(false);
 
@@ -10,14 +12,18 @@ export function useFindAndFilterMovies(initialMovies) {
   const [filteredMovies, setFilteredMovies] = useState([]);
 
   useEffect(() => {
-    if (areShortMoviesChosen) {
-      setFilteredMovies(filterShortMovies(foundMovies));
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
     } else {
-      setFilteredMovies(foundMovies);
-    }
+      if (areShortMoviesChosen) {
+        setFilteredMovies(filterShortMovies(foundMovies));
+      } else {
+        setFilteredMovies(foundMovies);
+      }
 
-    localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
-    localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
+      localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
+      localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
+    }
   }, [foundMovies, areShortMoviesChosen]);
 
   useEffect(() => {
