@@ -3,7 +3,8 @@ import "./AllMovies.css";
 import {useEffect, useState, useRef} from "react";
 
 import moviesApi from "../../utils/Api/MoviesApi";
-import filterMovies from "../../utils/functions/filter-movies";
+import findMovies from "../../utils/functions/find-movies";
+import filterShortMovies from "../../utils/functions/filter-short-movies";
 import {messages} from "../../utils/config";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 
@@ -14,11 +15,13 @@ import MoreMovies from "../MoreMovies/MoreMovies";
 function AllMovies() {
   const isInitialMount = useRef(true);
 
+  const [movieToSearch, setMovieToSearch] = useState('');
   const [areShortMoviesChosen, setAreShortMoviesChosen] = useState(false);
 
   const [allMovies, setAllMovies] = useState([]);
+  const [foundMovies, setFoundMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
-  const [showedMovies, setShowedMovies] = useState([]);
+  const [moviesToRender, setMoviesToRender] = useState([]);
 
   const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
   const [addedMoviesAmount, setAddedMoviesAmount] = useState(0);
@@ -44,8 +47,8 @@ function AllMovies() {
   );
 
   const isMoreMoviesVisible =
-    showedMovies.length !== 0
-    && showedMovies.length !== filteredMovies.length
+    moviesToRender.length !== 0
+    && moviesToRender.length !== filteredMovies.length
     && !areMoviesLoading;
 
   function showLoadingMessage(message) {
@@ -84,8 +87,8 @@ function AllMovies() {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('allMovies') && localStorage.getItem('keyWord') && localStorage.getItem('areShortMoviesChosen')) {
-      setAllMovies(JSON.parse(localStorage.getItem('allMovies')));
+    if (localStorage.getItem('foundMovies') && localStorage.getItem('keyWord') && localStorage.getItem('areShortMoviesChosen')) {
+      setFoundMovies(JSON.parse(localStorage.getItem('foundMovies')));
 
       setInputValues(prevInputValues => {
         return {...prevInputValues, movie: localStorage.getItem('keyWord')};
@@ -112,33 +115,34 @@ function AllMovies() {
   }, [])
 
   useEffect(() => {
-    setFilteredMovies(filterMovies(allMovies, inputValues.movie, areShortMoviesChosen));
+    if (areShortMoviesChosen) {
+      setFilteredMovies(filterShortMovies(foundMovies));
+    } else {
+      setFilteredMovies(foundMovies);
+    }
 
+    localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
     localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
-  }, [areShortMoviesChosen]);
+  }, [foundMovies, areShortMoviesChosen]);
 
   useEffect(() => {
-    if (isInitialMount.current) {
-      isInitialMount.current = false;
-    } else {
-      if (allMovies.length === 0) {
-        setFilteredMovies([]);
-      } else {
-        setFilteredMovies(filterMovies(allMovies, inputValues.movie, areShortMoviesChosen));
-      }
+    if (allMovies.length !== 0) {
+      setFoundMovies(findMovies(allMovies, movieToSearch));
+
+      localStorage.setItem('keyWord', movieToSearch);
     }
-  }, [allMovies]);
+  }, [movieToSearch]);
 
   useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
       if (filteredMovies.length === 0) {
-        setShowedMovies([]);
+        setMoviesToRender([]);
 
         showLoadingMessage(messages.movieNotFound);
       } else {
-        setShowedMovies(filteredMovies.slice(0, initialMoviesAmount));
+        setMoviesToRender(filteredMovies.slice(0, initialMoviesAmount));
 
         hideLoadingMessage();
       }
@@ -164,34 +168,36 @@ function AllMovies() {
 
     setAreMoviesLoading(true);
 
-    moviesApi.getAllMovies()
-      .then(loadedMovies => {
-        setAllMovies(loadedMovies);
+    if (allMovies.length === 0) {
+      moviesApi.getAllMovies()
+        .then(loadedMovies => {
+          setAllMovies(loadedMovies);
 
-        localStorage.setItem('allMovies', JSON.stringify(loadedMovies));
-        localStorage.setItem('keyWord', inputValues.movie);
-        localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
-      })
-      .catch(() => {
-        setAllMovies([]);
+          setMovieToSearch(inputValues.movie);
+        })
+        .catch(() => {
+          showLoadingMessage(messages.serverError);
+        })
+        .finally(() => {
+          setAreMoviesLoading(false);
+        });
+    } else {
+      setMovieToSearch(inputValues.movie);
 
-        showLoadingMessage(messages.serverError);
-      })
-      .finally(() => {
-        setAreMoviesLoading(false);
-      });
+      setAreMoviesLoading(false);
+    }
   }
 
   function handleMoreMovies() {
-    if (Math.abs(showedMovies.length - filteredMovies.length) >= addedMoviesAmount) {
-      for (let i = showedMovies.length; i < showedMovies.length + addedMoviesAmount; i++) {
-        setShowedMovies(prevShowedMovies => {
+    if (Math.abs(moviesToRender.length - filteredMovies.length) >= addedMoviesAmount) {
+      for (let i = moviesToRender.length; i < moviesToRender.length + addedMoviesAmount; i++) {
+        setMoviesToRender(prevShowedMovies => {
           return [...prevShowedMovies, filteredMovies[i]];
         })
       }
     } else {
-      for (let i = showedMovies.length; i < filteredMovies.length; i++) {
-        setShowedMovies(prevShowedMovies => {
+      for (let i = moviesToRender.length; i < filteredMovies.length; i++) {
+        setMoviesToRender(prevShowedMovies => {
           return [...prevShowedMovies, filteredMovies[i]];
         })
       }
@@ -213,7 +219,7 @@ function AllMovies() {
       />
 
       <AllMoviesCardList
-        movies={showedMovies}
+        movies={moviesToRender}
         areMoviesLoading={areMoviesLoading}
         isLoadingMessageVisible={isLoadingMessageVisible}
         loadingMessage={loadingMessage}

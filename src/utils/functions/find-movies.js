@@ -1,4 +1,4 @@
-export default function filterMovies(initialMovies, keyWord, areShort) {
+export default function findMovies(initialMovies, keyWord) {
   return initialMovies.filter(movie => {
     let isMatchedKeyWord = false;
 
@@ -8,11 +8,6 @@ export default function filterMovies(initialMovies, keyWord, areShort) {
       isMatchedKeyWord = movie.nameEN.toLowerCase().includes(keyWord.toLowerCase());
     } else if (movie.nameRU) {
       isMatchedKeyWord = movie.nameRU.toLowerCase().includes(keyWord.toLowerCase());
-    }
-
-
-    if (areShort) {
-      return isMatchedKeyWord && movie.duration < 41;
     }
 
     return  isMatchedKeyWord;
