@@ -104,8 +104,8 @@ class MainApi extends Api {
       .then(this._checkResponse);
   }
 
-  deleteMovie(movie) {
-    return fetch(`${this._baseUrl}/${this._moviesEndpoint}/${movie._id}`, {
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/${this._moviesEndpoint}/${movieId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'

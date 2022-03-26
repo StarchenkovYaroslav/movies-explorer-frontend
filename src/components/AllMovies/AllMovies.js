@@ -3,7 +3,8 @@ import "./AllMovies.css";
 import {useEffect, useState, useRef} from "react";
 
 import moviesApi from "../../utils/Api/MoviesApi";
-import {messages} from "../../utils/config";
+import mainApi from "../../utils/Api/MainApi";
+import {messages, moviesApiSettings} from "../../utils/config";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 import {useFindAndFilterMovies} from "../../utils/hooks/use-find-and-filter-movies";
 
@@ -15,6 +16,7 @@ function AllMovies() {
   const isInitialMount = useRef(true);
 
   const [allMovies, setAllMovies] = useState([]);
+  const [usersMovies, setUsersMovies] = useState([]);
   const [moviesToRender, setMoviesToRender] = useState([]);
 
   const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
@@ -117,6 +119,13 @@ function AllMovies() {
   }, [])
 
   useEffect(() => {
+    mainApi.getAllMovies()
+      .then(loadedUsersMovies => {
+        setUsersMovies(loadedUsersMovies);
+      })
+  }, []);
+
+  useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
@@ -171,6 +180,40 @@ function AllMovies() {
     }
   }
 
+  function handleSaveMovie(data) {
+    mainApi.addMovie({
+      country: data.country,
+      director: data.director,
+      duration: data.duration,
+      year: data.year,
+      description: data.description,
+      image: moviesApiSettings.baseUrl + data.image.url,
+      trailerLink: data.trailerLink,
+      thumbnail: moviesApiSettings.baseUrl + data.image.formats.thumbnail.url,
+      movieId: data.id,
+      nameRU: data.nameRU,
+      nameEN: data.nameEN,
+    })
+      .then((savedMovie) => {
+        setUsersMovies(prevUsersMovies => {
+          return [...prevUsersMovies, savedMovie];
+        });
+      })
+      .catch((err) => console.log(err.message));
+  }
+
+  function handleDeleteMovie(movieToDeleteId) {
+    mainApi.deleteMovie(movieToDeleteId)
+      .then(() => {
+        setUsersMovies(prevUsersMovies => {
+          return prevUsersMovies.filter(movie => movie._id !== movieToDeleteId);
+        })
+      })
+      .catch(() => {
+        console.log('error');
+      })
+  }
+
   function handleMoreMovies() {
     if (Math.abs(moviesToRender.length - filteredMovies.length) >= addedMoviesAmount) {
       for (let i = moviesToRender.length; i < moviesToRender.length + addedMoviesAmount; i++) {
@@ -203,9 +246,13 @@ function AllMovies() {
 
       <AllMoviesCardList
         movies={moviesToRender}
+        usersMovies={usersMovies}
         areMoviesLoading={areMoviesLoading}
         isLoadingMessageVisible={isLoadingMessageVisible}
         loadingMessage={loadingMessage}
+
+        onSaveMovie={handleSaveMovie}
+        onDeleteMovie={handleDeleteMovie}
       />
 
       {isMoreMoviesVisible  ? <MoreMovies onMoreMovies={handleMoreMovies} /> : null}

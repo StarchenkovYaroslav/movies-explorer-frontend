@@ -1,32 +1,51 @@
 import "./UsersMovies.css";
 
+import {useEffect, useState} from "react";
+
+import mainApi from "../../utils/Api/MainApi";
+
 import Search from "../Search/Search";
-import {useState} from "react";
 import UsersMoviesCardList from "../UsersMoviesCardList/UsersMoviesCardList";
 
 function UsersMovies() {
-  const [isShortMoviesChosen, setIsShortMoviesChosen] = useState(false);
-  const [searchedMovie, setSearchedMovie] = useState('');
+  const [usersMovies, setUsersMovies] = useState([]);
 
-  function handleChooseShortMovies(evt) {
-    setIsShortMoviesChosen(evt.target.checked);
-  }
+  useEffect(() => {
+    mainApi.getAllMovies()
+      .then((loadedMovies) => {
+        setUsersMovies(loadedMovies);
+      })
+      .catch(() => {
+        console.log('error');
+      });
+  }, [])
 
-  function handleInputSearchedMovie(evt) {
-    setSearchedMovie(evt.target.value);
+  function handleDeleteMovie(movieToDeleteId) {
+    mainApi.deleteMovie(movieToDeleteId)
+      .then(() => {
+        setUsersMovies(prevUsersMovies => {
+          return prevUsersMovies.filter(movie => movie._id !== movieToDeleteId);
+        })
+      })
+      .catch(() => {
+        console.log('error');
+      })
   }
 
   return (
     <div className="users-movies">
       <Search
-        searchedMovie={searchedMovie}
-        isShortMoviesChosen={isShortMoviesChosen}
+        searchedMovie={'searchedMovie'}
+        isShortMoviesChosen={'isShortMoviesChosen'}
 
-        onChooseShortMovies={handleChooseShortMovies}
-        onInputSearchedMovie={handleInputSearchedMovie}
+        onChooseShortMovies={'handleChooseShortMovies'}
+        onInputSearchedMovie={'handleInputSearchedMovie'}
       />
 
-      <UsersMoviesCardList />
+      <UsersMoviesCardList
+        movies={usersMovies}
+        onDeleteMovie={handleDeleteMovie}
+      />
     </div>
   );
 }
