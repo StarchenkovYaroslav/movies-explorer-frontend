@@ -3,10 +3,9 @@ import "./AllMovies.css";
 import {useEffect, useState, useRef} from "react";
 
 import moviesApi from "../../utils/Api/MoviesApi";
-import findMovies from "../../utils/functions/find-movies";
-import filterShortMovies from "../../utils/functions/filter-short-movies";
 import {messages} from "../../utils/config";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
+import {useFindAndFilterMovies} from "../../utils/hooks/use-find-and-filter-movies";
 
 import Search from "../Search/Search";
 import AllMoviesCardList from "../AllMoviesCardList/AllMoviesCardList";
@@ -15,12 +14,7 @@ import MoreMovies from "../MoreMovies/MoreMovies";
 function AllMovies() {
   const isInitialMount = useRef(true);
 
-  const [movieToSearch, setMovieToSearch] = useState('');
-  const [areShortMoviesChosen, setAreShortMoviesChosen] = useState(false);
-
   const [allMovies, setAllMovies] = useState([]);
-  const [foundMovies, setFoundMovies] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesToRender, setMoviesToRender] = useState([]);
 
   const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
@@ -33,6 +27,14 @@ function AllMovies() {
 
   const [formMessage, setFormMessage] = useState('');
   const [isFormMessageVisible, setIsFormMessageVisible] = useState(false);
+
+  const {
+    setMovieToFind,
+    areShortMoviesChosen,
+    setAreShortMoviesChosen,
+    setFoundMovies,
+    filteredMovies,
+  } = useFindAndFilterMovies(allMovies);
 
   const {
     inputValues,
@@ -115,25 +117,6 @@ function AllMovies() {
   }, [])
 
   useEffect(() => {
-    if (areShortMoviesChosen) {
-      setFilteredMovies(filterShortMovies(foundMovies));
-    } else {
-      setFilteredMovies(foundMovies);
-    }
-
-    localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
-    localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
-  }, [foundMovies, areShortMoviesChosen]);
-
-  useEffect(() => {
-    if (allMovies.length !== 0) {
-      setFoundMovies(findMovies(allMovies, movieToSearch));
-
-      localStorage.setItem('keyWord', movieToSearch);
-    }
-  }, [movieToSearch]);
-
-  useEffect(() => {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
@@ -173,7 +156,7 @@ function AllMovies() {
         .then(loadedMovies => {
           setAllMovies(loadedMovies);
 
-          setMovieToSearch(inputValues.movie);
+          setMovieToFind(inputValues.movie);
         })
         .catch(() => {
           showLoadingMessage(messages.serverError);
@@ -182,7 +165,7 @@ function AllMovies() {
           setAreMoviesLoading(false);
         });
     } else {
-      setMovieToSearch(inputValues.movie);
+      setMovieToFind(inputValues.movie);
 
       setAreMoviesLoading(false);
     }
