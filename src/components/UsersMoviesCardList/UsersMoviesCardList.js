@@ -1,15 +1,14 @@
-import "./UsersMoviesCardList.css";
-
 import UsersMoviesCard from "../UsersMoviesCard/UsersMoviesCard";
 import Preloader from "../Preloader/Preloader";
 import LoadingMessage from "../LoadingMessage/LoadingMessage";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 function UsersMoviesCardList(props) {
   const isPreloaderVisible = props.areMoviesLoading;
   const areMoviesVisible = !props.areMoviesLoading && props.movies.length !== 0;
 
   return (
-    <section className="users-movies-card-list">
+    <MoviesCardList>
 
       {areMoviesVisible && props.movies.map(movie => {
         return (
@@ -31,7 +30,7 @@ function UsersMoviesCardList(props) {
 
       {props.isLoadingMessageVisible ? <LoadingMessage message={props.loadingMessage} /> : null}
 
-    </section>
+    </MoviesCardList>
   )
 }
 

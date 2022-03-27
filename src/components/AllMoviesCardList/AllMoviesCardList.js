@@ -1,14 +1,14 @@
-import "./AllMoviesCardList.css";
 import AllMoviesCard from "../AllMoviesCard/AllMoviesCard";
 import Preloader from "../Preloader/Preloader";
 import LoadingMessage from "../LoadingMessage/LoadingMessage";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
 function AllMoviesCardList(props) {
   const isPreloaderVisible = props.areMoviesLoading;
   const areMoviesVisible = !props.areMoviesLoading && props.movies.length !== 0;
 
   return (
-    <section className="all-movies-card-list">
+    <MoviesCardList>
 
       {areMoviesVisible && props.movies.map(movie => {
         const isSaved = props.usersMovies.some(usersMovie => usersMovie.movieId === movie.id);
@@ -30,7 +30,7 @@ function AllMoviesCardList(props) {
 
       {props.isLoadingMessageVisible ? <LoadingMessage message={props.loadingMessage} /> : null}
 
-    </section>
+    </MoviesCardList>
   );
 }
 
