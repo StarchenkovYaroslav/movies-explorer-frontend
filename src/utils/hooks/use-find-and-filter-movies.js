@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from "react";
 import filterShortMovies from "../functions/filter-short-movies";
 import findMovies from "../functions/find-movies";
 
-export function useFindAndFilterMovies(initialMovies, mustShowAll) {
+export function useFindAndFilterMovies(initialMovies, mustShowAll = false) {
   const isInitialMount = useRef(true);
 
   const [movieToFind, setMovieToFind] = useState('');
