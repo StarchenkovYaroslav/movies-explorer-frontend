@@ -98,6 +98,8 @@ function App() {
       .then(() => {
         setLoggedIn(false);
 
+        localStorage.clear();
+
         navigate('/' + paths.signIn);
       })
       .catch((status) => {
