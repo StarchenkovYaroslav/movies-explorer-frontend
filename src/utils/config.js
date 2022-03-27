@@ -31,7 +31,9 @@ export const messages = {
   signInError: 'Что-то пошло не так...',
   signUpError: 'Что-то пошло не так...',
   profileEditErrorMessage: 'Что-то пошло не так...',
-  profileEditSuccessMessage: 'Данные изменены'
+  profileEditSuccessMessage: 'Данные изменены',
+  emailInputError: 'Введите корректный email.',
+  nameInputError: 'От 2 до 30 символов. Только буквы, пробел и дефис.'
 }
 
 export const userNameRegExp = /^[A-zА-яё\s\-]{2,30}$/;

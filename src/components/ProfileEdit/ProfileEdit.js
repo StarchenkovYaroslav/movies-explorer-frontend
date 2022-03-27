@@ -4,8 +4,8 @@ import {useContext} from "react";
 
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
-import nameValidator from "../../utils/input-validators/name-validator";
-import emailValidator from "../../utils/input-validators/email-validator";
+import {nameValidator} from "../../utils/input-validators/name-validator";
+import {emailValidator} from "../../utils/input-validators/email-validator";
 
 function ProfileEdit(props) {
   const currentUser = useContext(CurrentUserContext);
@@ -21,14 +21,8 @@ function ProfileEdit(props) {
     {name: '', email: ''},
     false,
     {
-      name: {
-        validate: nameValidator,
-        message: '2-30 символов. Только буквы, пробел и дефис'
-      },
-      email: {
-        validate: emailValidator,
-        message: 'введите корректный email'
-      }
+      name: nameValidator,
+      email: emailValidator
     }
   );
 

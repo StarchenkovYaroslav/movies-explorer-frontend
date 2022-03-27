@@ -1,5 +1,5 @@
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
-import emailValidator from "../../utils/input-validators/email-validator";
+import {emailValidator} from "../../utils/input-validators/email-validator";
 
 import Form from "../Form/Form";
 import Input from "../Input/Input";
@@ -16,10 +16,7 @@ function LoginForm(props) {
     {email: '', password: ''},
     false,
     {
-      email: {
-        validate: emailValidator,
-        message: 'введите корректный email'
-      }
+      email: emailValidator
     }
   );
 

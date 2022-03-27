@@ -1,5 +1,10 @@
-import {userNameRegExp} from "../config";
+import {messages, userNameRegExp} from "../config";
 
-export default function validateName(inputValue) {
+function validateName(inputValue) {
   return userNameRegExp.test(inputValue);
+}
+
+export const nameValidator = {
+  validate: validateName,
+  message: messages.nameInputError
 }
