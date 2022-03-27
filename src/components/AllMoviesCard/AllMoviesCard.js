@@ -23,6 +23,7 @@ function AllMoviesCard(props) {
       name={props.data.nameRU}
       duration={props.data.duration}
       image={moviesApiSettings.baseUrl + props.data.image.url}
+      trailerLink={props.data.trailerLink}
     >
       <button className={buttonClassName} type="button" onClick={handleButtonClick}>{buttonText}</button>
     </MoviesCard>

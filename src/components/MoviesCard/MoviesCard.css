@@ -8,7 +8,7 @@
     grid-gap: 18px 14px;
     grid-template-areas:
         "name duration"
-        "image image"
+        "link link"
         "button button";
     grid-template-columns: 230fr 90fr;
     padding: 18px 0;
@@ -39,8 +39,12 @@
     padding: 0 18px 0 0;
 }
 
+.movie-card__link {
+    grid-area: link;
+}
+
 .movie-card__image {
-    grid-area: image;
+    display: block;
     height: 200px;
     object-fit: cover;
     object-position: center center;

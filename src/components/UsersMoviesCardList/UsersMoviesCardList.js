@@ -20,6 +20,7 @@ function UsersMoviesCardList(props) {
             name={movie.nameRU}
             duration={movie.duration}
             image={movie.image}
+            trailerLink={movie.trailerLink}
 
             onDelete={props.onDeleteMovie}
           />
