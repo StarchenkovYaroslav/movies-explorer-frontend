@@ -1,10 +1,11 @@
 import "./AllMovies.css";
 
 import {useEffect, useState, useRef} from "react";
+import isURL from "validator/es/lib/isURL";
 
 import moviesApi from "../../utils/Api/MoviesApi";
 import mainApi from "../../utils/Api/MainApi";
-import {messages, moviesApiSettings} from "../../utils/config";
+import {messages, moviesApiSettings, noInfoImageLink} from "../../utils/config";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 import {useFindAndFilterMovies} from "../../utils/hooks/use-find-and-filter-movies";
 
@@ -188,17 +189,17 @@ function AllMovies() {
 
   function handleSaveMovie(data) {
     mainApi.addMovie({
-      country: data.country,
-      director: data.director,
-      duration: data.duration,
-      year: data.year,
-      description: data.description,
-      image: moviesApiSettings.baseUrl + data.image.url,
-      trailerLink: data.trailerLink,
-      thumbnail: moviesApiSettings.baseUrl + data.image.formats.thumbnail.url,
+      country: data.country ? data.country : 'No country',
+      director: data.director ? data.director : 'No director',
+      duration: data.duration ? data.duration : 0,
+      year: data.year ? data.year : '0000',
+      description: data.description ? data.description : 'No description',
+      image: data.image.url ? moviesApiSettings.baseUrl + data.image.url : noInfoImageLink,
+      trailerLink: data.trailerLink && isURL(data.trailerLink) ? data.trailerLink : noInfoImageLink,
+      thumbnail: data.image.formats.thumbnail.url ? moviesApiSettings.baseUrl + data.image.formats.thumbnail.url : noInfoImageLink,
       movieId: data.id,
-      nameRU: data.nameRU,
-      nameEN: data.nameEN,
+      nameRU: data.nameRU ? data.nameRU : 'No nameRU',
+      nameEN: data.nameEN ? data.nameEN : 'No nameEN',
     })
       .then((savedMovie) => {
         setUsersMovies(prevUsersMovies => {
