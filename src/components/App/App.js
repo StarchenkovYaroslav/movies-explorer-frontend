@@ -1,5 +1,7 @@
 import "./App.css";
 
+import {useEffect, useState} from "react";
+
 import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
 
 import {CurrentUserContext, defaultUser} from "../../contexts/CurrentUserContext";
@@ -15,8 +17,8 @@ import UsersMovies from "../UsersMovies/UsersMovies";
 import Profile from "../Profile/Profile";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
-import {useEffect, useState} from "react";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import AuthorizedComponent from "../AuthorizedComponent/AuthorizedComponent";
 
 function App() {
   const location = useLocation();
@@ -124,9 +126,43 @@ function App() {
           <Routes>
 
             <Route path={paths.main} element={<Main/>} />
-            <Route path={paths.movies} element={<AllMovies/>} />
-            <Route path={paths.savedMovies} element={<UsersMovies/>} />
-            <Route path={paths.profile} element={<Profile message={editProfileMessage} onEditProfile={handleEditProfile} onSignOut={handleSignOut}/>} />
+
+            <Route
+              path={paths.movies}
+              element={
+                <AuthorizedComponent
+                  component={<AllMovies/>}
+                  loggedIn={loggedIn}
+                />
+              }
+            />
+
+            <Route
+              path={paths.savedMovies}
+              element={
+                <AuthorizedComponent
+                  component={<UsersMovies/>}
+                  loggedIn={loggedIn}
+                />
+              }
+            />
+
+            <Route
+              path={paths.profile}
+              element={
+                <AuthorizedComponent
+                  component={
+                    <Profile
+                      message={editProfileMessage}
+                      onEditProfile={handleEditProfile}
+                      onSignOut={handleSignOut}
+                    />
+                  }
+                  loggedIn={loggedIn}
+                />
+              }
+            />
+
             <Route path={paths.signIn} element={<Login onSignIn={handleSignIn} message={signInMessage}/>} />
             <Route path={paths.signUp} element={<Register onSignUp={handleSignUp} message={signUpMessage}/>} />
 
