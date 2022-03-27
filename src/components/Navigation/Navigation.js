@@ -4,7 +4,7 @@ import { paths } from "../../utils/config";
 
 import { Link } from "react-router-dom";
 
-function Navigation({ loggedIn, isVisible }) {
+function Navigation({ loggedIn, isVisible, onModalLinkClick }) {
   let navigationClassName = 'navigation';
   if (loggedIn) navigationClassName += ' navigation_logged-in';
   if (isVisible) navigationClassName += ' navigation_visible';
@@ -21,11 +21,35 @@ function Navigation({ loggedIn, isVisible }) {
     ) : (
       <>
         <div className="navigation__links-list">
-          <Link to={paths.main} className="navigation__link navigation__link_logged-in navigation__link_path_main">Главная</Link>
-          <Link to={paths.movies} className="navigation__link navigation__link_logged-in navigation__link_path_movies">Фильмы</Link>
-          <Link to={paths.savedMovies} className="navigation__link navigation__link_logged-in navigation__link_path_saved-movies">Сохраненные фильмы</Link>
+          <Link
+            to={paths.main}
+            className="navigation__link navigation__link_logged-in navigation__link_path_main"
+            onClick={onModalLinkClick}
+          >
+            Главная
+          </Link>
+          <Link
+            to={paths.movies}
+            className="navigation__link navigation__link_logged-in navigation__link_path_movies"
+            onClick={onModalLinkClick}
+          >
+            Фильмы
+          </Link>
+          <Link
+            to={paths.savedMovies}
+            className="navigation__link navigation__link_logged-in navigation__link_path_saved-movies"
+            onClick={onModalLinkClick}
+          >
+            Сохраненные фильмы
+          </Link>
         </div>
-        <Link to={paths.profile} className="navigation__link navigation__link_path_profile">Аккаунт</Link>
+        <Link
+          to={paths.profile}
+          className="navigation__link navigation__link_path_profile"
+          onClick={onModalLinkClick}
+        >
+          Аккаунт
+        </Link>
       </>
     )
 
