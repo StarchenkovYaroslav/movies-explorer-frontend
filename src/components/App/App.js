@@ -136,6 +136,7 @@ function App() {
                 <AuthorizedComponent
                   component={<AllMovies/>}
                   loggedIn={loggedIn}
+                  pathToRedirect={'/' + paths.signIn}
                 />
               }
             />
@@ -146,6 +147,7 @@ function App() {
                 <AuthorizedComponent
                   component={<UsersMovies/>}
                   loggedIn={loggedIn}
+                  pathToRedirect={'/' + paths.signIn}
                 />
               }
             />
@@ -162,6 +164,7 @@ function App() {
                     />
                   }
                   loggedIn={loggedIn}
+                  pathToRedirect={'/' + paths.signIn}
                 />
               }
             />
@@ -177,6 +180,7 @@ function App() {
                     />
                   }
                   loggedIn={loggedIn}
+                  pathToRedirect={'/' + paths.movies}
                 />
               }
             />
@@ -192,6 +196,7 @@ function App() {
                     />
                   }
                   loggedIn={loggedIn}
+                  pathToRedirect={'/' + paths.movies}
                 />
               }
             />

@@ -4,7 +4,7 @@ import {paths} from "../../utils/config";
 
 function UnauthorizedComponent(props) {
   return (
-    !props.loggedIn ? props.component : <Navigate to={'/' + paths.movies} />
+    !props.loggedIn ? props.component : <Navigate to={props.pathToRedirect} />
   )
 }
 
