@@ -76,6 +76,14 @@ function UsersMovies() {
       });
   }, [])
 
+  useEffect(() => {
+    if (filteredMovies.length === 0) {
+      showLoadingMessage(messages.movieNotFound);
+    } else {
+      hideLoadingMessage();
+    }
+  }, [filteredMovies]);
+
   function handleSearchMovie(evt) {
     evt.preventDefault();
 

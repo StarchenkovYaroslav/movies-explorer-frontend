@@ -32,6 +32,8 @@ export function useFindAndFilterMovies(initialMovies, mustShowAll) {
   useEffect(() => {
     if (initialMovies.length !== 0) {
       setFoundMovies(findMovies(initialMovies, movieToFind));
+    } else {
+      setFoundMovies([]);
     }
   }, [movieToFind]);
 
