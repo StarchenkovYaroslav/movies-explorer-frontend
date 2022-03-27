@@ -11,6 +11,32 @@ export function useFindAndFilterMovies(initialMovies, mustShowAll) {
   const [foundMovies, setFoundMovies] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
 
+  const [isLoadingMessageVisible, setIsLoadingMessageVisible] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('');
+
+  const [formMessage, setFormMessage] = useState('');
+  const [isFormMessageVisible, setIsFormMessageVisible] = useState(false);
+
+  function showLoadingMessage(message) {
+    setIsLoadingMessageVisible(true);
+    setLoadingMessage(message);
+  }
+
+  function hideLoadingMessage() {
+    setIsLoadingMessageVisible(false);
+    setLoadingMessage('');
+  }
+
+  function showFormMessage(message) {
+    setFormMessage(message);
+    setIsFormMessageVisible(true);
+  }
+
+  function hideFormMessage() {
+    setFormMessage('');
+    setIsFormMessageVisible(false);
+  }
+
   useEffect(() => {
     if (mustShowAll) {
       setFoundMovies(initialMovies);
@@ -45,6 +71,14 @@ export function useFindAndFilterMovies(initialMovies, mustShowAll) {
     foundMovies,
     setFoundMovies,
     filteredMovies,
-    setFilteredMovies
+    setFilteredMovies,
+    formMessage,
+    isFormMessageVisible,
+    showFormMessage,
+    hideFormMessage,
+    loadingMessage,
+    isLoadingMessageVisible,
+    showLoadingMessage,
+    hideLoadingMessage
   }
 }

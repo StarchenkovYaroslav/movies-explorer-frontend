@@ -15,17 +15,19 @@ function UsersMovies() {
 
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
-  const [isLoadingMessageVisible, setIsLoadingMessageVisible] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState('');
-
-  const [formMessage, setFormMessage] = useState('');
-  const [isFormMessageVisible, setIsFormMessageVisible] = useState(false);
-
   const {
     setMovieToFind,
     areShortMoviesChosen,
     setAreShortMoviesChosen,
     filteredMovies,
+    formMessage,
+    isFormMessageVisible,
+    showFormMessage,
+    hideFormMessage,
+    loadingMessage,
+    isLoadingMessageVisible,
+    showLoadingMessage,
+    hideLoadingMessage
   } = useFindAndFilterMovies(usersMovies, true);
 
   const {
@@ -38,26 +40,6 @@ function UsersMovies() {
     {movie: ''},
     false
   );
-
-  function showLoadingMessage(message) {
-    setIsLoadingMessageVisible(true);
-    setLoadingMessage(message);
-  }
-
-  function hideLoadingMessage() {
-    setIsLoadingMessageVisible(false);
-    setLoadingMessage('');
-  }
-
-  function showFormMessage(message) {
-    setFormMessage(message);
-    setIsFormMessageVisible(true);
-  }
-
-  function hideFormMessage() {
-    setFormMessage('');
-    setIsFormMessageVisible(false);
-  }
 
   useEffect(() => {
     hideLoadingMessage();

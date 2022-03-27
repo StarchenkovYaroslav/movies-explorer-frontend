@@ -25,12 +25,6 @@ function AllMovies() {
 
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
-  const [isLoadingMessageVisible, setIsLoadingMessageVisible] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState('');
-
-  const [formMessage, setFormMessage] = useState('');
-  const [isFormMessageVisible, setIsFormMessageVisible] = useState(false);
-
   const {
     setMovieToFind,
     areShortMoviesChosen,
@@ -38,6 +32,14 @@ function AllMovies() {
     foundMovies,
     setFoundMovies,
     filteredMovies,
+    formMessage,
+    isFormMessageVisible,
+    showFormMessage,
+    hideFormMessage,
+    loadingMessage,
+    isLoadingMessageVisible,
+    showLoadingMessage,
+    hideLoadingMessage
   } = useFindAndFilterMovies(allMovies);
 
   const {
@@ -56,26 +58,6 @@ function AllMovies() {
     moviesToRender.length !== 0
     && moviesToRender.length !== filteredMovies.length
     && !areMoviesLoading;
-
-  function showLoadingMessage(message) {
-    setIsLoadingMessageVisible(true);
-    setLoadingMessage(message);
-  }
-
-  function hideLoadingMessage() {
-    setIsLoadingMessageVisible(false);
-    setLoadingMessage('');
-  }
-
-  function showFormMessage(message) {
-    setFormMessage(message);
-    setIsFormMessageVisible(true);
-  }
-
-  function hideFormMessage() {
-    setFormMessage('');
-    setIsFormMessageVisible(false);
-  }
 
   function checkPageWidth() {
     const pageWidth = document.documentElement.clientWidth;
