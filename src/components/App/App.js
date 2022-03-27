@@ -19,6 +19,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";
 import AuthorizedComponent from "../AuthorizedComponent/AuthorizedComponent";
+import UnauthorizedComponent from "../UnauthorizedComponent/UnauthorizedComponent";
 
 function App() {
   const location = useLocation();
@@ -163,8 +164,35 @@ function App() {
               }
             />
 
-            <Route path={paths.signIn} element={<Login onSignIn={handleSignIn} message={signInMessage}/>} />
-            <Route path={paths.signUp} element={<Register onSignUp={handleSignUp} message={signUpMessage}/>} />
+            <Route
+              path={paths.signIn}
+              element={
+                <UnauthorizedComponent
+                  component={
+                    <Login
+                      message={signInMessage}
+                      onSignIn={handleSignIn}
+                    />
+                  }
+                  loggedIn={loggedIn}
+                />
+              }
+            />
+
+            <Route
+              path={paths.signUp}
+              element={
+                <UnauthorizedComponent
+                  component={
+                    <Register
+                      message={signUpMessage}
+                      onSignUp={handleSignUp}
+                    />
+                  }
+                  loggedIn={loggedIn}
+                />
+              }
+            />
 
             <Route path="*" element={<NotFoundPage/>} />
 
