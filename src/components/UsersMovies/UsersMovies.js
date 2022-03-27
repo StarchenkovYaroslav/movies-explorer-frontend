@@ -99,9 +99,9 @@ function UsersMovies() {
           return prevUsersMovies.filter(movie => movie._id !== movieToDeleteId);
         })
       })
-      .catch(() => {
-        console.log('error');
-      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }
 
   function handleChooseShortMovies(evt) {

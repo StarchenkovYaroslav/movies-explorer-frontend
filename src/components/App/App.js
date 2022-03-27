@@ -104,7 +104,7 @@ function App() {
       })
       .catch((status) => {
         console.log(status);
-      })
+      });
   }
 
   function handleEditProfile(data) {
@@ -116,7 +116,7 @@ function App() {
       })
       .catch(() => {
         setEditProfileMessage(messages.profileEditErrorMessage);
-      })
+      });
   }
 
   return (

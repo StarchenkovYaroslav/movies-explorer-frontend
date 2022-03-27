@@ -205,7 +205,9 @@ function AllMovies() {
           return [...prevUsersMovies, savedMovie];
         });
       })
-      .catch((err) => console.log(err.message));
+      .catch(err => {
+        console.log(err.message)
+      });
   }
 
   function handleDeleteMovie(movieToDeleteId) {
@@ -215,7 +217,9 @@ function AllMovies() {
           return prevUsersMovies.filter(movie => movie._id !== movieToDeleteId);
         })
       })
-      .catch((err) => console.log(err.message));
+      .catch(err => {
+        console.log(err.message);
+      });
   }
 
   function handleMoreMovies() {
