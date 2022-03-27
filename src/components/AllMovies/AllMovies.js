@@ -193,7 +193,7 @@ function AllMovies() {
       director: data.director ? data.director : 'No director',
       duration: data.duration ? data.duration : 0,
       year: data.year ? data.year : '0000',
-      description: data.description ? data.description : 'No description',
+      description: data.description ? data.description.slice(0, 1000) : 'No description',
       image: data.image.url ? moviesApiSettings.baseUrl + data.image.url : noInfoImageLink,
       trailerLink: data.trailerLink && isURL(data.trailerLink) ? data.trailerLink : noInfoImageLink,
       thumbnail: data.image.formats.thumbnail.url ? moviesApiSettings.baseUrl + data.image.formats.thumbnail.url : noInfoImageLink,
