@@ -1,6 +1,7 @@
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 import {emailValidator} from "../../utils/input-validators/email-validator";
 import {nameValidator} from "../../utils/input-validators/name-validator";
+import {passwordValidator} from "../../utils/input-validators/password-validator";
 
 import Form from "../Form/Form";
 import Input from "../Input/Input";
@@ -18,7 +19,8 @@ function RegisterForm(props) {
     false,
     {
       name: nameValidator,
-      email: emailValidator
+      email: emailValidator,
+      password: passwordValidator
     }
   );
 
