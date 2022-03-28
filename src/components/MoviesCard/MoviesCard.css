@@ -23,7 +23,10 @@
     font-weight: 500;
     line-height: 1;
     margin: 0;
+    overflow: hidden;
     padding: 0 0 0 18px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .movie-card__duration {
