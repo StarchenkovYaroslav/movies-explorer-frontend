@@ -3,10 +3,12 @@ import CheckboxSwitcher from "../CheckboxSwitcher/CheckboxSwitcher";
 
 function FilterCheckbox({ children, isChecked }) {
   return (
-    <label className="checkbox">
-      <CheckboxSwitcher checked={isChecked} />
-      {children}
-    </label>
+    <div className="checkbox">
+      <label className="checkbox__container">
+        <CheckboxSwitcher checked={isChecked} />
+        {children}
+      </label>
+    </div>
   )
 }
 
