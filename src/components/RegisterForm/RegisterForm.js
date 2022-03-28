@@ -37,6 +37,7 @@ function RegisterForm(props) {
     >
       <Input
         required={true}
+        autoComplete="on"
         label="Имя"
         name="name"
         type="text"
@@ -49,6 +50,7 @@ function RegisterForm(props) {
       />
       <Input
         required={true}
+        autoComplete="on"
         label="E-mail"
         name="email"
         type="email"
@@ -60,6 +62,7 @@ function RegisterForm(props) {
       />
       <Input
         required={true}
+        autoComplete="off"
         label="Пароль"
         name="password"
         type="password"

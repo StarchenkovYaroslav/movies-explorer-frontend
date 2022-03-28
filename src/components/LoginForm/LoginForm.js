@@ -35,6 +35,7 @@ function LoginForm(props) {
     >
       <Input
         required={true}
+        autoComplete="on"
         label="E-mail"
         name="email"
         type="email"
@@ -46,6 +47,7 @@ function LoginForm(props) {
       />
       <Input
         required={true}
+        autoComplete="off"
         label="Пароль"
         name="password"
         type="password"

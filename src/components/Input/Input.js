@@ -7,13 +7,13 @@ function Input(props) {
       <input
         className="page-with-form__input-field"
         required={props.required}
+        autoComplete={props.autoComplete}
         name={props.name}
         type={props.type}
         placeholder={props.placeholder}
         id={props.id}
         value={props.value}
         onChange={props.onChange}
-        pattern={props.pattern}
       />
       <span className="page-with-form__input-validation-message">{props.validationMessage}</span>
     </fieldset>
