@@ -2,7 +2,7 @@ import "./UsersMovies.css";
 
 import {useEffect, useState} from "react";
 
-import mainApi from "../../utils/Api/MainApi";
+import mainApi from "../../utils/Api/mainApi";
 
 import Search from "../Search/Search";
 import UsersMoviesCardList from "../UsersMoviesCardList/UsersMoviesCardList";

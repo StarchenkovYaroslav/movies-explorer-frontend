@@ -7,7 +7,7 @@ import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
 import {CurrentUserContext, defaultUser} from "../../contexts/CurrentUserContext";
 
 import {messages, paths} from "../../utils/config";
-import mainApi from "../../utils/Api/MainApi";
+import mainApi from "../../utils/Api/mainApi";
 
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";

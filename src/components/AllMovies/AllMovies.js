@@ -3,8 +3,8 @@ import "./AllMovies.css";
 import {useEffect, useState, useRef} from "react";
 import isURL from "validator/es/lib/isURL";
 
-import moviesApi from "../../utils/Api/MoviesApi";
-import mainApi from "../../utils/Api/MainApi";
+import moviesApi from "../../utils/Api/moviesApi";
+import mainApi from "../../utils/Api/mainApi";
 import {messages, moviesApiSettings, noInfoImageLink} from "../../utils/config";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 import {useFindAndFilterMovies} from "../../utils/hooks/use-find-and-filter-movies";
