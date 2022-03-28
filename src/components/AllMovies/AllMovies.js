@@ -123,6 +123,7 @@ function AllMovies() {
         hideLoadingMessage();
       }
 
+      localStorage.setItem('keyWord', inputValues.movie);
       localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
       localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
     }
@@ -153,8 +154,6 @@ function AllMovies() {
           setAllMovies(loadedMovies);
 
           setMovieToFind(inputValues.movie);
-
-          localStorage.setItem('keyWord', inputValues.movie);
         })
         .catch(() => {
           showLoadingMessage(messages.serverError);
