@@ -44,6 +44,28 @@
 
 .movie-card__link {
     grid-area: link;
+    position: relative;
+}
+
+.movie-card__link::before {
+    align-items: center;
+    background-color: rgba(0, 0, 0, .9);
+    color: #fff;
+    content: "Открыть трейлер";
+    display: flex;
+    font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+    justify-content: center;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    transition: opacity .2s;
+    visibility: hidden;
+    width: 100%;
+}
+
+.movie-card__link:hover::before {
+    opacity: 1;
+    visibility: visible;
 }
 
 .movie-card__image {
