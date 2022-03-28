@@ -13,7 +13,7 @@ function LoginForm(props) {
     handleInputChange,
   } = useFormWithValidation(
     {email: '', password: ''},
-    {email: true, password: true},
+    {email: false, password: false},
     {email: '', password: ''},
     false,
     {

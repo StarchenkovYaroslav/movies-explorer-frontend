@@ -14,7 +14,7 @@ function RegisterForm(props) {
     handleInputChange,
   } = useFormWithValidation(
     {name: '', email: '', password: ''},
-    {name: true, email: true, password: true},
+    {name: false, email: false, password: false},
     {name: '', email: '', password: ''},
     false,
     {
