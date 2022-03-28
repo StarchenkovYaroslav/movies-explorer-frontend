@@ -1,3 +1,5 @@
+export const defaultErrorMessage = 'Что-то пошло не так';
+
 export const paths = {
   main: '',
   movies: 'movies',

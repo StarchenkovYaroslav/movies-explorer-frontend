@@ -1,14 +1,20 @@
 class Api {
-  constructor(settings) {
-    this._baseUrl = settings.baseUrl;
+  constructor(apiSettings, defaultErrorMessage) {
+    this._baseUrl = apiSettings.baseUrl;
+    this._defaultErrorMessage = defaultErrorMessage;
   }
 
-  _checkResponse(res) {
-    if (res.ok) {
-      return res.json();
+  _checkResponse(response) {
+    if (response.ok) {
+      return response.json();
     }
 
-    return Promise.reject(res.status);
+    return response.json()
+      .then(data => {
+        const message = data.message || this._defaultErrorMessage;
+
+        return Promise.reject(new Error(message));
+      });
   }
 }
 

@@ -46,8 +46,8 @@ function App() {
       .then((data) => {
         setLoggedIn(data.isValid);
       })
-      .catch(status => {
-        console.log(status);
+      .catch(err => {
+        console.log(err.message);
       });
   }, []);
 
@@ -57,8 +57,8 @@ function App() {
         .then(user => {
           setCurrentUser(user);
         })
-        .catch(status => {
-          console.log(status);
+        .catch(err => {
+          console.log(err.message);
         })
     }
   }, [loggedIn])
@@ -76,8 +76,8 @@ function App() {
 
         navigate('/' + paths.movies);
       })
-      .catch(() => {
-        setSignUpMessage(messages.signUpError);
+      .catch((err) => {
+        setSignUpMessage(err.message);
       });
   }
 
@@ -88,8 +88,8 @@ function App() {
 
         navigate('/' + paths.movies);
       })
-      .catch(() => {
-        setSignInMessage(messages.signInError);
+      .catch((err) => {
+        setSignInMessage(err.message);
       });
   }
 
@@ -102,8 +102,8 @@ function App() {
 
         navigate('/' + paths.signIn);
       })
-      .catch((status) => {
-        console.log(status);
+      .catch((err) => {
+        console.log(err.message);
       });
   }
 
@@ -114,8 +114,8 @@ function App() {
 
         setEditProfileMessage(messages.profileEditSuccessMessage);
       })
-      .catch(() => {
-        setEditProfileMessage(messages.profileEditErrorMessage);
+      .catch((err) => {
+        setEditProfileMessage(err.message);
       });
   }
 
