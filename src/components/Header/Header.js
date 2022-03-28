@@ -23,7 +23,7 @@ function Header({ loggedIn }) {
   return (
     <header className={headerClassName}>
       <Logo />
-      <Navigation loggedIn={loggedIn} isVisible={isMobileNavigationVisible} onModalLinkClick={handleModalLinkClick} />
+      <Navigation loggedIn={loggedIn} isVisible={isMobileNavigationVisible} onCloseSideNavigation={handleModalLinkClick} />
       {loggedIn && <Burger isActive={isMobileNavigationVisible} onClick={handleBurgerClick} />}
     </header>
   )
