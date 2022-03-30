@@ -5,7 +5,14 @@ import isURL from "validator/es/lib/isURL";
 
 import moviesApi from "../../utils/Api/moviesApi";
 import mainApi from "../../utils/Api/mainApi";
-import {messages, moviesAmount, moviesApiSettings, noInfoImageLink, pageWidths} from "../../utils/config";
+import {
+  localStorageNames,
+  messages,
+  moviesAmount,
+  moviesApiSettings,
+  noInfoImageLink,
+  pageWidths
+} from "../../utils/config";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 import {useFindAndFilterMovies} from "../../utils/hooks/use-find-and-filter-movies";
 
@@ -76,14 +83,14 @@ function AllMovies() {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('foundMovies') && localStorage.getItem('keyWord') && localStorage.getItem('areShortMoviesChosen')) {
-      setFoundMovies(JSON.parse(localStorage.getItem('foundMovies')));
+    if (localStorage.getItem(localStorageNames.foundMovies) && localStorage.getItem(localStorageNames.movieToFind) && localStorage.getItem(localStorageNames.areShortMoviesChosen)) {
+      setFoundMovies(JSON.parse(localStorage.getItem(localStorageNames.foundMovies)));
 
       setInputValues(prevInputValues => {
-        return {...prevInputValues, movie: localStorage.getItem('keyWord')};
+        return {...prevInputValues, movie: localStorage.getItem(localStorageNames.movieToFind)};
       })
 
-      setAreShortMoviesChosen(JSON.parse(localStorage.getItem('areShortMoviesChosen')));
+      setAreShortMoviesChosen(JSON.parse(localStorage.getItem(localStorageNames.areShortMoviesChosen)));
     }
   }, []);
 
@@ -124,9 +131,9 @@ function AllMovies() {
         hideLoadingMessage();
       }
 
-      localStorage.setItem('keyWord', inputValues.movie);
-      localStorage.setItem('foundMovies', JSON.stringify(foundMovies));
-      localStorage.setItem('areShortMoviesChosen', JSON.stringify(areShortMoviesChosen));
+      localStorage.setItem(localStorageNames.movieToFind, inputValues.movie);
+      localStorage.setItem(localStorageNames.foundMovies, JSON.stringify(foundMovies));
+      localStorage.setItem(localStorageNames.areShortMoviesChosen, JSON.stringify(areShortMoviesChosen));
     }
   }, [filteredMovies])
 

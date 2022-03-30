@@ -62,3 +62,8 @@ export const userPasswordRegExp = /^.{2,30}$/;
 
 export const noInfoImageLink = 'https://st3.depositphotos.com/1269954/12628/v/950/depositphotos_126285396-stock-illustration-no-information-rubber-stamp.jpg';
 
+export const localStorageNames = {
+  movieToFind: 'movieToFind',
+  foundMovies: 'foundMovies',
+  areShortMoviesChosen: 'areShortMoviesChosen'
+}
