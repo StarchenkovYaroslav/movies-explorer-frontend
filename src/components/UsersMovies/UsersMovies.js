@@ -12,6 +12,7 @@ import {messages} from "../../utils/config";
 
 function UsersMovies() {
   const [usersMovies, setUsersMovies] = useState([]);
+  const [wereMoviesLoaded, setWereMoviesLoaded] = useState(false);
 
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
@@ -50,6 +51,7 @@ function UsersMovies() {
     mainApi.getUsersMovies()
       .then((loadedMovies) => {
         setUsersMovies(loadedMovies);
+        setWereMoviesLoaded(true);
       })
       .catch(() => {
         showLoadingMessage(messages.serverError);
@@ -60,14 +62,10 @@ function UsersMovies() {
   }, [])
 
   useEffect(() => {
-    if (usersMovies.length === 0 && areMoviesLoading) {
-      showLoadingMessage(messages.noUsersMovies);
-    }
-  }, [usersMovies]);
-
-  useEffect(() => {
-    if (filteredMovies.length === 0 && movieToFind !== '') {
+    if (filteredMovies.length === 0 && usersMovies.length !== 0) {
       showLoadingMessage(messages.movieNotFound);
+    } else if (filteredMovies.length === 0 && usersMovies.length === 0 && wereMoviesLoaded) {
+      showLoadingMessage(messages.noUsersMovies);
     } else if (filteredMovies.length !== 0) {
       hideLoadingMessage();
     }
