@@ -60,7 +60,7 @@ function UsersMovies() {
   }, [])
 
   useEffect(() => {
-    if (usersMovies.length === 0) {
+    if (usersMovies.length === 0 && isLoadingMessageVisible) {
       showLoadingMessage(messages.noUsersMovies);
     }
   }, [usersMovies]);
