@@ -40,6 +40,20 @@ export const messages = {
   passwordInputError: 'От 2 до 30 символов'
 }
 
+export const moviesAmount = {
+  bigPageInitial: 12,
+  bigPageAdded: 3,
+  middlePageInitial: 8,
+  middlePageAdded: 2,
+  smallPageInitial: 5,
+  smallPageAdded: 2,
+}
+
+export const pageWidths = {
+  maxWidthOfMiddlePage: 1007,
+  maxWidthOfSmallPage: 635
+}
+
 export const maxShortMovieDuration = 40;
 
 export const userNameRegExp = /^[A-zА-яё\s\-]{2,30}$/;

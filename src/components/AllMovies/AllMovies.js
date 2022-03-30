@@ -5,7 +5,7 @@ import isURL from "validator/es/lib/isURL";
 
 import moviesApi from "../../utils/Api/moviesApi";
 import mainApi from "../../utils/Api/mainApi";
-import {messages, moviesApiSettings, noInfoImageLink} from "../../utils/config";
+import {messages, moviesAmount, moviesApiSettings, noInfoImageLink, pageWidths} from "../../utils/config";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 import {useFindAndFilterMovies} from "../../utils/hooks/use-find-and-filter-movies";
 
@@ -63,15 +63,15 @@ function AllMovies() {
   function checkPageWidth() {
     const pageWidth = document.documentElement.clientWidth;
 
-    if (pageWidth > 1007) {
-      setInitialMoviesAmount(12);
-      setAddedMoviesAmount(3);
-    } else if(pageWidth > 635) {
-      setInitialMoviesAmount(8);
-      setAddedMoviesAmount(2);
+    if (pageWidth > pageWidths.maxWidthOfMiddlePage) {
+      setInitialMoviesAmount(moviesAmount.bigPageInitial);
+      setAddedMoviesAmount(moviesAmount.bigPageAdded);
+    } else if(pageWidth > pageWidths.maxWidthOfSmallPage) {
+      setInitialMoviesAmount(moviesAmount.middlePageInitial);
+      setAddedMoviesAmount(moviesAmount.middlePageAdded);
     } else {
-      setInitialMoviesAmount(5);
-      setAddedMoviesAmount(2);
+      setInitialMoviesAmount(moviesAmount.smallPageInitial);
+      setAddedMoviesAmount(moviesAmount.smallPageAdded);
     }
   }
 
