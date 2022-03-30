@@ -1,5 +1,3 @@
-export const defaultErrorMessage = 'Что-то пошло не так';
-
 export const paths = {
   main: '',
   movies: 'movies',
@@ -27,6 +25,7 @@ export const mainApiSettings = {
 }
 
 export const messages = {
+  defaultErrorMessage: 'Что-то пошло не так',
   serverError: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
   movieNotFound: 'Ничего не найдено',
   noUsersMovies: 'Нет сохраненных фильмов',

@@ -1,5 +1,5 @@
 import Api from "./Api";
-import {defaultErrorMessage, mainApiSettings} from "../config";
+import {mainApiSettings, messages} from "../config";
 
 class MainApi extends Api {
   constructor(settings) {
@@ -116,4 +116,4 @@ class MainApi extends Api {
   }
 }
 
-export default new MainApi(mainApiSettings, defaultErrorMessage);
+export default new MainApi(mainApiSettings, messages.defaultErrorMessage);
