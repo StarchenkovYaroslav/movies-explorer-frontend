@@ -115,6 +115,8 @@ function UsersMovies() {
         formMessage={formMessage}
         isFormMessageVisible={isFormMessageVisible}
 
+        areMoviesLoading={areMoviesLoading}
+
         onChooseShortMovies={handleChooseShortMovies}
         onInputSearchedMovie={handleInputChange}
         onSearch={handleSearchMovie}

@@ -230,6 +230,8 @@ function AllMovies() {
         formMessage={formMessage}
         isFormMessageVisible={isFormMessageVisible}
 
+        areMoviesLoading={areMoviesLoading}
+
         onChooseShortMovies={handleChooseShortMovies}
         onInputSearchedMovie={handleInputChange}
         onSearch={handleSearchMovie}
