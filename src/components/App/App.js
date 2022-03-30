@@ -100,7 +100,7 @@ function App() {
 
         localStorage.clear();
 
-        navigate('/' + paths.signIn);
+        navigate('/' + paths.main);
       })
       .catch((err) => {
         console.log(err.message);
@@ -136,7 +136,7 @@ function App() {
                 <AuthorizedComponent
                   component={<AllMovies/>}
                   loggedIn={loggedIn}
-                  pathToRedirect={'/' + paths.signIn}
+                  pathToRedirect={'/' + paths.main}
                 />
               }
             />
@@ -147,7 +147,7 @@ function App() {
                 <AuthorizedComponent
                   component={<UsersMovies/>}
                   loggedIn={loggedIn}
-                  pathToRedirect={'/' + paths.signIn}
+                  pathToRedirect={'/' + paths.main}
                 />
               }
             />
@@ -164,7 +164,7 @@ function App() {
                     />
                   }
                   loggedIn={loggedIn}
-                  pathToRedirect={'/' + paths.signIn}
+                  pathToRedirect={'/' + paths.main}
                 />
               }
             />
