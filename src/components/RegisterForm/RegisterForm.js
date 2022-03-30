@@ -7,6 +7,8 @@ import Form from "../Form/Form";
 import Input from "../Input/Input";
 
 function RegisterForm(props) {
+  const areInputsActive = !props.isSigningUp;
+
   const {
     inputValues,
     inputErrorMessages,
@@ -32,13 +34,17 @@ function RegisterForm(props) {
 
   return (
     <Form
-      submitButtonText="Зарегистрироваться"
       isValid={isFormValid}
-      onSubmit={handleSubmit}
+      isSubmitting={props.isSigningUp}
+
+      submitButtonText="Зарегистрироваться"
       message={props.message}
+
+      onSubmit={handleSubmit}
     >
       <Input
         required={true}
+        disabled={!areInputsActive}
         autoComplete="on"
         label="Имя"
         name="name"
@@ -52,6 +58,7 @@ function RegisterForm(props) {
       />
       <Input
         required={true}
+        disabled={!areInputsActive}
         autoComplete="on"
         label="E-mail"
         name="email"
@@ -64,6 +71,7 @@ function RegisterForm(props) {
       />
       <Input
         required={true}
+        disabled={!areInputsActive}
         autoComplete="off"
         label="Пароль"
         name="password"

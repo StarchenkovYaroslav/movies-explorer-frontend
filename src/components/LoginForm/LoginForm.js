@@ -6,6 +6,8 @@ import Form from "../Form/Form";
 import Input from "../Input/Input";
 
 function LoginForm(props) {
+  const areInputsActive = !props.isSigningIn;
+
   const {
     inputValues,
     inputErrorMessages,
@@ -30,13 +32,17 @@ function LoginForm(props) {
 
   return (
     <Form
-      submitButtonText="Войти"
-      onSubmit={handleSingIn}
       isValid={isFormValid}
+      isSubmitting={props.isSigningIn}
+
+      submitButtonText="Войти"
       message={props.message}
+
+      onSubmit={handleSingIn}
     >
       <Input
         required={true}
+        disabled={!areInputsActive}
         autoComplete="on"
         label="E-mail"
         name="email"
@@ -49,6 +55,7 @@ function LoginForm(props) {
       />
       <Input
         required={true}
+        disabled={!areInputsActive}
         autoComplete="off"
         label="Пароль"
         name="password"

@@ -12,7 +12,7 @@ function Login(props) {
     <div className="login">
       <PageWithForm>
         <Greeting text="Рады видеть!" />
-        <LoginForm onSignIn={props.onSignIn} message={props.message} />
+        <LoginForm onSignIn={props.onSignIn} message={props.message} isSigningIn={props.isSigningIn} />
         <Suggestion linkPath={`/${paths.signUp}`} linkText="Регистрация" questionText="Ещё не зарегистрированы?" />
       </PageWithForm>
     </div>

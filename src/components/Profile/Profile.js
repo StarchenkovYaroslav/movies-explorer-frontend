@@ -9,7 +9,7 @@ function Profile(props) {
     <div className="profile">
       <ProfileGreeting />
       <ProfileEdit message={props.message} onEditProfile={props.onEditProfile} />
-      <ProfileExit onExit={props.onSignOut} />
+      <ProfileExit onExit={props.onSignOut} isSigningOut={props.isSigningOut} />
     </div>
   );
 }

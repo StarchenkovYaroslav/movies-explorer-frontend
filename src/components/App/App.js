@@ -29,6 +29,10 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState(defaultUser);
 
+  const [isSigningUp, setIsSigningUp] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
   const [signUpMessage, setSignUpMessage] = useState('');
   const [signInMessage, setSignInMessage] = useState('');
   const [editProfileMessage, setEditProfileMessage] = useState('');
@@ -64,6 +68,8 @@ function App() {
   }, [loggedIn])
 
   function handleSignUp(data) {
+    setIsSigningUp(true);
+
     mainApi.signUp(data)
       .then(() => {
         return mainApi.signIn({
@@ -78,10 +84,15 @@ function App() {
       })
       .catch((err) => {
         setSignUpMessage(err.message);
+      })
+      .finally(() => {
+        setIsSigningUp(false);
       });
   }
 
   function handleSignIn(data) {
+    setIsSigningIn(true);
+
     mainApi.signIn(data)
       .then(() => {
         setLoggedIn(true);
@@ -90,10 +101,15 @@ function App() {
       })
       .catch((err) => {
         setSignInMessage(err.message);
+      })
+      .finally(() => {
+        setIsSigningIn(false);
       });
   }
 
   function handleSignOut() {
+    setIsSigningOut(true);
+
     mainApi.signOut()
       .then(() => {
         setLoggedIn(false);
@@ -104,6 +120,9 @@ function App() {
       })
       .catch((err) => {
         console.log(err.message);
+      })
+      .finally(() => {
+        setIsSigningOut(false);
       });
   }
 
@@ -159,6 +178,8 @@ function App() {
                   component={
                     <Profile
                       message={editProfileMessage}
+                      isSigningOut={isSigningOut}
+
                       onEditProfile={handleEditProfile}
                       onSignOut={handleSignOut}
                     />
@@ -176,6 +197,8 @@ function App() {
                   component={
                     <Login
                       message={signInMessage}
+                      isSigningIn={isSigningIn}
+
                       onSignIn={handleSignIn}
                     />
                   }
@@ -192,6 +215,8 @@ function App() {
                   component={
                     <Register
                       message={signUpMessage}
+                      isSigningUp={isSigningUp}
+
                       onSignUp={handleSignUp}
                     />
                   }
