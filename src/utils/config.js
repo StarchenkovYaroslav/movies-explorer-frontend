@@ -40,6 +40,8 @@ export const messages = {
   passwordInputError: 'От 2 до 30 символов'
 }
 
+export const maxShortMovieDuration = 40;
+
 export const userNameRegExp = /^[A-zА-яё\s\-]{2,30}$/;
 
 export const userPasswordRegExp = /^.{2,30}$/;
