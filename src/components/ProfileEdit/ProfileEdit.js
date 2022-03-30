@@ -10,6 +10,8 @@ import {emailValidator} from "../../utils/input-validators/email-validator";
 function ProfileEdit(props) {
   const currentUser = useContext(CurrentUserContext);
 
+  const areInputsActive = !props.isProfileEditing;
+
   const {
     inputValues,
     setInputValues,
@@ -27,7 +29,7 @@ function ProfileEdit(props) {
     }
   );
 
-  const isSubmitButtonActive = isFormValid && Object.entries(inputValues).some(input => {
+  const isSubmitButtonActive = isFormValid && !props.isProfileEditing && Object.entries(inputValues).some(input => {
       const [inputName, inputValue] = input;
 
       return inputValue !== currentUser[inputName];
@@ -62,6 +64,7 @@ function ProfileEdit(props) {
             <input
               className="profile-edit__input"
               required={true}
+              disabled={!areInputsActive}
               id="name"
               name="name"
               type="text"
@@ -75,6 +78,7 @@ function ProfileEdit(props) {
             <label className="profile-edit__input-label" htmlFor="email">E-mail</label>
             <input
               className="profile-edit__input"
+              disabled={!areInputsActive}
               required={true}
               id="email"
               name="email"

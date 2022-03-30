@@ -33,6 +33,7 @@ function App() {
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [isSigningIn, setIsSigningIn] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const [isProfileEditing, setIsProfileEditing] = useState(false);
 
   const [signUpMessage, setSignUpMessage] = useState('');
   const [signInMessage, setSignInMessage] = useState('');
@@ -133,6 +134,7 @@ function App() {
   }
 
   function handleEditProfile(data) {
+    setIsProfileEditing(true);
     setEditProfileMessage('');
 
     mainApi.editCurrentUser(data)
@@ -143,6 +145,9 @@ function App() {
       })
       .catch((err) => {
         setEditProfileMessage(err.message);
+      })
+      .finally(() => {
+        setIsProfileEditing(false);
       });
   }
 
@@ -188,6 +193,7 @@ function App() {
                   component={
                     <Profile
                       message={editProfileMessage}
+                      isProfileEditing={isProfileEditing}
                       isSigningOut={isSigningOut}
 
                       onEditProfile={handleEditProfile}

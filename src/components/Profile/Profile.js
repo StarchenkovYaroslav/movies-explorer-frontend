@@ -8,7 +8,7 @@ function Profile(props) {
   return (
     <div className="profile">
       <ProfileGreeting />
-      <ProfileEdit message={props.message} onEditProfile={props.onEditProfile} />
+      <ProfileEdit message={props.message} isProfileEditing={props.isProfileEditing} onEditProfile={props.onEditProfile} />
       <ProfileExit onExit={props.onSignOut} isSigningOut={props.isSigningOut} />
     </div>
   );
