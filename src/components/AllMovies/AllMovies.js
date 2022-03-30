@@ -8,10 +8,8 @@ import mainApi from "../../utils/Api/mainApi";
 import {
   localStorageNames,
   messages,
-  moviesAmount,
   moviesApiSettings,
   noInfoImageLink,
-  pageWidths
 } from "../../utils/config";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
 import {useFindAndFilterMovies} from "../../utils/hooks/use-find-and-filter-movies";
@@ -19,6 +17,7 @@ import {useFindAndFilterMovies} from "../../utils/hooks/use-find-and-filter-movi
 import Search from "../Search/Search";
 import AllMoviesCardList from "../AllMoviesCardList/AllMoviesCardList";
 import MoreMovies from "../MoreMovies/MoreMovies";
+import {useCheckPageWidth} from "../../utils/hooks/use-check-page-width";
 
 function AllMovies() {
   const isInitialMount = useRef(true);
@@ -27,12 +26,12 @@ function AllMovies() {
   const [usersMovies, setUsersMovies] = useState([]);
   const [moviesToRender, setMoviesToRender] = useState([]);
 
+  const [areMoviesLoading, setAreMoviesLoading] = useState(false);
   const [wereMoviesLoaded, setWereMoviesLoaded] = useState(false);
 
-  const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
-  const [addedMoviesAmount, setAddedMoviesAmount] = useState(0);
+  // const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
+  // const [addedMoviesAmount, setAddedMoviesAmount] = useState(0);
 
-  const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
   const {
     setMovieToFind,
@@ -62,25 +61,15 @@ function AllMovies() {
     false
   );
 
+  const {
+    initialMoviesAmount,
+    addedMoviesAmount,
+  } = useCheckPageWidth();
+
   const isMoreMoviesVisible =
     moviesToRender.length !== 0
     && moviesToRender.length !== filteredMovies.length
     && !areMoviesLoading;
-
-  function checkPageWidth() {
-    const pageWidth = document.documentElement.clientWidth;
-
-    if (pageWidth > pageWidths.maxWidthOfMiddlePage) {
-      setInitialMoviesAmount(moviesAmount.bigPageInitial);
-      setAddedMoviesAmount(moviesAmount.bigPageAdded);
-    } else if(pageWidth > pageWidths.maxWidthOfSmallPage) {
-      setInitialMoviesAmount(moviesAmount.middlePageInitial);
-      setAddedMoviesAmount(moviesAmount.middlePageAdded);
-    } else {
-      setInitialMoviesAmount(moviesAmount.smallPageInitial);
-      setAddedMoviesAmount(moviesAmount.smallPageAdded);
-    }
-  }
 
   useEffect(() => {
     const savedJSONAllMovies = localStorage.getItem(localStorageNames.allMovies);
@@ -99,22 +88,6 @@ function AllMovies() {
       })
     }
   }, []);
-
-  useEffect(() => {
-    checkPageWidth()
-  }, [])
-
-  useEffect(() => {
-    function postponeCheckPageWidth() {
-      setTimeout(checkPageWidth, 2000);
-    }
-
-    window.addEventListener('resize', postponeCheckPageWidth);
-
-    return () => {
-      window.removeEventListener('resize', postponeCheckPageWidth);
-    }
-  }, [])
 
   useEffect(() => {
     mainApi.getUsersMovies()
