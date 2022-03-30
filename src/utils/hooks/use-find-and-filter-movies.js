@@ -56,6 +56,8 @@ export function useFindAndFilterMovies(initialMovies, mustShowAll = false) {
   }, [foundMovies, areShortMoviesChosen]);
 
   useEffect(() => {
+    hideLoadingMessage();
+
     if (initialMovies.length !== 0) {
       setFoundMovies(findMovies(initialMovies, movieToFind));
     } else {

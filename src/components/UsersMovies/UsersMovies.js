@@ -85,7 +85,6 @@ function UsersMovies() {
     }
 
     if (usersMovies.length !== 0) {
-      hideLoadingMessage();
       setMovieToFind(inputValues.movie);
     }
   }

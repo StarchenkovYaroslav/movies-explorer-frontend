@@ -155,8 +155,6 @@ function AllMovies() {
       hideFormMessage();
     }
 
-    hideLoadingMessage();
-
     setAreMoviesLoading(true);
 
     if (allMovies.length === 0) {
