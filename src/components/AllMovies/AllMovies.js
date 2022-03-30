@@ -26,6 +26,7 @@ function AllMovies() {
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
   const {
+    movieToFind,
     setMovieToFind,
     areShortMoviesChosen,
     setAreShortMoviesChosen,
@@ -113,7 +114,7 @@ function AllMovies() {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      if (filteredMovies.length === 0) {
+      if (filteredMovies.length === 0 && movieToFind !== '') {
         setMoviesToRender([]);
 
         showLoadingMessage(messages.movieNotFound);
@@ -237,6 +238,7 @@ function AllMovies() {
       <AllMoviesCardList
         movies={moviesToRender}
         usersMovies={usersMovies}
+
         areMoviesLoading={areMoviesLoading}
         isLoadingMessageVisible={isLoadingMessageVisible}
         loadingMessage={loadingMessage}
