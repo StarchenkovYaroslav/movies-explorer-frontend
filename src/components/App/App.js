@@ -69,6 +69,7 @@ function App() {
 
   function handleSignUp(data) {
     setIsSigningUp(true);
+    setSignUpMessage('');
 
     mainApi.signUp(data)
       .then(() => {
@@ -92,6 +93,7 @@ function App() {
 
   function handleSignIn(data) {
     setIsSigningIn(true);
+    setSignInMessage('');
 
     mainApi.signIn(data)
       .then(() => {
