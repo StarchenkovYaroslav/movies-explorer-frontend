@@ -29,10 +29,6 @@ function AllMovies() {
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
   const [wereMoviesLoaded, setWereMoviesLoaded] = useState(false);
 
-  // const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
-  // const [addedMoviesAmount, setAddedMoviesAmount] = useState(0);
-
-
   const {
     setMovieToFind,
     areShortMoviesChosen,
