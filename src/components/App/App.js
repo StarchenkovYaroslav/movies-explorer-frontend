@@ -133,6 +133,8 @@ function App() {
   }
 
   function handleEditProfile(data) {
+    setEditProfileMessage('');
+
     mainApi.editCurrentUser(data)
       .then(user => {
         setCurrentUser(user);
