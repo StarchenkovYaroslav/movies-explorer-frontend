@@ -17,10 +17,9 @@ function UsersMovies() {
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
   const {
-    movieToFind,
     setMovieToFind,
     areShortMoviesChosen,
-    setAreShortMoviesChosen,
+    handleChooseShortMovies,
     filteredMovies,
     formMessage,
     isFormMessageVisible,
@@ -97,10 +96,6 @@ function UsersMovies() {
       .catch((err) => {
         console.log(err.message);
       });
-  }
-
-  function handleChooseShortMovies(evt) {
-    setAreShortMoviesChosen(evt.target.checked);
   }
 
   return (

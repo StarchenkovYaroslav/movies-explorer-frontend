@@ -37,6 +37,7 @@ function AllMovies() {
     setMovieToFind,
     areShortMoviesChosen,
     setAreShortMoviesChosen,
+    handleChooseShortMovies,
     filteredMovies,
     formMessage,
     isFormMessageVisible,
@@ -139,10 +140,6 @@ function AllMovies() {
       localStorage.setItem(localStorageNames.areShortMoviesChosen, JSON.stringify(areShortMoviesChosen));
     }
   }, [filteredMovies])
-
-  function handleChooseShortMovies(evt) {
-    setAreShortMoviesChosen(evt.target.checked);
-  }
 
   function handleSearchMovie(evt) {
     evt.preventDefault();

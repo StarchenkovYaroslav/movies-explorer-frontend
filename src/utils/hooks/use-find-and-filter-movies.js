@@ -37,6 +37,10 @@ export function useFindAndFilterMovies(initialMovies, mustShowAll = false) {
     setIsFormMessageVisible(false);
   }
 
+  function handleChooseShortMovies(evt) {
+    setAreShortMoviesChosen(evt.target.checked);
+  }
+
   useEffect(() => {
     if (mustShowAll) {
       setFoundMovies(initialMovies);
@@ -70,6 +74,7 @@ export function useFindAndFilterMovies(initialMovies, mustShowAll = false) {
     setMovieToFind,
     areShortMoviesChosen,
     setAreShortMoviesChosen,
+    handleChooseShortMovies,
     foundMovies,
     setFoundMovies,
     filteredMovies,
