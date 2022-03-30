@@ -27,13 +27,14 @@ function AllMovies() {
   const [usersMovies, setUsersMovies] = useState([]);
   const [moviesToRender, setMoviesToRender] = useState([]);
 
+  const [wereMoviesLoaded, setWereMoviesLoaded] = useState(false);
+
   const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
   const [addedMoviesAmount, setAddedMoviesAmount] = useState(0);
 
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
   const {
-    movieToFind,
     setMovieToFind,
     areShortMoviesChosen,
     setAreShortMoviesChosen,
@@ -88,6 +89,7 @@ function AllMovies() {
 
     if (savedJSONAllMovies && savedMovieToFind && savedJSONAreShortMoviesChosen) {
       setAllMovies(JSON.parse(savedJSONAllMovies));
+      setWereMoviesLoaded(true);
 
       setMovieToFind(savedMovieToFind);
       setAreShortMoviesChosen(JSON.parse(savedJSONAreShortMoviesChosen));
@@ -125,10 +127,14 @@ function AllMovies() {
     if (isInitialMount.current) {
       isInitialMount.current = false;
     } else {
-      if (filteredMovies.length === 0 && movieToFind !== '') {
+      if (filteredMovies.length === 0 && wereMoviesLoaded) {
         setMoviesToRender([]);
 
         showLoadingMessage(messages.movieNotFound);
+      } else if (filteredMovies.length === 0 && !wereMoviesLoaded) {
+        setMoviesToRender([]);
+
+        showLoadingMessage(messages.moviesWereNotSearched);
       } else {
         setMoviesToRender(filteredMovies.slice(0, initialMoviesAmount));
 
@@ -154,10 +160,14 @@ function AllMovies() {
 
     setAreMoviesLoading(true);
 
-    if (allMovies.length === 0) {
+    if (!wereMoviesLoaded) {
+      hideLoadingMessage();
+
       moviesApi.getAllMovies()
         .then(loadedMovies => {
           setAllMovies(loadedMovies);
+
+          setWereMoviesLoaded(true);
 
           setMovieToFind(inputValues.movie);
         })
