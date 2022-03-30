@@ -26,7 +26,13 @@ function ProfileEdit(props) {
     }
   );
 
-  const submitButtonClassName = `profile-edit__submit-button${isFormValid ? '' : ' profile-edit__submit-button_disabled'}`;
+  const isSubmitButtonActive = isFormValid && Object.entries(inputValues).some(input => {
+      const [inputName, inputValue] = input;
+
+      return inputValue !== currentUser[inputName];
+    });
+
+  const submitButtonClassName = `profile-edit__submit-button${isSubmitButtonActive ? '' : ' profile-edit__submit-button_disabled'}`;
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -68,7 +74,7 @@ function ProfileEdit(props) {
           <span className="profile-edit__input-error-message">{inputErrorMessages.email}</span>
         </div>
         <span className="profile-edit__form-message">{props.message}</span>
-        <button className={submitButtonClassName} type="submit" disabled={!isFormValid}>Редактировать</button>
+        <button className={submitButtonClassName} type="submit" disabled={!isSubmitButtonActive}>Редактировать</button>
       </form>
     </section>
   );
