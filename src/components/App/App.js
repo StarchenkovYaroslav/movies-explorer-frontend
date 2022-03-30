@@ -26,6 +26,7 @@ function App() {
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [wasLoggedInChecked, setWasLoggedInChecked] = useState(false);
 
   const [currentUser, setCurrentUser] = useState(defaultUser);
 
@@ -52,6 +53,9 @@ function App() {
       })
       .catch(err => {
         console.log(err.message);
+      })
+      .finally(() => {
+        setWasLoggedInChecked(true);
       });
   }, []);
 
@@ -141,6 +145,8 @@ function App() {
   }
 
   return (
+    wasLoggedInChecked ?
+
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
 
@@ -237,6 +243,8 @@ function App() {
 
       </div>
     </CurrentUserContext.Provider>
+
+      : null
   )
 }
 

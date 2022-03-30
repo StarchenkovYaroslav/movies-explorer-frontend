@@ -1,6 +1,6 @@
 import "./ProfileEdit.css";
 
-import {useContext} from "react";
+import {useContext, useEffect} from "react";
 
 import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
@@ -12,6 +12,7 @@ function ProfileEdit(props) {
 
   const {
     inputValues,
+    setInputValues,
     inputErrorMessages,
     handleInputChange,
     isFormValid
@@ -33,6 +34,18 @@ function ProfileEdit(props) {
     });
 
   const submitButtonClassName = `profile-edit__submit-button${isSubmitButtonActive ? '' : ' profile-edit__submit-button_disabled'}`;
+
+  useEffect(() => {
+    setInputValues(prevInputValues => {
+      const newInputValues = {...prevInputValues};
+
+      Object.keys(newInputValues).forEach(inputName => {
+        newInputValues[inputName] = currentUser[inputName];
+      });
+
+      return newInputValues;
+    })
+  }, [currentUser]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
