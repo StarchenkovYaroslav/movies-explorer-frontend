@@ -13,8 +13,7 @@ export const moviesApiSettings = {
 }
 
 export const mainApiSettings = {
-  baseUrl: 'http://localhost:3001',
-  //baseUrl: 'https://api.moviesexplorer.nomoredomains.work',
+  baseUrl: 'https://api.moviesexplorer.nomoredomains.work',
   usersEndpoint: 'users',
   userInfoEndpoint: 'me',
   moviesEndpoint: 'movies',
