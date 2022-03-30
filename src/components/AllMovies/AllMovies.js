@@ -37,8 +37,6 @@ function AllMovies() {
     setMovieToFind,
     areShortMoviesChosen,
     setAreShortMoviesChosen,
-    foundMovies,
-    setFoundMovies,
     filteredMovies,
     formMessage,
     isFormMessageVisible,
@@ -83,14 +81,19 @@ function AllMovies() {
   }
 
   useEffect(() => {
-    if (localStorage.getItem(localStorageNames.foundMovies) && localStorage.getItem(localStorageNames.movieToFind) && localStorage.getItem(localStorageNames.areShortMoviesChosen)) {
-      setFoundMovies(JSON.parse(localStorage.getItem(localStorageNames.foundMovies)));
+    const savedJSONAllMovies = localStorage.getItem(localStorageNames.allMovies);
+    const savedMovieToFind = localStorage.getItem(localStorageNames.movieToFind);
+    const savedJSONAreShortMoviesChosen = localStorage.getItem(localStorageNames.areShortMoviesChosen);
+
+    if (savedJSONAllMovies && savedMovieToFind && savedJSONAreShortMoviesChosen) {
+      setAllMovies(JSON.parse(savedJSONAllMovies));
+
+      setMovieToFind(savedMovieToFind);
+      setAreShortMoviesChosen(JSON.parse(savedJSONAreShortMoviesChosen));
 
       setInputValues(prevInputValues => {
-        return {...prevInputValues, movie: localStorage.getItem(localStorageNames.movieToFind)};
+        return {...prevInputValues, movie: savedMovieToFind};
       })
-
-      setAreShortMoviesChosen(JSON.parse(localStorage.getItem(localStorageNames.areShortMoviesChosen)));
     }
   }, []);
 
@@ -132,7 +135,7 @@ function AllMovies() {
       }
 
       localStorage.setItem(localStorageNames.movieToFind, inputValues.movie);
-      localStorage.setItem(localStorageNames.foundMovies, JSON.stringify(foundMovies));
+      localStorage.setItem(localStorageNames.allMovies, JSON.stringify(allMovies));
       localStorage.setItem(localStorageNames.areShortMoviesChosen, JSON.stringify(areShortMoviesChosen));
     }
   }, [filteredMovies])

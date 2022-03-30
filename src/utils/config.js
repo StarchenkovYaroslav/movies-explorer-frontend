@@ -63,6 +63,6 @@ export const noInfoImageLink = 'https://st3.depositphotos.com/1269954/12628/v/95
 
 export const localStorageNames = {
   movieToFind: 'movieToFind',
-  foundMovies: 'foundMovies',
+  allMovies: 'allMovies',
   areShortMoviesChosen: 'areShortMoviesChosen'
 }
