@@ -16,6 +16,7 @@ function UsersMovies() {
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
 
   const {
+    movieToFind,
     setMovieToFind,
     areShortMoviesChosen,
     setAreShortMoviesChosen,
@@ -46,7 +47,7 @@ function UsersMovies() {
 
     setAreMoviesLoading(true);
 
-    mainApi.getAllMovies()
+    mainApi.getUsersMovies()
       .then((loadedMovies) => {
         setUsersMovies(loadedMovies);
       })
@@ -59,9 +60,15 @@ function UsersMovies() {
   }, [])
 
   useEffect(() => {
-    if (filteredMovies.length === 0) {
+    if (usersMovies.length === 0) {
+      showLoadingMessage(messages.noUsersMovies);
+    }
+  }, [usersMovies]);
+
+  useEffect(() => {
+    if (filteredMovies.length === 0 && movieToFind !== '') {
       showLoadingMessage(messages.movieNotFound);
-    } else {
+    } else if (filteredMovies.length !== 0) {
       hideLoadingMessage();
     }
   }, [filteredMovies]);
@@ -77,9 +84,10 @@ function UsersMovies() {
       hideFormMessage();
     }
 
-    hideLoadingMessage();
-
-    setMovieToFind(inputValues.movie);
+    if (usersMovies.length !== 0) {
+      hideLoadingMessage();
+      setMovieToFind(inputValues.movie);
+    }
   }
 
   function handleDeleteMovie(movieToDeleteId) {

@@ -82,7 +82,7 @@ class MainApi extends Api {
       .then(this._checkResponse);
   }
 
-  getAllMovies() {
+  getUsersMovies() {
     return fetch(`${this._baseUrl}/${this._moviesEndpoint}`, {
       headers: {
         'Content-Type': 'application/json'

@@ -104,7 +104,7 @@ function AllMovies() {
   }, [])
 
   useEffect(() => {
-    mainApi.getAllMovies()
+    mainApi.getUsersMovies()
       .then(loadedUsersMovies => {
         setUsersMovies(loadedUsersMovies);
       })
