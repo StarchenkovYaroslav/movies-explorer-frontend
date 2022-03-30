@@ -1,28 +1,15 @@
-import "./App.css";
-
 import {useEffect, useState} from "react";
 
-import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-import {CurrentUserContext, defaultUser} from "../../contexts/CurrentUserContext";
+import {defaultUser} from "../../contexts/CurrentUserContext";
 
 import {messages, paths} from "../../utils/config";
 import mainApi from "../../utils/Api/mainApi";
 
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import AllMovies from "../AllMovies/AllMovies";
-import UsersMovies from "../UsersMovies/UsersMovies";
-import Profile from "../Profile/Profile";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import NotFoundPage from "../NotFoundPage/NotFoundPage";
-import AuthorizedComponent from "../AuthorizedComponent/AuthorizedComponent";
-import UnauthorizedComponent from "../UnauthorizedComponent/UnauthorizedComponent";
+import Page from "../Page/Page";
 
 function App() {
-  const location = useLocation();
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -38,14 +25,6 @@ function App() {
   const [signUpMessage, setSignUpMessage] = useState('');
   const [signInMessage, setSignInMessage] = useState('');
   const [editProfileMessage, setEditProfileMessage] = useState('');
-
-  const isHeaderVisible =
-    Object.values(paths).includes(location.pathname.slice(1))
-    && (loggedIn || location.pathname === '/' + paths.main);
-
-  const isFooterVisible =
-    Object.values(paths).includes(location.pathname.slice(1))
-    && ((loggedIn && location.pathname !== '/' + paths.profile) || location.pathname === '/' + paths.main);
 
   useEffect(() => {
     mainApi.checkAuth()
@@ -153,107 +132,27 @@ function App() {
 
   return (
     wasLoggedInChecked ?
+      <Page
+        loggedIn={loggedIn}
 
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
+        currentUser={currentUser}
 
-        {isHeaderVisible ? <Header loggedIn={loggedIn} /> : null}
+        isSigningUp={isSigningUp}
+        isSigningIn={isSigningIn}
+        isSigningOut={isSigningOut}
+        isProfileEditing={isProfileEditing}
 
-        <main className="content">
-          <Routes>
+        signUpMessage={signUpMessage}
+        signInMessage={signInMessage}
+        editProfileMessage={editProfileMessage}
 
-            <Route path={paths.main} element={<Main/>} />
-
-            <Route
-              path={paths.movies}
-              element={
-                <AuthorizedComponent
-                  component={<AllMovies/>}
-                  loggedIn={loggedIn}
-                  pathToRedirect={'/' + paths.main}
-                />
-              }
-            />
-
-            <Route
-              path={paths.savedMovies}
-              element={
-                <AuthorizedComponent
-                  component={<UsersMovies/>}
-                  loggedIn={loggedIn}
-                  pathToRedirect={'/' + paths.main}
-                />
-              }
-            />
-
-            <Route
-              path={paths.profile}
-              element={
-                <AuthorizedComponent
-                  component={
-                    <Profile
-                      message={editProfileMessage}
-                      isProfileEditing={isProfileEditing}
-                      isSigningOut={isSigningOut}
-
-                      onEditProfile={handleEditProfile}
-                      onSignOut={handleSignOut}
-                    />
-                  }
-                  loggedIn={loggedIn}
-                  pathToRedirect={'/' + paths.main}
-                />
-              }
-            />
-
-            <Route
-              path={paths.signIn}
-              element={
-                <UnauthorizedComponent
-                  component={
-                    <Login
-                      message={signInMessage}
-                      isSigningIn={isSigningIn}
-
-                      onSignIn={handleSignIn}
-                    />
-                  }
-                  loggedIn={loggedIn}
-                  pathToRedirect={'/' + paths.movies}
-                />
-              }
-            />
-
-            <Route
-              path={paths.signUp}
-              element={
-                <UnauthorizedComponent
-                  component={
-                    <Register
-                      message={signUpMessage}
-                      isSigningUp={isSigningUp}
-
-                      onSignUp={handleSignUp}
-                    />
-                  }
-                  loggedIn={loggedIn}
-                  pathToRedirect={'/' + paths.movies}
-                />
-              }
-            />
-
-            <Route path="*" element={<NotFoundPage/>} />
-
-          </Routes>
-        </main>
-
-        {isFooterVisible ? <Footer/> : null}
-
-      </div>
-    </CurrentUserContext.Provider>
-
+        onSignUp={handleSignUp}
+        onSignIn={handleSignIn}
+        onSignOut={handleSignOut}
+        onEditProfile={handleEditProfile}
+      />
       : null
-  )
+  );
 }
 
 export default App;
