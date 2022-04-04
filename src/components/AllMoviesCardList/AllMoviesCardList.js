@@ -1,24 +1,36 @@
-import "./AllMoviesCardList.css";
 import AllMoviesCard from "../AllMoviesCard/AllMoviesCard";
-import {moviesApiSettings} from "../../utils/config";
+import Preloader from "../Preloader/Preloader";
+import LoadingMessage from "../LoadingMessage/LoadingMessage";
+import MoviesCardList from "../MoviesCardList/MoviesCardList";
 
-function AllMoviesCardList({ movies }) {
+function AllMoviesCardList(props) {
+  const isPreloaderVisible = props.areMoviesLoading;
+  const areMoviesVisible = !props.areMoviesLoading && props.movies.length !== 0;
+
   return (
-    <section className="all-movies-card-list">
+    <MoviesCardList>
 
-      {movies.length !== 0 && movies.map(movie => {
+      {areMoviesVisible && props.movies.map(movie => {
+        const isSaved = props.usersMovies.some(usersMovie => usersMovie.movieId === movie.id);
+
         return (
           <AllMoviesCard
             key={movie.id}
-            isSaved={false}
-            name={movie.nameRU}
-            duration={movie.duration}
-            image={moviesApiSettings.baseUrl + '/' + movie.image.url}
+            isSaved={isSaved}
+            data={movie}
+            usersMovies={props.usersMovies}
+
+            onSave={props.onSaveMovie}
+            onDelete={props.onDeleteMovie}
           />
         )
       })}
 
-    </section>
+      {isPreloaderVisible ? <Preloader /> : null}
+
+      {props.isLoadingMessageVisible ? <LoadingMessage message={props.loadingMessage} /> : null}
+
+    </MoviesCardList>
   );
 }
 

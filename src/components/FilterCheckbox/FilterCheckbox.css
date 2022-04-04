@@ -1,5 +1,11 @@
 .checkbox {
     align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.checkbox__container {
+    align-items: center;
     cursor: pointer;
     display: flex;
     justify-content: center;

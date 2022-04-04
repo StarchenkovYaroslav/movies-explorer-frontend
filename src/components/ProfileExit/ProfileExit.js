@@ -1,9 +1,12 @@
 import "./ProfileExit.css";
 
-function ProfileExit({ onExit }) {
+function ProfileExit({ onExit, isSigningOut }) {
+  const isButtonActive = !isSigningOut;
+  const buttonClassName = `profile-exit__button${!isButtonActive ? ' profile-exit__button_disabled' : ''}`;
+
   return (
     <section className="profile-exit">
-      <button className="profile-exit__button" type="button" onClick={onExit}>Выйти из аккаута</button>
+      <button className={buttonClassName} type="button" disabled={!isButtonActive} onClick={onExit}>Выйти из аккаута</button>
     </section>
   );
 }

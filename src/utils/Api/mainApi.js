@@ -1,5 +1,5 @@
 import Api from "./Api";
-import {mainApiSettings} from "./config";
+import {mainApiSettings, messages} from "../config";
 
 class MainApi extends Api {
   constructor(settings) {
@@ -82,7 +82,7 @@ class MainApi extends Api {
       .then(this._checkResponse);
   }
 
-  getAllMovies() {
+  getUsersMovies() {
     return fetch(`${this._baseUrl}/${this._moviesEndpoint}`, {
       headers: {
         'Content-Type': 'application/json'
@@ -104,8 +104,8 @@ class MainApi extends Api {
       .then(this._checkResponse);
   }
 
-  deleteMovie(movie) {
-    return fetch(`${this._baseUrl}/${this._moviesEndpoint}/${movie._id}`, {
+  deleteMovie(movieId) {
+    return fetch(`${this._baseUrl}/${this._moviesEndpoint}/${movieId}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -116,4 +116,4 @@ class MainApi extends Api {
   }
 }
 
-export default new MainApi(mainApiSettings);
+export default new MainApi(mainApiSettings, messages.defaultErrorMessage);

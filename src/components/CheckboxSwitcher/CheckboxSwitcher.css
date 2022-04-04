@@ -7,7 +7,9 @@
     justify-content: start;
     height: 20px;
     padding: 0 2px;
+    transition: all .5s;
     width: 36px;
+
 }
 
 .switcher__indicator {
@@ -22,5 +24,8 @@
 
 .switcher__indicator_checked {
     background-color: #2BE080;
-    transform: translate(16px, 0);
+}
+
+.switcher_checked {
+    justify-content: end;
 }

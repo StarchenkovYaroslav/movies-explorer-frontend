@@ -16,10 +16,14 @@ function Header({ loggedIn }) {
     setIsBurgerActive(!isBurgerActive);
   }
 
+  function handleCloseSideNavigation() {
+    setIsMobileNavigationVisible(false);
+  }
+
   return (
     <header className={headerClassName}>
       <Logo />
-      <Navigation loggedIn={loggedIn} isVisible={isMobileNavigationVisible} />
+      <Navigation loggedIn={loggedIn} isVisible={isMobileNavigationVisible} onCloseSideNavigation={handleCloseSideNavigation} />
       {loggedIn && <Burger isActive={isMobileNavigationVisible} onClick={handleBurgerClick} />}
     </header>
   )

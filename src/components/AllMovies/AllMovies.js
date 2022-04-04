@@ -1,100 +1,205 @@
 import "./AllMovies.css";
 
-import {useEffect, useState} from "react";
+import {useEffect, useState, useRef} from "react";
+import isURL from "validator/es/lib/isURL";
 
-import moviesApi from "../../utils/MoviesApi";
+import moviesApi from "../../utils/Api/moviesApi";
+import mainApi from "../../utils/Api/mainApi";
+import {
+  localStorageNames,
+  messages,
+  moviesApiSettings,
+  noInfoImageLink,
+} from "../../utils/config";
+import {useFormWithValidation} from "../../utils/hooks/use-form-with-validation";
+import {useFindAndFilterMovies} from "../../utils/hooks/use-find-and-filter-movies";
 
 import Search from "../Search/Search";
 import AllMoviesCardList from "../AllMoviesCardList/AllMoviesCardList";
 import MoreMovies from "../MoreMovies/MoreMovies";
+import {useCheckPageWidth} from "../../utils/hooks/use-check-page-width";
 
 function AllMovies() {
-  const [isShortMoviesChosen, setIsShortMoviesChosen] = useState(false);
-  const [searchedMovie, setSearchedMovie] = useState('');
+  const isInitialMount = useRef(true);
 
   const [allMovies, setAllMovies] = useState([]);
-  const [showedMovies, setShowedMovies] = useState([]);
-
-  const [initialMoviesAmount, setInitialMoviesAmount] = useState(0);
-  const [addedMoviesAmount, setAddedMoviesAmount] = useState(0);
+  const [usersMovies, setUsersMovies] = useState([]);
+  const [moviesToRender, setMoviesToRender] = useState([]);
 
   const [areMoviesLoading, setAreMoviesLoading] = useState(false);
+  const [wereMoviesLoaded, setWereMoviesLoaded] = useState(false);
 
-  const isMoreMoviesVisible = showedMovies.length !== 0 && showedMovies.length !== allMovies.length;
+  const {
+    setMovieToFind,
+    areShortMoviesChosen,
+    setAreShortMoviesChosen,
+    handleChooseShortMovies,
+    filteredMovies,
+    formMessage,
+    isFormMessageVisible,
+    showFormMessage,
+    hideFormMessage,
+    loadingMessage,
+    isLoadingMessageVisible,
+    showLoadingMessage,
+    hideLoadingMessage
+  } = useFindAndFilterMovies(allMovies);
 
-  function checkPageWidth() {
-    const pageWidth = document.documentElement.clientWidth;
+  const {
+    inputValues,
+    setInputValues,
+    inputsValidity,
+    handleInputChange,
+  } = useFormWithValidation(
+    {movie: ''},
+    {movie: false},
+    {movie: ''},
+    false
+  );
 
-    if (pageWidth > 1007) {
-      setInitialMoviesAmount(12);
-      setAddedMoviesAmount(3);
-    } else if(pageWidth > 635) {
-      setInitialMoviesAmount(8);
-      setAddedMoviesAmount(2);
+  const {
+    initialMoviesAmount,
+    addedMoviesAmount,
+  } = useCheckPageWidth();
+
+  const isMoreMoviesVisible =
+    moviesToRender.length !== 0
+    && moviesToRender.length !== filteredMovies.length
+    && !areMoviesLoading;
+
+  useEffect(() => {
+    const savedJSONAllMovies = localStorage.getItem(localStorageNames.allMovies);
+    const savedMovieToFind = localStorage.getItem(localStorageNames.movieToFind);
+    const savedJSONAreShortMoviesChosen = localStorage.getItem(localStorageNames.areShortMoviesChosen);
+
+    if (savedJSONAllMovies && savedMovieToFind && savedJSONAreShortMoviesChosen) {
+      setAllMovies(JSON.parse(savedJSONAllMovies));
+      setWereMoviesLoaded(true);
+
+      setMovieToFind(savedMovieToFind);
+      setAreShortMoviesChosen(JSON.parse(savedJSONAreShortMoviesChosen));
+
+      setInputValues(prevInputValues => {
+        return {...prevInputValues, movie: savedMovieToFind};
+      })
+    }
+  }, []);
+
+  useEffect(() => {
+    mainApi.getUsersMovies()
+      .then(loadedUsersMovies => {
+        setUsersMovies(loadedUsersMovies);
+      })
+  }, []);
+
+  useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
     } else {
-      setInitialMoviesAmount(5);
-      setAddedMoviesAmount(2);
+      if (filteredMovies.length === 0 && wereMoviesLoaded) {
+        setMoviesToRender([]);
+
+        showLoadingMessage(messages.movieNotFound);
+      } else if (filteredMovies.length === 0 && !wereMoviesLoaded) {
+        setMoviesToRender([]);
+
+        showLoadingMessage(messages.moviesWereNotSearched);
+      } else {
+        setMoviesToRender(filteredMovies.slice(0, initialMoviesAmount));
+
+        hideLoadingMessage();
+      }
+
+      localStorage.setItem(localStorageNames.movieToFind, inputValues.movie);
+      localStorage.setItem(localStorageNames.allMovies, JSON.stringify(allMovies));
+      localStorage.setItem(localStorageNames.areShortMoviesChosen, JSON.stringify(areShortMoviesChosen));
     }
-  }
-
-  useEffect(() => {
-    checkPageWidth()
-  }, [])
-
-  useEffect(() => {
-    function postponeCheckPageWidth() {
-      setTimeout(checkPageWidth, 2000);
-    }
-
-    window.addEventListener('resize', postponeCheckPageWidth);
-
-    return () => {
-      window.removeEventListener('resize', postponeCheckPageWidth);
-    }
-  }, [])
-
-  useEffect(() => {
-    setShowedMovies(allMovies.slice(0, initialMoviesAmount));
-  }, [allMovies])
-
-  function handleChooseShortMovies(evt) {
-    setIsShortMoviesChosen(evt.target.checked);
-  }
-
-  function handleInputSearchedMovie(evt) {
-    setSearchedMovie(evt.target.value);
-  }
+  }, [filteredMovies])
 
   function handleSearchMovie(evt) {
     evt.preventDefault();
 
+    if (!inputsValidity.movie) {
+      showFormMessage(messages.searchMovieFormErrorMessage);
+
+      return;
+    } else {
+      hideFormMessage();
+    }
+
     setAreMoviesLoading(true);
 
-    moviesApi.getAllMovies()
-      .then(loadedMovies => {
-        setAllMovies(loadedMovies);
+    if (!wereMoviesLoaded) {
+      hideLoadingMessage();
 
-        localStorage.setItem('allMovies', JSON.stringify(loadedMovies));
+      moviesApi.getAllMovies()
+        .then(loadedMovies => {
+          setAllMovies(loadedMovies);
+
+          setWereMoviesLoaded(true);
+
+          setMovieToFind(inputValues.movie);
+        })
+        .catch(() => {
+          showLoadingMessage(messages.serverError);
+        })
+        .finally(() => {
+          setAreMoviesLoading(false);
+        });
+    } else {
+      setMovieToFind(inputValues.movie);
+
+      setAreMoviesLoading(false);
+    }
+  }
+
+  function handleSaveMovie(data) {
+    mainApi.addMovie({
+      country: data.country ? data.country : 'No country',
+      director: data.director ? data.director : 'No director',
+      duration: data.duration ? data.duration : 0,
+      year: data.year ? data.year : '0000',
+      description: data.description ? data.description.slice(0, 1000) : 'No description',
+      image: data.image.url ? moviesApiSettings.baseUrl + data.image.url : noInfoImageLink,
+      trailerLink: data.trailerLink && isURL(data.trailerLink) ? data.trailerLink : noInfoImageLink,
+      thumbnail: data.image.formats.thumbnail.url ? moviesApiSettings.baseUrl + data.image.formats.thumbnail.url : noInfoImageLink,
+      movieId: data.id,
+      nameRU: data.nameRU ? data.nameRU : 'No nameRU',
+      nameEN: data.nameEN ? data.nameEN : 'No nameEN',
+    })
+      .then((savedMovie) => {
+        setUsersMovies(prevUsersMovies => {
+          return [...prevUsersMovies, savedMovie];
+        });
       })
-      .catch(status => {
-        console.log(status);
+      .catch(err => {
+        console.log(err.message)
+      });
+  }
+
+  function handleDeleteMovie(movieToDeleteId) {
+    mainApi.deleteMovie(movieToDeleteId)
+      .then(() => {
+        setUsersMovies(prevUsersMovies => {
+          return prevUsersMovies.filter(movie => movie._id !== movieToDeleteId);
+        })
       })
-      .finally(() => {
-        setAreMoviesLoading(false);
+      .catch(err => {
+        console.log(err.message);
       });
   }
 
   function handleMoreMovies() {
-    if (Math.abs(showedMovies.length - allMovies.length) >= addedMoviesAmount) {
-      for (let i = showedMovies.length; i < showedMovies.length + addedMoviesAmount; i++) {
-        setShowedMovies(prevShowedMovies => {
-          return [...prevShowedMovies, allMovies[i]];
+    if (Math.abs(moviesToRender.length - filteredMovies.length) >= addedMoviesAmount) {
+      for (let i = moviesToRender.length; i < moviesToRender.length + addedMoviesAmount; i++) {
+        setMoviesToRender(prevShowedMovies => {
+          return [...prevShowedMovies, filteredMovies[i]];
         })
       }
     } else {
-      for (let i = showedMovies.length; i < allMovies.length; i++) {
-        setShowedMovies(prevShowedMovies => {
-          return [...prevShowedMovies, allMovies[i]];
+      for (let i = moviesToRender.length; i < filteredMovies.length; i++) {
+        setMoviesToRender(prevShowedMovies => {
+          return [...prevShowedMovies, filteredMovies[i]];
         })
       }
     }
@@ -103,15 +208,30 @@ function AllMovies() {
   return (
     <div className="all-movies">
       <Search
-        searchedMovie={searchedMovie}
-        isShortMoviesChosen={isShortMoviesChosen}
+        searchedMovie={inputValues.movie}
+        isShortMoviesChosen={areShortMoviesChosen}
+
+        formMessage={formMessage}
+        isFormMessageVisible={isFormMessageVisible}
+
+        areMoviesLoading={areMoviesLoading}
 
         onChooseShortMovies={handleChooseShortMovies}
-        onInputSearchedMovie={handleInputSearchedMovie}
+        onInputSearchedMovie={handleInputChange}
         onSearch={handleSearchMovie}
       />
 
-      <AllMoviesCardList movies={showedMovies} />
+      <AllMoviesCardList
+        movies={moviesToRender}
+        usersMovies={usersMovies}
+
+        areMoviesLoading={areMoviesLoading}
+        isLoadingMessageVisible={isLoadingMessageVisible}
+        loadingMessage={loadingMessage}
+
+        onSaveMovie={handleSaveMovie}
+        onDeleteMovie={handleDeleteMovie}
+      />
 
       {isMoreMoviesVisible  ? <MoreMovies onMoreMovies={handleMoreMovies} /> : null}
     </div>

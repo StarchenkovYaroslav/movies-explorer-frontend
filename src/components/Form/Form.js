@@ -1,13 +1,17 @@
 import "./Form.css";
 import SubmitButton from "../SubmitButton/SubmitButton";
+import FormMessage from "../FormMessage/FormMessage";
 
-function Form({ onSubmit, children, submitButtonText, isValid }) {
+function Form(props) {
+  const isSubmitButtonActive = !props.isSubmitting && props.isValid;
+
   return (
-    <form className="page-with-form__form" noValidate={true} onSubmit={onSubmit}>
+    <form className="page-with-form__form" noValidate={true} onSubmit={props.onSubmit}>
       <div className="page-with-form__inputs-container">
-        {children}
+        {props.children}
       </div>
-      <SubmitButton text={submitButtonText} isActive={isValid} />
+      <FormMessage message={props.message} />
+      <SubmitButton text={props.submitButtonText} isActive={isSubmitButtonActive} />
     </form>
   )
 }

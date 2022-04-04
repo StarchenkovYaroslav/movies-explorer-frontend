@@ -4,8 +4,9 @@
     display: grid;
     grid-template-areas:
         "inputs"
+        "message"
         "submit-button";
-    grid-template-rows: auto 1fr;
+    grid-template-rows: auto 1fr auto;
     margin: 0 0 16px;
 }
 

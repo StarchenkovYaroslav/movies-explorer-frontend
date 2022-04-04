@@ -1,76 +1,158 @@
-import "./App.css";
+import {useEffect, useState} from "react";
 
-import {Routes, Route, useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
-import { paths } from "../../utils/config";
+import {defaultUser} from "../../contexts/CurrentUserContext";
 
-import Footer from "../Footer/Footer";
-import Header from "../Header/Header";
-import Main from "../Main/Main";
-import AllMovies from "../AllMovies/AllMovies";
-import UsersMovies from "../UsersMovies/UsersMovies";
-import Profile from "../Profile/Profile";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
-import {useState} from "react";
-import NotFoundPage from "../NotFoundPage/NotFoundPage";
+import {messages, paths} from "../../utils/config";
+import mainApi from "../../utils/Api/mainApi";
+
+import Page from "../Page/Page";
 
 function App() {
-  const location = useLocation();
-
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const [wasLoggedInChecked, setWasLoggedInChecked] = useState(false);
 
-  const isHeaderVisible =
-    (Object.values(paths).includes(location.pathname.slice(1)) || location.pathname === paths.main)
-    && (loggedIn
-    || location.pathname === paths.main);
+  const [currentUser, setCurrentUser] = useState(defaultUser);
 
-  const isFooterVisible =
-    (Object.values(paths).includes(location.pathname.slice(1)) || location.pathname === paths.main)
-    && (location.pathname !== '/' + paths.profile
-    && location.pathname !== '/' + paths.signUp
-    && location.pathname !== '/' + paths.signIn);
+  const [isSigningUp, setIsSigningUp] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [isSigningOut, setIsSigningOut] = useState(false);
+  const [isProfileEditing, setIsProfileEditing] = useState(false);
 
-  function handleSignIn(evt) {
-    evt.preventDefault();
+  const [signUpMessage, setSignUpMessage] = useState('');
+  const [signInMessage, setSignInMessage] = useState('');
+  const [editProfileMessage, setEditProfileMessage] = useState('');
 
-    setLoggedIn(true);
+  useEffect(() => {
+    mainApi.checkAuth()
+      .then((data) => {
+        setLoggedIn(data.isValid);
+      })
+      .catch(err => {
+        console.log(err.message);
+      })
+      .finally(() => {
+        setWasLoggedInChecked(true);
+      });
+  }, []);
 
-    navigate('/' + paths.movies);
+  useEffect(() => {
+    if (loggedIn) {
+      mainApi.getCurrentUser()
+        .then(user => {
+          setCurrentUser(user);
+        })
+        .catch(err => {
+          console.log(err.message);
+        })
+    }
+  }, [loggedIn])
+
+  function handleSignUp(data) {
+    setIsSigningUp(true);
+    setSignUpMessage('');
+
+    mainApi.signUp(data)
+      .then(() => {
+        return mainApi.signIn({
+          email: data.email,
+          password: data.password,
+        });
+      })
+      .then(() => {
+        setLoggedIn(true);
+
+        navigate('/' + paths.movies);
+      })
+      .catch((err) => {
+        setSignUpMessage(err.message);
+      })
+      .finally(() => {
+        setIsSigningUp(false);
+      });
+  }
+
+  function handleSignIn(data) {
+    setIsSigningIn(true);
+    setSignInMessage('');
+
+    mainApi.signIn(data)
+      .then(() => {
+        setLoggedIn(true);
+
+        navigate('/' + paths.movies);
+      })
+      .catch((err) => {
+        setSignInMessage(err.message);
+      })
+      .finally(() => {
+        setIsSigningIn(false);
+      });
   }
 
   function handleSignOut() {
-    setLoggedIn(false);
+    setIsSigningOut(true);
 
-    navigate('/' + paths.signIn);
+    mainApi.signOut()
+      .then(() => {
+        setLoggedIn(false);
+
+        localStorage.clear();
+
+        navigate('/' + paths.main);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      })
+      .finally(() => {
+        setIsSigningOut(false);
+      });
+  }
+
+  function handleEditProfile(data) {
+    setIsProfileEditing(true);
+    setEditProfileMessage('');
+
+    mainApi.editCurrentUser(data)
+      .then(user => {
+        setCurrentUser(user);
+
+        setEditProfileMessage(messages.profileEditSuccessMessage);
+      })
+      .catch((err) => {
+        setEditProfileMessage(err.message);
+      })
+      .finally(() => {
+        setIsProfileEditing(false);
+      });
   }
 
   return (
-    <div className="page">
+    wasLoggedInChecked ?
+      <Page
+        loggedIn={loggedIn}
 
-      {isHeaderVisible ? <Header loggedIn={loggedIn} /> : null}
+        currentUser={currentUser}
 
-      <main className="content">
-        <Routes>
+        isSigningUp={isSigningUp}
+        isSigningIn={isSigningIn}
+        isSigningOut={isSigningOut}
+        isProfileEditing={isProfileEditing}
 
-          <Route path={paths.main} element={<Main/>} />
-          <Route path={paths.movies} element={<AllMovies/>} />
-          <Route path={paths.savedMovies} element={<UsersMovies/>} />
-          <Route path={paths.profile} element={<Profile onSignOut={handleSignOut}/>} />
-          <Route path={paths.signIn} element={<Login onSignIn={handleSignIn}/>} />
-          <Route path={paths.signUp} element={<Register/>} />
+        signUpMessage={signUpMessage}
+        signInMessage={signInMessage}
+        editProfileMessage={editProfileMessage}
 
-          <Route path="*" element={<NotFoundPage/>} />
-
-        </Routes>
-      </main>
-
-      {isFooterVisible ? <Footer/> : null}
-
-    </div>
-  )
+        onSignUp={handleSignUp}
+        onSignIn={handleSignIn}
+        onSignOut={handleSignOut}
+        onEditProfile={handleEditProfile}
+      />
+      : null
+  );
 }
 
 export default App;

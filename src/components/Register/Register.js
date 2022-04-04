@@ -7,12 +7,12 @@ import RegisterForm from "../RegisterForm/RegisterForm";
 import PageWithForm from "../PageWithForm/PageWithForm";
 import Suggestion from "../Suggestion/Suggestion";
 
-function Register() {
+function Register(props) {
   return (
     <section className="register">
       <PageWithForm>
         <Greeting text="Добро пожаловать!" />
-        <RegisterForm />
+        <RegisterForm onSignUp={props.onSignUp} message={props.message} isSigningUp={props.isSigningUp} />
         <Suggestion linkPath={`/${paths.signIn}`} linkText="Войти" questionText="Уже зарегистрированы?" />
       </PageWithForm>
     </section>

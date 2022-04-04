@@ -7,6 +7,8 @@ function Input(props) {
       <input
         className="page-with-form__input-field"
         required={props.required}
+        disabled={props.disabled}
+        autoComplete={props.autoComplete}
         name={props.name}
         type={props.type}
         placeholder={props.placeholder}
