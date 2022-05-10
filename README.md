@@ -1,4 +1,4 @@
-## Movies explorer (frontend)
+# Movies explorer (frontend)
 
 ## Описание проекта
 
