@@ -1,2 +1,9 @@
-[макет в figma](https://www.figma.com/file/8vw9zVCPDXubVDllRQfXWF/Diploma-(Copy)?node-id=932%3A3593)
-домен: https://moviesexplorer.nomoredomains.work
+## Movies explorer (frontend)
+
+## Описание проекта
+
+Сайт с возможностью авторизации, поиска\фильтрации\добавления в избранное\удаления из избранного фильмов. Учебный проект.
+
+## Ссылка на сайт
+
+https://moviesexplorer.nomoredomains.work
